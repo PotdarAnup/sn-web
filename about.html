@@ -1,0 +1,398 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>About — Structura Nordic AB</title>
+  <meta name="description" content="Meet Premchand Potdar, Owner & Director of Structura Nordic AB. 7+ years in façade engineering and BIM coordination across Europe and globally.">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            navy:{50:'#EDF3FB',100:'#CADCF0',200:'#A8C0E0',300:'#7FA4CF',400:'#4E78A8',500:'#22487A',600:'#1B3A6B',700:'#142D55',800:'#0F1E35',900:'#0A1628'},
+            gold:{300:'#FFD166',400:'#FFB800',500:'#F0A500',600:'#D4900A'},
+            brand:{cyan:'#00B4D8',grey:'#8A97A8'}
+          },
+          fontFamily: { heading:['"Plus Jakarta Sans"','sans-serif'], body:['Inter','sans-serif'] }
+        }
+      }
+    }
+  </script>
+  <style>
+    *,*::before,*::after{box-sizing:border-box}
+    body{font-family:'Inter',sans-serif;color:#0F172A;background:#FAFAFA;-webkit-font-smoothing:antialiased}
+    h1,h2,h3,h4,h5,h6{font-family:'Plus Jakarta Sans',sans-serif}
+    .reveal{opacity:0;transform:translateY(28px);transition:opacity .65s cubic-bezier(.16,1,.3,1),transform .65s cubic-bezier(.16,1,.3,1)}
+    .reveal.visible{opacity:1;transform:translateY(0)}
+    .reveal-l{opacity:0;transform:translateX(-28px);transition:opacity .65s cubic-bezier(.16,1,.3,1),transform .65s cubic-bezier(.16,1,.3,1)}
+    .reveal-l.visible{opacity:1;transform:translateX(0)}
+    .reveal-r{opacity:0;transform:translateX(28px);transition:opacity .65s cubic-bezier(.16,1,.3,1),transform .65s cubic-bezier(.16,1,.3,1)}
+    .reveal-r.visible{opacity:1;transform:translateX(0)}
+    .d1{transition-delay:.1s}.d2{transition-delay:.2s}.d3{transition-delay:.3s}.d4{transition-delay:.4s}.d5{transition-delay:.5s}
+    @keyframes heroUp{from{opacity:0;transform:translateY(24px)}to{opacity:1;transform:translateY(0)}}
+    .ha{animation:heroUp .8s cubic-bezier(.16,1,.3,1) both}
+    .ha:nth-child(1){animation-delay:.1s}.ha:nth-child(2){animation-delay:.25s}.ha:nth-child(3){animation-delay:.4s}
+    .nav-glass{background:rgba(250,250,250,.9);backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);border-bottom:1px solid rgba(226,232,240,.8)}
+    .card-lift{transition:transform .25s ease,box-shadow .25s ease}
+    .card-lift:hover{transform:translateY(-4px);box-shadow:0 20px 50px rgba(15,30,53,.10)}
+    .lbl{font-size:.7rem;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:#F0A500}
+    .skill-bar{height:4px;background:#E2E8F0;border-radius:9999px;overflow:hidden}
+    .skill-fill{height:100%;background:linear-gradient(90deg,#0F1E35,#00B4D8);border-radius:9999px;width:0;transition:width 1.2s cubic-bezier(.16,1,.3,1)}
+    .skill-fill.animated{width:var(--w)}
+    @media(prefers-reduced-motion:reduce){.reveal,.reveal-l,.reveal-r{opacity:1;transform:none;transition:none}.ha{animation:none;opacity:1}.skill-fill{width:var(--w);transition:none}*{transition-duration:.01ms!important;animation-duration:.01ms!important}}
+  </style>
+</head>
+
+<body
+  x-data="{lang:localStorage.getItem('sn-lang')||'en',navOpen:false,scrolled:false,t(e,s,d,i){const v={en:e,sv:s,de:d,it:i};return v[this.lang]??e},setLang(l){this.lang=l;localStorage.setItem('sn-lang',l)}}"
+  x-init="window.addEventListener('scroll',()=>{scrolled=window.scrollY>60})"
+  :lang="lang">
+
+<!-- NAV -->
+<header :class="scrolled?'nav-glass shadow-sm':'bg-white/80 backdrop-blur'" class="fixed top-0 left-0 right-0 z-50 transition-all duration-300">
+  <div class="max-w-7xl mx-auto px-5 lg:px-8">
+    <div class="flex items-center justify-between h-16">
+      <a href="index.html" class="flex items-center cursor-pointer flex-shrink-0"><img src="../Company Logo/Logo Structura Nordic AB.png" alt="Structura Nordic AB" class="h-[60px] w-auto rounded-lg"></a>
+      <nav class="hidden md:flex items-center gap-7">
+        <a href="index.html" class="text-sm font-medium text-slate-600 hover:text-navy-800 transition-colors cursor-pointer" x-text="t('Home','Hem','Startseite','Home')"></a>
+        <a href="about.html" class="text-sm font-semibold text-navy-900 border-b-2 border-navy-800 pb-0.5 cursor-pointer" x-text="t('About','Om Oss','Über Uns','Chi Siamo')"></a>
+        <a href="services.html" class="text-sm font-medium text-slate-600 hover:text-navy-800 transition-colors cursor-pointer" x-text="t('Services','Tjänster','Leistungen','Servizi')"></a>
+        <a href="projects.html" class="text-sm font-medium text-slate-600 hover:text-navy-800 transition-colors cursor-pointer" x-text="t('Projects','Projekt','Projekte','Progetti')"></a>
+        <a href="contact.html" class="text-sm font-medium text-slate-600 hover:text-navy-800 transition-colors cursor-pointer" x-text="t('Contact','Kontakt','Kontakt','Contatto')"></a>
+      </nav>
+      <div class="hidden md:flex items-center gap-3">
+        <div class="relative" x-data="{langOpen:false}">
+          <button @click="langOpen=!langOpen" class="flex items-center gap-1.5 px-3 py-1.5 rounded-full border border-slate-200 text-xs font-bold text-slate-600 hover:border-navy-800 hover:text-navy-800 transition-all cursor-pointer select-none">
+            <span x-text="{'en':'🇬🇧','sv':'🇸🇪','de':'🇩🇪','it':'🇮🇹'}[lang]"></span>
+            <span x-text="lang.toUpperCase()"></span>
+            <svg class="w-3 h-3 opacity-60" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7"/></svg>
+          </button>
+          <div x-show="langOpen" @click.away="langOpen=false" x-transition class="absolute right-0 top-full mt-2 bg-white rounded-xl shadow-lg border border-slate-100 py-1 z-[60] min-w-[130px]">
+            <button @click="setLang('en');langOpen=false" :class="lang==='en'?'bg-slate-50 text-navy-800 font-semibold':'text-slate-600'" class="flex items-center gap-2 w-full px-3 py-2 text-xs hover:bg-slate-50 transition-colors">🇬🇧 English</button>
+            <button @click="setLang('sv');langOpen=false" :class="lang==='sv'?'bg-slate-50 text-navy-800 font-semibold':'text-slate-600'" class="flex items-center gap-2 w-full px-3 py-2 text-xs hover:bg-slate-50 transition-colors">🇸🇪 Svenska</button>
+            <button @click="setLang('de');langOpen=false" :class="lang==='de'?'bg-slate-50 text-navy-800 font-semibold':'text-slate-600'" class="flex items-center gap-2 w-full px-3 py-2 text-xs hover:bg-slate-50 transition-colors">🇩🇪 Deutsch</button>
+            <button @click="setLang('it');langOpen=false" :class="lang==='it'?'bg-slate-50 text-navy-800 font-semibold':'text-slate-600'" class="flex items-center gap-2 w-full px-3 py-2 text-xs hover:bg-slate-50 transition-colors">🇮🇹 Italiano</button>
+          </div>
+        </div>
+        <a href="contact.html" class="px-5 py-2 bg-navy-800 text-white text-sm font-semibold rounded-full hover:bg-navy-700 transition-colors cursor-pointer" x-text="t('Get in Touch','Kontakta Oss','Kontakt aufnehmen','Contattaci')"></a>
+      </div>
+      <button @click="navOpen=!navOpen" class="md:hidden p-2 text-navy-900 cursor-pointer" aria-label="Menu">
+        <svg x-show="!navOpen" class="w-6 h-6" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M4 6h16M4 12h16M4 18h16"/></svg>
+        <svg x-show="navOpen" class="w-6 h-6" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12"/></svg>
+      </button>
+    </div>
+  </div>
+  <div x-show="navOpen" x-transition class="md:hidden nav-glass px-5 pb-5 pt-3">
+    <nav class="flex flex-col gap-1">
+      <a href="index.html" class="text-sm text-slate-700 py-2.5 border-b border-slate-100 cursor-pointer" x-text="t('Home','Hem','Startseite','Home')"></a>
+      <a href="about.html" class="text-sm font-semibold text-navy-900 py-2.5 border-b border-slate-100 cursor-pointer" x-text="t('About','Om Oss','Über Uns','Chi Siamo')"></a>
+      <a href="services.html" class="text-sm text-slate-700 py-2.5 border-b border-slate-100 cursor-pointer" x-text="t('Services','Tjänster','Leistungen','Servizi')"></a>
+      <a href="projects.html" class="text-sm text-slate-700 py-2.5 border-b border-slate-100 cursor-pointer" x-text="t('Projects','Projekt','Projekte','Progetti')"></a>
+      <a href="contact.html" class="text-sm text-slate-700 py-2.5 cursor-pointer" x-text="t('Contact','Kontakt','Kontakt','Contatto')"></a>
+    </nav>
+    <div class="mt-4 flex items-center gap-3">
+      <div class="flex items-center gap-1.5 flex-wrap">
+        <button @click="setLang('en')" :class="lang==='en'?'bg-navy-800 text-white border-navy-800':'border-slate-200 text-slate-500'" class="px-2 py-1 rounded-full border text-xs font-bold cursor-pointer transition-all">🇬🇧 EN</button>
+        <button @click="setLang('sv')" :class="lang==='sv'?'bg-navy-800 text-white border-navy-800':'border-slate-200 text-slate-500'" class="px-2 py-1 rounded-full border text-xs font-bold cursor-pointer transition-all">🇸🇪 SV</button>
+        <button @click="setLang('de')" :class="lang==='de'?'bg-navy-800 text-white border-navy-800':'border-slate-200 text-slate-500'" class="px-2 py-1 rounded-full border text-xs font-bold cursor-pointer transition-all">🇩🇪 DE</button>
+        <button @click="setLang('it')" :class="lang==='it'?'bg-navy-800 text-white border-navy-800':'border-slate-200 text-slate-500'" class="px-2 py-1 rounded-full border text-xs font-bold cursor-pointer transition-all">🇮🇹 IT</button>
+      </div>
+      <a href="contact.html" class="flex-1 text-center py-2.5 bg-navy-800 text-white text-sm font-semibold rounded-full cursor-pointer" x-text="t('Get in Touch','Kontakta Oss','Kontakt aufnehmen','Contattaci')"></a>
+    </div>
+  </div>
+</header>
+
+<!-- PAGE HERO -->
+<section class="pt-32 pb-16 bg-white relative overflow-hidden">
+  <div class="absolute inset-0 pointer-events-none select-none" aria-hidden="true">
+    <img src="../Company Logo/Logo Structura Nordic AB.png" alt="" class="w-full h-full object-cover" style="opacity:0.20;">
+  </div>
+  <div class="max-w-7xl mx-auto px-5 lg:px-8 relative z-10">
+    <div class="max-w-3xl">
+      <div class="ha"><span class="lbl" x-text="t('Our Story','Vår Berättelse','Unsere Geschichte','La Nostra Storia')"></span></div>
+      <h1 class="ha mt-4 font-heading font-extrabold text-navy-900 leading-tight" style="font-size:clamp(2.4rem,5vw,4rem)"
+          x-text="t('About Structura Nordic AB','Om Structura Nordic AB','Über Structura Nordic AB','Informazioni su Structura Nordic AB')">
+      </h1>
+      <p class="ha mt-5 text-slate-600 leading-relaxed max-w-xl" style="font-size:clamp(1rem,1.8vw,1.1rem)"
+         x-text="t('A specialized façade engineering firm born from deep industry expertise — built to deliver precision, speed, and quality on every project.','Ett specialiserat fasadingenjörsföretag grundat av djup branschexpertis — byggt för att leverera precision, snabbhet och kvalitet i varje projekt.','Ein spezialisiertes Fassadenengineering-Unternehmen aus tiefem Branchen-Know-how — gebaut für Präzision, Geschwindigkeit und Qualität bei jedem Projekt.','Un\'azienda specializzata in ingegneria di facciata nata da una profonda esperienza del settore — costruita per offrire precisione, velocità e qualità in ogni progetto.')">
+      </p>
+    </div>
+  </div>
+</section>
+
+<!-- COMPANY OVERVIEW -->
+
+<section class="py-20 bg-slate-50">
+  <div class="max-w-7xl mx-auto px-5 lg:px-8">
+    <div class="grid lg:grid-cols-3 gap-10">
+      <div class="lg:col-span-2">
+        <p class="lbl reveal" x-text="t('The Company','Företaget','Das Unternehmen','L\'Azienda')"></p>
+        <h2 class="mt-4 text-3xl lg:text-4xl font-heading font-extrabold text-navy-900 leading-tight reveal d1"
+            x-text="t('Engineering Excellence — Delivered Digitally, Globally','Ingenjörsexcellens — Levererad Digitalt, Globalt','Ingenieursexzellenz — Digital und Global geliefert','Eccellenza ingegneristica — Consegnata digitalmente, globalmente')">
+        </h2>
+        <div class="mt-6 space-y-4 text-slate-600 leading-relaxed text-sm lg:text-base">
+          <p class="reveal d2" x-text="t('Structura Nordic AB is a specialized engineering design firm headquartered in Gothenburg, Sweden. We serve global clients across the façade, construction, and building envelope industry — delivering precision-engineered solutions from concept to fabrication.','Structura Nordic AB är ett specialiserat ingenjörsföretag med säte i Göteborg, Sverige. Vi betjänar globala kunder inom fasad-, bygg- och byggnadsskalindustrin — och levererar precisionsteknik från koncept till tillverkning.','Structura Nordic AB ist ein spezialisiertes Ingenieur-Designbüro mit Sitz in Göteborg, Schweden. Wir betreuen globale Kunden in der Fassaden-, Bau- und Gebäudehüllenindustrie — und liefern präzisionstechnische Lösungen vom Konzept bis zur Fertigung.','Structura Nordic AB è uno studio di ingegneria specializzato con sede a Göteborg, in Svezia. Serviamo clienti globali nel settore delle facciate, costruzioni e involucro edilizio — consegnando soluzioni ingegneristiche di precisione dal concetto alla fabbricazione.')"></p>
+          <p class="reveal d3" x-text="t('Our team carries 20+ years of combined experience across curtain wall systems, structural glazing, BIM coordination, and mechanical design. We operate with a BIM-first approach, delivering at LOD 100 through LOD 500 depending on project phase requirements.','Vårt team har 20+ års samlad erfarenhet inom curtainwallsystem, strukturell glasning, BIM-koordinering och mekanisk design. Vi arbetar med en BIM-först-metod och levererar vid LOD 100 till LOD 500 beroende på projektfaskrav.','Unser Team verfügt über 20+ Jahre Gesamterfahrung in Curtainwall-Systemen, Strukturverglasung, BIM-Koordinierung und Maschinenbau. Wir arbeiten BIM-first und liefern bei LOD 100 bis LOD 500 je nach Projektphase.','Il nostro team vanta oltre 20 anni di esperienza combinata in sistemi curtain wall, vetrate strutturali, coordinamento BIM e progettazione meccanica. Operiamo con un approccio BIM-first, consegnando da LOD 100 a LOD 500 in base ai requisiti della fase progettuale.')"></p>
+          <p class="reveal d4" x-text="t('We have successfully delivered projects across Australia, Canada, USA, Saudi Arabia, and Germany — always remote-capable, always meeting international standards.','Vi har framgångsrikt levererat projekt i Australien, Kanada, USA, Saudiarabien och Tyskland — alltid fjärrkapabla, alltid i linje med internationella standarder.','Wir haben erfolgreich Projekte in Australien, Kanada, USA, Saudi-Arabien und Deutschland abgewickelt — immer remote-fähig, immer nach internationalen Standards.','Abbiamo consegnato con successo progetti in Australia, Canada, USA, Arabia Saudita e Germania — sempre operativi da remoto, sempre rispettando gli standard internazionali.')"></p>
+        </div>
+      </div>
+      <div class="space-y-4 reveal-r">
+        <div class="bg-white rounded-2xl p-6 border border-slate-100 card-lift">
+          <div class="text-3xl font-extrabold font-heading text-navy-800">Sweden</div>
+          <div class="text-xs text-slate-500 mt-1 uppercase tracking-wider" x-text="t('Headquarters','Huvudkontor','Hauptsitz','Sede Principale')"></div>
+        </div>
+        <div class="bg-navy-800 rounded-2xl p-6 card-lift">
+          <div class="text-3xl font-extrabold font-heading text-white">LOD 500</div>
+          <div class="text-xs text-blue-300 mt-1 uppercase tracking-wider">BIM Delivery</div>
+        </div>
+        <div class="bg-white rounded-2xl p-6 border border-slate-100 card-lift">
+          <div class="text-3xl font-extrabold font-heading text-navy-800">5+</div>
+          <div class="text-xs text-slate-500 mt-1 uppercase tracking-wider" x-text="t('Countries Served','Länder Betjänade','Bediente Länder','Paesi Serviti')"></div>
+        </div>
+        <div class="bg-white rounded-2xl p-6 border border-slate-100 card-lift">
+          <div class="text-3xl font-extrabold font-heading text-navy-800">6+</div>
+          <div class="text-xs text-slate-500 mt-1 uppercase tracking-wider" x-text="t('Software Platforms','Mjukvaruverktyg','Software-Plattformen','Piattaforme Software')"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- DIRECTOR PROFILE -->
+<section class="py-24 bg-white">
+  <div class="max-w-7xl mx-auto px-5 lg:px-8">
+    <p class="lbl reveal" x-text="t('Leadership','Ledning','Führung','Leadership')"></p>
+    <h2 class="mt-4 text-3xl lg:text-4xl font-heading font-extrabold text-navy-900 leading-tight reveal d1 mb-14"
+        x-text="t('Meet the Director','Möt Direktören','Den Direktor kennenlernen','Incontra il Direttore')">
+    </h2>
+    <div class="grid lg:grid-cols-2 gap-14 lg:gap-20 items-center">
+      <div class="reveal-l">
+        <div class="relative">
+          <div class="absolute -inset-3 bg-gradient-to-br from-navy-100 to-slate-100 rounded-3xl"></div>
+          <img src="../Company Logo/Prem photo.jpeg" alt="Premchand Potdar — Owner & Director, Structura Nordic AB"
+               class="relative rounded-2xl w-full object-cover object-top"
+               style="max-height:480px;object-position:top center">
+          <div class="absolute bottom-4 left-4 right-4 bg-white/90 backdrop-blur-sm rounded-xl p-4 border border-slate-100">
+            <div class="font-heading font-extrabold text-navy-900">Premchand Potdar</div>
+            <div class="text-sm text-slate-500 mt-0.5" x-text="t('Owner & Director, Structura Nordic AB','Ägare & Direktör, Structura Nordic AB','Inhaber & Direktor, Structura Nordic AB','Proprietario & Direttore, Structura Nordic AB')"></div>
+            <div class="mt-2 flex items-center gap-3 text-xs text-slate-400">
+              <span>Gothenburg, Sweden</span>
+              <span>·</span>
+              <span>+46 761 715 919</span>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="reveal-r">
+        <blockquote class="text-2xl font-heading font-bold text-navy-900 leading-snug border-l-4 border-navy-800 pl-6"
+                    x-text="t('\"Precision in every detail, from the first line of design to the last fabrication drawing.\"','\"Precision i varje detalj, från den första designlinjen till den sista tillverkningsritningen.\"','\"Präzision in jedem Detail, von der ersten Entwurfslinie bis zur letzten Fertigungszeichnung.\"','\"Precisione in ogni dettaglio, dalla prima riga di progetto all\'ultimo disegno di fabbricazione.\"')">
+        </blockquote>
+        <div class="mt-8 space-y-4 text-slate-600 leading-relaxed text-sm">
+          <p x-text="t('Premchand Potdar is a Façade Engineer and BIM Coordinator with 7+ years of specialized experience across India and Europe. He is an expert in 3D modelling (Revit, Rhino), U-value calculations, curtain wall systems, and full LOD 400/500 BIM delivery.','Premchand Potdar är en fasadingenjör och BIM-koordinator med 7+ års specialisererad erfarenhet i Indien och Europa. Han är expert på 3D-modellering (Revit, Rhino), U-värdesberäkningar, curtainwallsystem och fullständig LOD 400/500 BIM-leverans.','Premchand Potdar ist Fassadeningenieur und BIM-Koordinator mit 7+ Jahren Fachkenntnissen in Indien und Europa. Er ist Experte in 3D-Modellierung (Revit, Rhino), U-Wert-Berechnungen, Curtainwall-Systemen und vollständiger LOD 400/500 BIM-Lieferung.','Premchand Potdar è un ingegnere di facciata e coordinatore BIM con oltre 7 anni di esperienza specializzata in India e in Europa. È esperto in modellazione 3D (Revit, Rhino), calcoli del valore U, sistemi curtain wall e consegna BIM completa LOD 400/500.')"></p>
+          <p x-text="t('He founded Structura Nordic AB after years of delivering high-profile projects with global façade contractors and engineering firms. He is currently also a Masters candidate in Integrated Design at Ostwestfalen-Lippe University of Applied Sciences, Germany.','Han grundade Structura Nordic AB efter år av att ha levererat högprofilerade projekt med globala fasadentreprenörer och ingenjörsföretag. Han är för närvarande också en mastersstudent i Integrerad Design vid Ostwestfalen-Lippe Hochschule i Tyskland.','Er gründete Structura Nordic AB nach Jahren der Abwicklung hochkarätiger Projekte mit globalen Fassadenunternehmen und Ingenieursbüros. Er ist derzeit auch Masterstudent in Integriertem Design an der Hochschule Ostwestfalen-Lippe, Deutschland.','Ha fondato Structura Nordic AB dopo anni di consegna di progetti di alto profilo con appaltatori di facciate e studi di ingegneria globali. Attualmente è anche candidato al master in Design Integrato presso la Hochschule Ostwestfalen-Lippe, Germania.')"></p>
+        </div>
+        <div class="mt-8 grid grid-cols-2 gap-4">
+          <div class="bg-slate-50 rounded-xl p-4 text-center border border-slate-100">
+            <div class="text-2xl font-extrabold font-heading text-navy-800">7+</div>
+            <div class="text-xs text-slate-500 mt-1" x-text="t('Years Specialized','År Specialiserad','Jahre spezialisiert','Anni Specializzato')"></div>
+          </div>
+          <div class="bg-slate-50 rounded-xl p-4 text-center border border-slate-100">
+            <div class="text-2xl font-extrabold font-heading text-navy-800">6</div>
+            <div class="text-xs text-slate-500 mt-1" x-text="t('Major Projects','Större Projekt','Große Projekte','Progetti Principali')"></div>
+          </div>
+          <div class="bg-navy-800 rounded-xl p-4 text-center">
+            <div class="text-2xl font-extrabold font-heading text-white">LOD 500</div>
+            <div class="text-xs text-blue-300 mt-1">BIM Expert</div>
+          </div>
+          <div class="bg-slate-50 rounded-xl p-4 text-center border border-slate-100">
+            <div class="text-2xl font-extrabold font-heading text-navy-800">5+</div>
+            <div class="text-xs text-slate-500 mt-1" x-text="t('Countries','Länder','Länder','Paesi')"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- EXPERIENCE TIMELINE -->
+<section class="py-24 bg-slate-50">
+  <div class="max-w-5xl mx-auto px-5 lg:px-8">
+    <p class="lbl reveal" x-text="t('Career Journey','Karriärresa','Karriereweg','Percorso Professionale')"></p>
+    <h2 class="mt-4 text-3xl lg:text-4xl font-heading font-extrabold text-navy-900 leading-tight reveal d1 mb-14"
+        x-text="t('Professional Experience','Yrkeserfarenhet','Berufserfahrung','Esperienza Professionale')">
+    </h2>
+    <div class="relative">
+      <div class="absolute left-5 top-0 bottom-0 w-px bg-slate-200 md:left-1/2"></div>
+      <div class="space-y-12">
+        <!-- Role 1 -->
+        <div class="relative grid md:grid-cols-2 gap-8 items-start reveal">
+          <div class="md:text-right md:pr-12">
+            <div class="inline-flex items-center gap-2 bg-navy-800 text-white text-xs font-semibold px-3 py-1.5 rounded-full mb-3" x-text="t('2023 — Present','2023 — Nu','2023 — Heute','2023 — Presente')"></div>
+            <h3 class="text-lg font-heading font-extrabold text-navy-900" x-text="t('Owner & Director','Ägare & Direktör','Inhaber & Direktor','Proprietario & Direttore')"></h3>
+            <div class="text-navy-600 font-semibold text-sm mt-0.5">Structura Nordic AB — Gothenburg, Sweden</div>
+            <p class="mt-3 text-slate-500 text-sm leading-relaxed" x-text="t('Founded Structura Nordic AB to deliver specialized façade engineering globally. Also BIM Coordinator at VARA Designs on Australian timber façade projects — LOD 400 Revit modeling, U-value calculations, shop drawings, and client coordination.','Grundade Structura Nordic AB för att leverera specialiserad fasadteknik globalt. Även BIM-koordinator på VARA Designs för australiska träfasadprojekt — LOD 400 Revit-modellering, U-värdesberäkningar, verkstadsritningar och kundkoordinering.','Structura Nordic AB gegründet, um weltweit spezialisiertes Fassadenengineering anzubieten. Auch BIM-Koordinator bei VARA Designs für australische Holzfassadenprojekte — LOD 400 Revit-Modellierung, U-Wert-Berechnungen, Werkstattzeichnungen und Kundenkoordinierung.','Fondato Structura Nordic AB per offrire ingegneria di facciata specializzata a livello globale. Anche BIM Coordinator presso VARA Designs per progetti di facciate in legno australiane — modellazione Revit LOD 400, calcoli valore U, disegni di officina e coordinamento clienti.')"></p>
+          </div>
+          <div class="pl-14 md:pl-12">
+            <div class="absolute left-3 md:left-1/2 md:-translate-x-1/2 w-5 h-5 bg-navy-800 rounded-full border-4 border-white shadow-sm" style="top:4px"></div>
+          </div>
+        </div>
+        <!-- Role 2 -->
+        <div class="relative grid md:grid-cols-2 gap-8 items-start reveal">
+          <div class="md:order-2 md:pl-12">
+            <div class="inline-flex items-center gap-2 bg-slate-200 text-slate-700 text-xs font-semibold px-3 py-1.5 rounded-full mb-3">2021 — 2023</div>
+            <h3 class="text-lg font-heading font-extrabold text-navy-900" x-text="t('Assistant Consultant, Façades','Biträdande Konsult, Fasader','Beratungsassistent, Fassaden','Consulente Assistente, Facciate')"></h3>
+            <div class="text-navy-600 font-semibold text-sm mt-0.5">WSP India — Bengaluru, India</div>
+            <p class="mt-3 text-slate-500 text-sm leading-relaxed" x-text="t('Developed and managed façade system concepts from design through production. Reviewed architectural drawings and contractor calculations. Worked with architects on conceptual designs, façade detailing, and structural analysis.','Utvecklade och hanterade fasadsystemkoncept från design till produktion. Granskade arkitektoniska ritningar och entreprenörsberäkningar. Samarbetade med arkitekter om konceptuella designer, fasaddetaljer och strukturanalys.','Fassadensystemkonzepte von der Planung bis zur Produktion entwickelt und verwaltet. Architekturzeichnungen und Unternehmensberechnungen geprüft. Mit Architekten an Konzeptdesigns, Fassadendetails und Strukturanalysen gearbeitet.','Sviluppato e gestito concetti di sistema di facciata dalla progettazione alla produzione. Revisione di disegni architettonici e calcoli degli appaltatori. Collaborazione con architetti su design concettuali, dettagli di facciata e analisi strutturale.')"></p>
+          </div>
+          <div class="md:order-1 md:text-right md:pr-12 pl-14 md:pl-0">
+            <div class="absolute left-3 md:left-1/2 md:-translate-x-1/2 w-5 h-5 bg-slate-400 rounded-full border-4 border-white shadow-sm" style="top:4px"></div>
+          </div>
+        </div>
+        <!-- Role 3 -->
+        <div class="relative grid md:grid-cols-2 gap-8 items-start reveal">
+          <div class="md:text-right md:pr-12">
+            <div class="inline-flex items-center gap-2 bg-slate-200 text-slate-700 text-xs font-semibold px-3 py-1.5 rounded-full mb-3">2017 — 2021</div>
+            <h3 class="text-lg font-heading font-extrabold text-navy-900">BIM Modeler</h3>
+            <div class="text-navy-600 font-semibold text-sm mt-0.5">Greens Façade Engineering — Kochi, India</div>
+            <p class="mt-3 text-slate-500 text-sm leading-relaxed" x-text="t('Delivered LOD 400 & 500 BIM models and fabrication-ready shop drawings. Prepared parametric families — curtain walls, doors, windows in Revit. Coordinated multi-discipline clash detection using Navisworks/Revit.','Levererade LOD 400 & 500 BIM-modeller och tillverkningsfärdiga verkstadsritningar. Förberedde parametriska familjer — curtainwalls, dörrar, fönster i Revit. Koordinerade multidisciplin kollisionsdetektering med Navisworks/Revit.','LOD 400 & 500 BIM-Modelle und fertigungsfertige Werkstattzeichnungen geliefert. Parametrische Familien erstellt — Vorhangfassaden, Türen, Fenster in Revit. Multidisziplinäre Kollisionserkennung mit Navisworks/Revit koordiniert.','Consegnati modelli BIM LOD 400 & 500 e disegni di officina pronti per la fabbricazione. Preparate famiglie parametriche — curtain wall, porte, finestre in Revit. Coordinato il rilevamento clash multidisciplinare con Navisworks/Revit.')"></p>
+          </div>
+          <div class="pl-14 md:pl-12">
+            <div class="absolute left-3 md:left-1/2 md:-translate-x-1/2 w-5 h-5 bg-slate-300 rounded-full border-4 border-white shadow-sm" style="top:4px"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SOFTWARE SKILLS -->
+<section class="py-24 bg-white" x-data="{animated:false}" x-intersect.once="animated=true">
+  <div class="max-w-7xl mx-auto px-5 lg:px-8">
+    <div class="grid lg:grid-cols-2 gap-16 items-start">
+      <div>
+        <p class="lbl reveal" x-text="t('Technical Expertise','Teknisk Kompetens','Technische Kompetenz','Competenza Tecnica')"></p>
+        <h2 class="mt-4 text-3xl lg:text-4xl font-heading font-extrabold text-navy-900 leading-tight reveal d1"
+            x-text="t('Software & Skills','Mjukvara & Kompetens','Software & Fähigkeiten','Software & Competenze')">
+        </h2>
+        <p class="mt-5 text-slate-600 leading-relaxed text-sm reveal d2"
+           x-text="t('Proficient across 6+ industry-leading engineering platforms — enabling seamless integration with any client workflow.','Kompetent på 6+ branschledande ingenjörsplattformar — möjliggör sömlös integration med alla kunders arbetsflöden.','Kompetent auf 6+ branchenführenden Ingenieurplattformen — für nahtlose Integration in jeden Kundenworkflow.','Competente su 6+ piattaforme ingegneristiche leader del settore — per un\'integrazione perfetta con qualsiasi flusso di lavoro del cliente.')">
+        </p>
+        <div class="mt-10 space-y-5 reveal d3">
+          <template x-for="skill in [
+            {name:'Autodesk Revit',sub:'BIM Modeling / Façade Design',pct:98},
+            {name:'AutoCAD / Athena',sub:'2D Detailing & Shop Drawings',pct:95},
+            {name:'Navisworks',sub:'Clash Detection & Coordination',pct:90},
+            {name:'Rhino + Grasshopper',sub:'Parametric & Complex Forms',pct:85},
+            {name:'Flixo / THERM+',sub:'U-value & Thermal Analysis',pct:88},
+            {name:'SolidWorks',sub:'Mechanical Design',pct:80},
+            {name:'Karamba / MEPLA',sub:'Structural & Glass Calculations',pct:82},
+            {name:'Inventor / iLogic',sub:'Automation & Parametric Dev.',pct:78},
+            {name:'Tekla Structures',sub:'Structural BIM',pct:75}
+          ]" :key="skill.name">
+            <div>
+              <div class="flex justify-between items-baseline mb-2">
+                <div>
+                  <span class="text-sm font-semibold text-navy-900 font-heading" x-text="skill.name"></span>
+                  <span class="text-xs text-slate-400 ml-2" x-text="skill.sub"></span>
+                </div>
+                <span class="text-xs font-bold text-navy-600" x-text="skill.pct+'%'"></span>
+              </div>
+              <div class="skill-bar">
+                <div class="skill-fill" :class="animated?'animated':''" :style="`--w:${skill.pct}%`"></div>
+              </div>
+            </div>
+          </template>
+        </div>
+      </div>
+      <div>
+        <p class="lbl reveal" x-text="t('Core Strengths','Kärnstyrkor','Kernstärken','Punti di Forza')"></p>
+        <h2 class="mt-4 text-3xl lg:text-4xl font-heading font-extrabold text-navy-900 leading-tight reveal d1 mb-10"
+            x-text="t('Façade Expertise','Fasadexpertis','Fassadenkompetenz','Competenza nelle Facciate')">
+        </h2>
+        <div class="grid grid-cols-2 gap-4">
+          <template x-for="(item, i) in [
+            t('Curtain Wall & Unitized Systems','Curtainwall & Unitiserade System','Vorhangfassaden & Unitisierte Systeme','Curtain Wall e Sistemi Unitizzati'),
+            t('LOD 400/500 BIM Delivery','LOD 400/500 BIM-leverans','LOD 400/500 BIM-Lieferung','Consegna BIM LOD 400/500'),
+            t('U-value & Thermal Calcs','U-värde & Termiska Beräkningar','U-Wert- & Wärmeberechnungen','Calcoli Valore U & Termici'),
+            t('Structural Load Analysis','Strukturell Lastanalys','Strukturelle Lastanalyse','Analisi dei Carichi Strutturali'),
+            t('Navisworks Clash Detection','Navisworks Kollisionsdetektering','Navisworks Kollisionserkennung','Rilevamento Clash Navisworks'),
+            t('Parametric Family Creation','Parametriskt Familjeskapande','Parametrische Familienerstellung','Creazione di Famiglie Parametriche'),
+            t('Wind Load per EN/ASCE','Vindlast per EN/ASCE','Windlast nach EN/ASCE','Carico Vento per EN/ASCE'),
+            t('Timber Façade Systems','Träfasadsystem','Holzfassadensysteme','Sistemi di Facciata in Legno')
+          ]" :key="i">
+            <div class="flex items-start gap-3 reveal" :class="'d'+Math.min(i+1,5)">
+              <svg class="w-4 h-4 text-navy-600 flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg>
+              <span class="text-sm text-slate-600 leading-snug" x-text="item"></span>
+            </div>
+          </template>
+        </div>
+
+        <!-- Education -->
+        <div class="mt-14">
+          <p class="lbl reveal" x-text="t('Education','Utbildning','Ausbildung','Istruzione')"></p>
+          <div class="mt-6 space-y-4">
+            <div class="bg-slate-50 rounded-2xl p-5 border border-slate-100 reveal d1">
+              <div class="text-xs text-navy-600 font-semibold uppercase tracking-wider mb-1">2023 — <span x-text="t('Present','Nu','Heute','Presente')"></span></div>
+              <div class="font-heading font-bold text-navy-900 text-sm" x-text="t('Master in Integrated Design','Master i Integrerad Design','Master in Integriertem Design','Master in Design Integrato')"></div>
+              <div class="text-slate-500 text-xs mt-1">Ostwestfalen-Lippe University of Applied Sciences · Germany</div>
+              <div class="text-slate-400 text-xs mt-1" x-text="t('Specialization: Façade Design, Building Physics, Sustainability','Specialisering: Fasaddesign, Byggnadsfysik, Hållbarhet','Spezialisierung: Fassadendesign, Bauphysik, Nachhaltigkeit','Specializzazione: Design di Facciata, Fisica Edile, Sostenibilità')"></div>
+            </div>
+            <div class="bg-slate-50 rounded-2xl p-5 border border-slate-100 reveal d2">
+              <div class="text-xs text-slate-400 font-semibold uppercase tracking-wider mb-1">2017</div>
+              <div class="font-heading font-bold text-navy-900 text-sm" x-text="t('Bachelor of Engineering — Mechanical','Kandidatexamen i Teknik — Mekanik','Bachelor of Engineering — Maschinenbau','Bachelor of Engineering — Meccanica')"></div>
+              <div class="text-slate-500 text-xs mt-1">CCET, Oddanchatram · India</div>
+              <div class="text-slate-400 text-xs mt-1" x-text="t('Foundation in structural mechanics and engineering principles','Grund i strukturmekanik och ingenjörsprinciper','Grundlagen der Strukturmechanik und Ingenieurprinzipien','Basi di meccanica strutturale e principi ingegneristici')"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="py-20 bg-navy-900 relative overflow-hidden">
+  <div class="absolute inset-0 flex items-center justify-center pointer-events-none select-none" aria-hidden="true">
+    <img src="../Company Logo/Logo Structura Nordic AB.png" alt="" class="w-full h-full object-contain" style="opacity:0.20;">
+  </div>
+  <div class="max-w-4xl mx-auto px-5 lg:px-8 text-center relative z-10">
+    <h2 class="text-3xl lg:text-5xl font-heading font-extrabold text-white leading-tight reveal" x-text="t('Ready to Work Together?','Redo att Arbeta Tillsammans?','Bereit zusammenzuarbeiten?','Pronti a lavorare insieme?')"></h2>
+    <p class="mt-5 text-slate-400 leading-relaxed reveal d1" x-text="t('Let\'s discuss your next façade engineering or BIM project.','Låt oss diskutera ditt nästa fasadteknik- eller BIM-projekt.','Lassen Sie uns Ihr nächstes Fassadenengineering- oder BIM-Projekt besprechen.','Discutiamo il vostro prossimo progetto di ingegneria di facciata o BIM.')"></p>
+    <div class="mt-8 flex flex-wrap justify-center gap-4 reveal d2">
+      <a href="contact.html" class="inline-flex items-center gap-2 px-7 py-3.5 bg-white text-navy-900 font-semibold rounded-full hover:bg-slate-100 transition-colors cursor-pointer" x-text="t('Get in Touch','Kontakta Oss','Kontakt aufnehmen','Contattaci')"></a>
+      <a href="projects.html" class="inline-flex items-center gap-2 px-7 py-3.5 border-2 border-white/30 text-white font-semibold rounded-full hover:border-white transition-all cursor-pointer" x-text="t('View Projects','Se Projekt','Projekte ansehen','Vedi Progetti')"></a>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer class="bg-navy-900 border-t border-navy-700 py-10">
+  <div class="max-w-7xl mx-auto px-5 lg:px-8">
+    <div class="flex flex-col md:flex-row items-center justify-between gap-6">
+      <img src="../Company Logo/Logo Structura Nordic AB.png" alt="Structura Nordic AB" class="h-20 w-auto rounded-lg ring-1 ring-white/20">
+      <nav class="flex flex-wrap justify-center gap-x-6 gap-y-2">
+        <a href="index.html" class="text-slate-400 hover:text-white text-sm transition-colors cursor-pointer" x-text="t('Home','Hem','Startseite','Home')"></a>
+        <a href="about.html" class="text-slate-400 hover:text-white text-sm transition-colors cursor-pointer" x-text="t('About','Om Oss','Über Uns','Chi Siamo')"></a>
+        <a href="services.html" class="text-slate-400 hover:text-white text-sm transition-colors cursor-pointer" x-text="t('Services','Tjänster','Leistungen','Servizi')"></a>
+        <a href="projects.html" class="text-slate-400 hover:text-white text-sm transition-colors cursor-pointer" x-text="t('Projects','Projekt','Projekte','Progetti')"></a>
+        <a href="contact.html" class="text-slate-400 hover:text-white text-sm transition-colors cursor-pointer" x-text="t('Contact','Kontakt','Kontakt','Contatto')"></a>
+      </nav>
+      <p class="text-slate-500 text-sm">© 2024 Structura Nordic AB</p>
+    </div>
+  </div>
+</footer>
+
+<script>
+const obs = new IntersectionObserver(entries => {
+  entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible') });
+}, { threshold: 0.08, rootMargin: '0px 0px -40px 0px' });
+document.querySelectorAll('.reveal,.reveal-l,.reveal-r').forEach(el => obs.observe(el));
+</script>
+</body>
+</html>

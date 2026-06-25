@@ -1,0 +1,476 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Structura Nordic AB — Advanced Façade Engineering & Mechanical Design</title>
+  <meta name="description" content="Sweden-based specialist in façade engineering and mechanical design. LOD 500 BIM delivery, 20+ years experience, serving global clients from Gothenburg.">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            navy: { 50:'#EDF3FB',100:'#CADCF0',200:'#A8C0E0',300:'#7FA4CF',400:'#4E78A8',500:'#22487A',600:'#1B3A6B',700:'#142D55',800:'#0F1E35',900:'#0A1628' },
+            gold: { 300:'#FFD166',400:'#FFB800',500:'#F0A500',600:'#D4900A' },
+            brand: { cyan:'#00B4D8',grey:'#8A97A8' }
+          },
+          fontFamily: { heading:['"Plus Jakarta Sans"','sans-serif'], body:['Inter','sans-serif'] }
+        }
+      }
+    }
+  </script>
+  <style>
+    *,*::before,*::after{box-sizing:border-box}
+    body{font-family:'Inter',sans-serif;color:#0F172A;background:#FAFAFA;-webkit-font-smoothing:antialiased}
+    h1,h2,h3,h4,h5,h6{font-family:'Plus Jakarta Sans',sans-serif}
+    .reveal{opacity:0;transform:translateY(28px);transition:opacity .65s cubic-bezier(.16,1,.3,1),transform .65s cubic-bezier(.16,1,.3,1)}
+    .reveal.visible{opacity:1;transform:translateY(0)}
+    .reveal-l{opacity:0;transform:translateX(-28px);transition:opacity .65s cubic-bezier(.16,1,.3,1),transform .65s cubic-bezier(.16,1,.3,1)}
+    .reveal-l.visible{opacity:1;transform:translateX(0)}
+    .reveal-r{opacity:0;transform:translateX(28px);transition:opacity .65s cubic-bezier(.16,1,.3,1),transform .65s cubic-bezier(.16,1,.3,1)}
+    .reveal-r.visible{opacity:1;transform:translateX(0)}
+    .d1{transition-delay:.1s}.d2{transition-delay:.2s}.d3{transition-delay:.3s}.d4{transition-delay:.4s}.d5{transition-delay:.5s}
+    @keyframes heroUp{from{opacity:0;transform:translateY(24px)}to{opacity:1;transform:translateY(0)}}
+    .ha{animation:heroUp .8s cubic-bezier(.16,1,.3,1) both}
+    .ha:nth-child(1){animation-delay:.1s}.ha:nth-child(2){animation-delay:.25s}.ha:nth-child(3){animation-delay:.4s}.ha:nth-child(4){animation-delay:.55s}.ha:nth-child(5){animation-delay:.7s}
+    @keyframes float{0%,100%{transform:translateY(0)}50%{transform:translateY(-12px)}}
+    .float{animation:float 5s ease-in-out infinite}
+    .float2{animation:float 5s ease-in-out 2.5s infinite}
+    .facade-bg{background-color:#0F1E35;background-image:linear-gradient(rgba(0,180,216,.06) 1px,transparent 1px),linear-gradient(90deg,rgba(0,180,216,.06) 1px,transparent 1px);background-size:64px 64px}
+    .nav-glass{background:rgba(250,250,250,.95);backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);border-bottom:1px solid rgba(226,232,240,.8)}
+    .card-lift{transition:transform .25s ease,box-shadow .25s ease}
+    .card-lift:hover{transform:translateY(-6px);box-shadow:0 24px 64px rgba(15,30,53,.14)}
+    .lbl{font-size:.7rem;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:#F0A500}
+    .stat-num{font-family:'Plus Jakarta Sans',sans-serif;font-weight:800;font-size:3rem;line-height:1;color:#ffffff}
+    @media(prefers-reduced-motion:reduce){.reveal,.reveal-l,.reveal-r{opacity:1;transform:none;transition:none}.ha{animation:none;opacity:1}.float,.float2{animation:none}*{transition-duration:.01ms!important;animation-duration:.01ms!important}}
+  </style>
+</head>
+
+<body
+  x-data="{lang:localStorage.getItem('sn-lang')||'en',navOpen:false,scrolled:false,t(e,s,d,i){const v={en:e,sv:s,de:d,it:i};return v[this.lang]??e},setLang(l){this.lang=l;localStorage.setItem('sn-lang',l)}}"
+  x-init="window.addEventListener('scroll',()=>{scrolled=window.scrollY>60})"
+  :lang="lang">
+
+<!-- NAV -->
+<header :class="scrolled?'nav-glass shadow-sm':'bg-transparent'" class="fixed top-0 left-0 right-0 z-50 transition-all duration-300">
+  <div class="max-w-7xl mx-auto px-5 lg:px-8">
+    <div class="flex items-center justify-between h-16">
+      <a href="index.html" class="flex items-center cursor-pointer flex-shrink-0">
+        <img src="../Company Logo/Logo Structura Nordic AB.png" alt="Structura Nordic AB" class="h-[60px] w-auto rounded-lg transition-all duration-300">
+      </a>
+      <nav class="hidden md:flex items-center gap-7">
+        <a href="index.html" :class="scrolled?'text-navy-900 border-navy-800':'text-white border-gold-400'" class="text-sm font-semibold border-b-2 pb-0.5 cursor-pointer transition-colors" x-text="t('Home','Hem','Startseite','Home')"></a>
+        <a href="about.html" :class="scrolled?'text-slate-600 hover:text-navy-800':'text-white/80 hover:text-white'" class="text-sm font-medium transition-colors cursor-pointer" x-text="t('About','Om Oss','Über Uns','Chi Siamo')"></a>
+        <a href="services.html" :class="scrolled?'text-slate-600 hover:text-navy-800':'text-white/80 hover:text-white'" class="text-sm font-medium transition-colors cursor-pointer" x-text="t('Services','Tjänster','Leistungen','Servizi')"></a>
+        <a href="projects.html" :class="scrolled?'text-slate-600 hover:text-navy-800':'text-white/80 hover:text-white'" class="text-sm font-medium transition-colors cursor-pointer" x-text="t('Projects','Projekt','Projekte','Progetti')"></a>
+        <a href="contact.html" :class="scrolled?'text-slate-600 hover:text-navy-800':'text-white/80 hover:text-white'" class="text-sm font-medium transition-colors cursor-pointer" x-text="t('Contact','Kontakt','Kontakt','Contatto')"></a>
+      </nav>
+      <div class="hidden md:flex items-center gap-3">
+        <div class="relative" x-data="{langOpen:false}">
+          <button @click="langOpen=!langOpen" :class="scrolled?'border-slate-200 text-slate-600 hover:border-navy-800 hover:text-navy-800':'border-white/30 text-white/70 hover:border-white hover:text-white'" class="flex items-center gap-1.5 px-3 py-1.5 rounded-full border text-xs font-bold transition-all cursor-pointer select-none">
+            <span x-text="{'en':'🇬🇧','sv':'🇸🇪','de':'🇩🇪','it':'🇮🇹'}[lang]"></span>
+            <span x-text="lang.toUpperCase()"></span>
+            <svg class="w-3 h-3 opacity-60" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7"/></svg>
+          </button>
+          <div x-show="langOpen" @click.away="langOpen=false" x-transition class="absolute right-0 top-full mt-2 bg-white rounded-xl shadow-lg border border-slate-100 py-1 z-[60] min-w-[130px]">
+            <button @click="setLang('en');langOpen=false" :class="lang==='en'?'bg-slate-50 text-navy-800 font-semibold':'text-slate-600'" class="flex items-center gap-2 w-full px-3 py-2 text-xs hover:bg-slate-50 transition-colors">🇬🇧 English</button>
+            <button @click="setLang('sv');langOpen=false" :class="lang==='sv'?'bg-slate-50 text-navy-800 font-semibold':'text-slate-600'" class="flex items-center gap-2 w-full px-3 py-2 text-xs hover:bg-slate-50 transition-colors">🇸🇪 Svenska</button>
+            <button @click="setLang('de');langOpen=false" :class="lang==='de'?'bg-slate-50 text-navy-800 font-semibold':'text-slate-600'" class="flex items-center gap-2 w-full px-3 py-2 text-xs hover:bg-slate-50 transition-colors">🇩🇪 Deutsch</button>
+            <button @click="setLang('it');langOpen=false" :class="lang==='it'?'bg-slate-50 text-navy-800 font-semibold':'text-slate-600'" class="flex items-center gap-2 w-full px-3 py-2 text-xs hover:bg-slate-50 transition-colors">🇮🇹 Italiano</button>
+          </div>
+        </div>
+        <a href="contact.html" :class="scrolled?'bg-navy-800 text-white hover:bg-navy-700':'bg-gold-500 text-navy-900 hover:bg-gold-400'" class="px-5 py-2 text-sm font-semibold rounded-full transition-colors cursor-pointer" x-text="t('Get in Touch','Kontakta Oss','Kontakt aufnehmen','Contattaci')"></a>
+      </div>
+      <button @click="navOpen=!navOpen" :class="scrolled?'text-navy-900':'text-white'" class="md:hidden p-2 cursor-pointer transition-colors" aria-label="Menu">
+        <svg x-show="!navOpen" class="w-6 h-6" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M4 6h16M4 12h16M4 18h16"/></svg>
+        <svg x-show="navOpen" class="w-6 h-6" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12"/></svg>
+      </button>
+    </div>
+  </div>
+  <div x-show="navOpen" x-transition class="md:hidden nav-glass px-5 pb-5 pt-3">
+    <nav class="flex flex-col gap-1">
+      <a href="index.html" class="text-sm font-semibold text-navy-900 py-2.5 border-b border-slate-100 cursor-pointer" x-text="t('Home','Hem','Startseite','Home')"></a>
+      <a href="about.html" class="text-sm text-slate-700 py-2.5 border-b border-slate-100 cursor-pointer" x-text="t('About','Om Oss','Über Uns','Chi Siamo')"></a>
+      <a href="services.html" class="text-sm text-slate-700 py-2.5 border-b border-slate-100 cursor-pointer" x-text="t('Services','Tjänster','Leistungen','Servizi')"></a>
+      <a href="projects.html" class="text-sm text-slate-700 py-2.5 border-b border-slate-100 cursor-pointer" x-text="t('Projects','Projekt','Projekte','Progetti')"></a>
+      <a href="contact.html" class="text-sm text-slate-700 py-2.5 cursor-pointer" x-text="t('Contact','Kontakt','Kontakt','Contatto')"></a>
+    </nav>
+    <div class="mt-4 flex items-center gap-3">
+      <div class="flex items-center gap-1.5 flex-wrap">
+        <button @click="setLang('en')" :class="lang==='en'?'bg-navy-800 text-white border-navy-800':'border-slate-200 text-slate-500'" class="px-2 py-1 rounded-full border text-xs font-bold cursor-pointer transition-all">🇬🇧 EN</button>
+        <button @click="setLang('sv')" :class="lang==='sv'?'bg-navy-800 text-white border-navy-800':'border-slate-200 text-slate-500'" class="px-2 py-1 rounded-full border text-xs font-bold cursor-pointer transition-all">🇸🇪 SV</button>
+        <button @click="setLang('de')" :class="lang==='de'?'bg-navy-800 text-white border-navy-800':'border-slate-200 text-slate-500'" class="px-2 py-1 rounded-full border text-xs font-bold cursor-pointer transition-all">🇩🇪 DE</button>
+        <button @click="setLang('it')" :class="lang==='it'?'bg-navy-800 text-white border-navy-800':'border-slate-200 text-slate-500'" class="px-2 py-1 rounded-full border text-xs font-bold cursor-pointer transition-all">🇮🇹 IT</button>
+      </div>
+      <a href="contact.html" class="flex-1 text-center py-2.5 bg-navy-800 text-white text-sm font-semibold rounded-full cursor-pointer" x-text="t('Get in Touch','Kontakta Oss','Kontakt aufnehmen','Contattaci')"></a>
+    </div>
+  </div>
+</header>
+
+<!-- HERO -->
+<section class="relative min-h-screen flex items-center facade-bg overflow-hidden">
+  <div class="absolute right-0 top-0 bottom-0 w-1/2 md:w-2/5 pointer-events-none select-none hidden md:block overflow-hidden" aria-hidden="true">
+    <!-- Real building photo — twilight glass curtain wall -->
+    <img src="Image/Building image.png" alt="Façade Engineering" class="w-full h-full object-cover object-center" style="filter: brightness(0.72) saturate(1.2) contrast(1.12);">
+    <!-- Left-edge fade — blends photo into the dark hero background -->
+    <div class="absolute inset-0" style="background: linear-gradient(to right, #0F1E35 0%, rgba(15,30,53,0.6) 28%, transparent 62%);"></div>
+    <!-- Bottom fade -->
+    <div class="absolute inset-0" style="background: linear-gradient(to top, rgba(10,22,40,0.85) 0%, transparent 24%);"></div>
+    <!-- Navy-cyan brand colour wash -->
+    <div class="absolute inset-0" style="background: rgba(0,30,90,0.28);"></div>
+    <!-- BIM-grid overlay — keeps engineering aesthetic over the photo -->
+    <div class="absolute inset-0" style="background-image: linear-gradient(rgba(0,180,216,0.12) 1px, transparent 1px), linear-gradient(90deg, rgba(0,180,216,0.12) 1px, transparent 1px); background-size: 56px 56px; opacity: 0.55;"></div>
+    <!-- Cyan right-edge glow -->
+    <div class="absolute inset-y-0 right-0 w-24" style="background: linear-gradient(to left, rgba(0,180,216,0.12), transparent);"></div>
+    <!-- Float cards -->
+    <div class="absolute top-1/4 right-8 bg-white rounded-2xl shadow-2xl p-4 max-w-[152px] float border border-slate-100">
+      <div class="text-xs text-slate-400 font-medium">BIM Delivery</div>
+      <div class="text-2xl font-extrabold text-navy-800 font-heading mt-0.5">LOD 500</div>
+      <div class="mt-2.5 grid grid-cols-5 gap-1">
+        <div class="h-1 bg-gold-500 rounded-full"></div>
+        <div class="h-1 bg-gold-500 rounded-full"></div>
+        <div class="h-1 bg-gold-500 rounded-full"></div>
+        <div class="h-1 bg-gold-500 rounded-full"></div>
+        <div class="h-1 bg-gold-500 rounded-full"></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="max-w-7xl mx-auto px-5 lg:px-8 pt-20 pb-16 relative z-10 w-full">
+    <div class="max-w-2xl lg:max-w-3xl">
+      <div class="ha">
+        <span class="lbl" x-text="t('Gothenburg, Sweden — Serving Globally','Göteborg, Sverige — Verkar Globalt','Göteborg, Schweden — Weltweit tätig','Göteborg, Svezia — Operiamo Globalmente')"></span>
+      </div>
+      <h1 class="ha mt-5 font-heading font-extrabold text-white leading-[1.06] tracking-tight" style="font-size:clamp(2.6rem,6vw,4.6rem)"
+          x-html="t('Advanced Façade<br>Engineering &amp;<br>Mechanical Design','Avancerad Fasadteknik<br>&amp; Mekanisk Design','Avancierte Fassadentechnik<br>&amp; Maschinenbau','Ingegneria di Facciata<br>Avanzata &amp;<br>Design Meccanico')">
+      </h1>
+      <p class="ha mt-6 text-slate-300 leading-relaxed max-w-xl" style="font-size:clamp(1rem,1.8vw,1.15rem)"
+         x-text="t('Precision-engineered solutions from concept to fabrication-ready drawings — with speed, accuracy, and full BIM integration at LOD 500. Based in Sweden, serving clients across Europe and globally.','Precisionsteknik från koncept till tillverkningsfärdiga ritningar — med snabbhet, noggrannhet och fullständig BIM-integration vid LOD 500. Baserade i Sverige, betjänar kunder i Europa och globalt.','Präzisionstechnische Lösungen vom Konzept bis zu fertigungsgerechten Zeichnungen — mit Geschwindigkeit, Genauigkeit und vollständiger BIM-Integration bei LOD 500. Mit Sitz in Schweden, für Kunden in Europa und weltweit.','Soluzioni di precisione dal concetto ai disegni pronti per la produzione — velocità, precisione e piena integrazione BIM a LOD 500. Con sede in Svezia, al servizio di clienti in Europa e nel mondo.')">
+      </p>
+      <div class="ha mt-8 flex flex-wrap gap-3">
+        <a href="services.html" class="inline-flex items-center gap-2 px-6 py-3 bg-gold-500 text-navy-900 font-semibold rounded-full hover:bg-gold-400 transition-colors cursor-pointer text-sm">
+          <span x-text="t('Explore Services','Utforska Tjänster','Leistungen erkunden','Esplora Servizi')"></span>
+          <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M17 8l4 4m0 0l-4 4m4-4H3"/></svg>
+        </a>
+        <a href="contact.html" class="inline-flex items-center gap-2 px-6 py-3 border-2 border-white/60 text-white font-semibold rounded-full hover:bg-white hover:text-navy-800 transition-all cursor-pointer text-sm" x-text="t('Start a Project','Starta ett Projekt','Projekt starten','Avvia un Progetto')"></a>
+      </div>
+      <div class="ha mt-14 flex flex-wrap gap-x-8 gap-y-5 items-center">
+        <div>
+          <div class="stat-num">20<span class="text-gold-400">+</span></div>
+          <div class="text-xs text-slate-400 font-medium mt-1 uppercase tracking-wider" x-text="t('Years Experience','Års Erfarenhet','Jahre Erfahrung','Anni di Esperienza')"></div>
+        </div>
+        <div class="w-px h-12 bg-white/20"></div>
+        <div>
+          <div class="stat-num">6<span class="text-gold-400">+</span></div>
+          <div class="text-xs text-slate-400 font-medium mt-1 uppercase tracking-wider" x-text="t('Software Platforms','Mjukvaruverktyg','Software-Plattformen','Piattaforme Software')"></div>
+        </div>
+        <div class="w-px h-12 bg-white/20"></div>
+        <div>
+          <div class="stat-num">100<span class="text-gold-400">%</span></div>
+          <div class="text-xs text-slate-400 font-medium mt-1 uppercase tracking-wider" x-text="t('BIM Ready','BIM-Redo','BIM-Bereit','Pronto per BIM')"></div>
+        </div>
+        <div class="w-px h-12 bg-white/20"></div>
+        <div>
+          <div class="stat-num">5<span class="text-gold-400">+</span></div>
+          <div class="text-xs text-slate-400 font-medium mt-1 uppercase tracking-wider" x-text="t('Countries Served','Länder Betjänade','Bediente Länder','Paesi Serviti')"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="absolute bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2 opacity-40">
+    <div class="w-px h-10 bg-white"></div>
+    <span class="text-xs text-white font-semibold tracking-widest uppercase" x-text="t('Scroll','Rulla','Scrollen','Scorri')"></span>
+  </div>
+</section>
+
+<!-- ABOUT SNIPPET -->
+<section class="py-24 bg-white">
+  <div class="max-w-7xl mx-auto px-5 lg:px-8">
+    <div class="grid lg:grid-cols-2 gap-16 lg:gap-24 items-center">
+      <div>
+        <p class="lbl reveal" x-text="t('Who We Are','Vilka Vi Är','Wer Wir Sind','Chi Siamo')"></p>
+        <h2 class="mt-4 text-4xl lg:text-5xl font-heading font-extrabold text-navy-900 leading-tight reveal d1"
+            x-text="t('A Specialized Façade Engineering Firm','Ett Specialiserat Fasadingenjörsföretag','Ein spezialisiertes Fassadenunternehmen','Uno Studio di Ingegneria di Facciata')">
+        </h2>
+        <p class="mt-6 text-slate-600 leading-relaxed reveal d2"
+           x-text="t('Structura Nordic AB is headquartered in Gothenburg, Sweden, delivering precision façade engineering and mechanical design solutions to clients across Australia, Canada, USA, Saudi Arabia, and Europe.','Structura Nordic AB har sitt säte i Göteborg, Sverige, och levererar precisionsfasadteknik och mekaniska designlösningar till kunder i Australien, Kanada, USA, Saudiarabien och Europa.','Die Structura Nordic AB hat ihren Sitz in Göteborg, Schweden, und liefert präzise Fassadentechnik und Konstruktionslösungen an Kunden in Australien, Kanada, USA, Saudi-Arabien und Europa.','Structura Nordic AB ha sede a Göteborg, Svezia, e fornisce soluzioni di ingegneria di facciata e design meccanico di precisione a clienti in Australia, Canada, USA, Arabia Saudita ed Europa.')">
+        </p>
+        <p class="mt-4 text-slate-600 leading-relaxed reveal d3"
+           x-text="t('With full LOD 500 BIM delivery capability and fluency across 6+ software platforms, we serve as a single engineering partner from concept through fabrication-ready documentation.','Med fullständig LOD 500 BIM-leveranskapacitet och kompetens i 6+ mjukvaruplattformar fungerar vi som en enda ingenjörspartner från koncept till tillverkningsfärdig dokumentation.','Mit vollständiger LOD 500 BIM-Lieferfähigkeit und Kompetenz in 6+ Softwareplattformen sind wir Ihr einziger Ingenieurpartner vom Konzept bis zur fertigungsgerechten Dokumentation.','Con piena capacità di consegna BIM LOD 500 e competenza in oltre 6 piattaforme software, siamo il vostro unico partner ingegneristico dal concetto alla documentazione pronta per la produzione.')">
+        </p>
+        <a href="about.html" class="mt-8 inline-flex items-center gap-2 font-semibold text-navy-700 hover:text-navy-900 transition-colors cursor-pointer text-sm reveal d4">
+          <span x-text="t('Meet our director →','Möt vår direktör →','Unseren Direktor kennenlernen →','Incontra il nostro direttore →')"></span>
+        </a>
+      </div>
+      <div class="grid grid-cols-3 gap-3 reveal-r">
+        <div class="bg-navy-800 rounded-2xl p-5 text-center card-lift cursor-default col-span-1">
+          <div class="text-base font-extrabold text-white font-heading">Revit</div>
+          <div class="text-xs text-blue-300 mt-1">98%</div>
+        </div>
+        <div class="bg-slate-50 border border-slate-100 rounded-2xl p-5 text-center card-lift cursor-default">
+          <div class="text-base font-extrabold text-navy-800 font-heading">AutoCAD</div>
+          <div class="text-xs text-slate-400 mt-1">95%</div>
+        </div>
+        <div class="bg-slate-50 border border-slate-100 rounded-2xl p-5 text-center card-lift cursor-default">
+          <div class="text-base font-extrabold text-navy-800 font-heading">Rhino</div>
+          <div class="text-xs text-slate-400 mt-1">85%</div>
+        </div>
+        <div class="bg-slate-50 border border-slate-100 rounded-2xl p-5 text-center card-lift cursor-default">
+          <div class="text-base font-extrabold text-navy-800 font-heading">Navisworks</div>
+          <div class="text-xs text-slate-400 mt-1">90%</div>
+        </div>
+        <div class="bg-navy-900 rounded-2xl p-5 text-center card-lift cursor-default">
+          <div class="text-base font-extrabold text-white font-heading">Tekla</div>
+          <div class="text-xs text-blue-300 mt-1">75%</div>
+        </div>
+        <div class="bg-slate-50 border border-slate-100 rounded-2xl p-5 text-center card-lift cursor-default">
+          <div class="text-base font-extrabold text-navy-800 font-heading">Inventor</div>
+          <div class="text-xs text-slate-400 mt-1">78%</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SERVICES -->
+<section class="py-24 bg-slate-50">
+  <div class="max-w-7xl mx-auto px-5 lg:px-8">
+    <div class="max-w-2xl">
+      <p class="lbl reveal" x-text="t('What We Do','Vad Vi Gör','Was Wir Tun','Cosa Facciamo')"></p>
+      <h2 class="mt-4 text-4xl lg:text-5xl font-heading font-extrabold text-navy-900 leading-tight reveal d1"
+          x-text="t('End-to-End Engineering Solutions','Heltäckande Ingenjörslösningar','Ganzheitliche Ingenieurlösungen','Soluzioni di Ingegneria End-to-End')">
+      </h2>
+    </div>
+    <div class="mt-14 grid md:grid-cols-2 lg:grid-cols-3 gap-5">
+      <div class="bg-white rounded-2xl p-7 card-lift reveal d1 group cursor-pointer" onclick="location.href='services.html'">
+        <div class="w-11 h-11 bg-navy-50 rounded-xl flex items-center justify-center mb-5 group-hover:bg-navy-100 transition-colors">
+          <svg class="w-5 h-5 text-navy-700" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="1.5"><path stroke-linecap="round" stroke-linejoin="round" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4"/></svg>
+        </div>
+        <h3 class="text-lg font-heading font-bold text-navy-900" x-text="t('Façade Design & Engineering','Fasaddesign & Teknik','Fassadendesign & Technik','Design & Ingegneria di Facciata')"></h3>
+        <p class="mt-3 text-slate-500 text-sm leading-relaxed" x-text="t('Curtain Wall, Unitized, Stick System, Cladding, Skylight, Timber & Rainscreen Façade systems.','Curtainwall, Unitiserad, Pinnfasad, Fasadbeklädnad, Takljus, Trä & Regnskärmsfasad.','Vorhangfassade, Unitized, Stick-System, Verkleidung, Oberlicht, Holz & Regenschutz-Fassaden.','Facciata a Cortina, Unitizzata, a Listelli, Rivestimento, Lucernario, Legno & Parete Ventilata.')"></p>
+        <span class="mt-5 inline-flex items-center gap-1 text-xs font-semibold text-navy-600 group-hover:text-navy-900 transition-colors" x-text="t('Learn more →','Läs mer →','Mehr erfahren →','Scopri di più →')"></span>
+      </div>
+      <div class="bg-white rounded-2xl p-7 card-lift reveal d2 group cursor-pointer" onclick="location.href='services.html'">
+        <div class="w-11 h-11 bg-navy-50 rounded-xl flex items-center justify-center mb-5 group-hover:bg-navy-100 transition-colors">
+          <svg class="w-5 h-5 text-navy-700" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="1.5"><path stroke-linecap="round" stroke-linejoin="round" d="M20 7l-8-4-8 4m16 0l-8 4m8-4v10l-8 4m0-10L4 7m8 4v10M4 7v10l8 4"/></svg>
+        </div>
+        <h3 class="text-lg font-heading font-bold text-navy-900" x-text="t('BIM & 3D Modeling','BIM & 3D-Modellering','BIM & 3D-Modellierung','BIM & Modellazione 3D')"></h3>
+        <p class="mt-3 text-slate-500 text-sm leading-relaxed" x-text="t('LOD 100–500 Revit/Tekla models, Clash Detection, Digital Twin Preparation.','LOD 100–500 Revit/Tekla-modeller, Kollisionsdetektering, Digital Tvilling-förberedelse.','LOD 100–500 Revit/Tekla-Modelle, Kollisionserkennung, Digitaler Zwilling.','Modelli Revit/Tekla LOD 100–500, Rilevamento Clash, Preparazione Digital Twin.')"></p>
+        <span class="mt-5 inline-flex items-center gap-1 text-xs font-semibold text-navy-600 group-hover:text-navy-900 transition-colors" x-text="t('Learn more →','Läs mer →','Mehr erfahren →','Scopri di più →')"></span>
+      </div>
+      <div class="bg-white rounded-2xl p-7 card-lift reveal d3 group cursor-pointer" onclick="location.href='services.html'">
+        <div class="w-11 h-11 bg-navy-50 rounded-xl flex items-center justify-center mb-5 group-hover:bg-navy-100 transition-colors">
+          <svg class="w-5 h-5 text-navy-700" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="1.5"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/></svg>
+        </div>
+        <h3 class="text-lg font-heading font-bold text-navy-900" x-text="t('Drafting & Documentation','Ritning & Dokumentation','Zeichnung & Dokumentation','Disegno & Documentazione')"></h3>
+        <p class="mt-3 text-slate-500 text-sm leading-relaxed" x-text="t('Shop Drawings, Fabrication Drawings, GA Drawings, BOM & MTO to international standards.','Verkstadsritningar, Tillverkningsritningar, GA-ritningar, BOM & MTO enligt internationell standard.','Werkstattzeichnungen, Fertigungszeichnungen, GA-Zeichnungen, BOM & MTO nach internationalen Normen.','Disegni di Officina, Disegni di Fabbricazione, Disegni GA, BOM & MTO secondo standard internazionali.')"></p>
+        <span class="mt-5 inline-flex items-center gap-1 text-xs font-semibold text-navy-600 group-hover:text-navy-900 transition-colors" x-text="t('Learn more →','Läs mer →','Mehr erfahren →','Scopri di più →')"></span>
+      </div>
+      <div class="bg-white rounded-2xl p-7 card-lift reveal d1 group cursor-pointer" onclick="location.href='services.html'">
+        <div class="w-11 h-11 bg-navy-50 rounded-xl flex items-center justify-center mb-5 group-hover:bg-navy-100 transition-colors">
+          <svg class="w-5 h-5 text-navy-700" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="1.5"><path stroke-linecap="round" stroke-linejoin="round" d="M9 7h6m0 10v-3m-3 3h.01M9 17h.01M9 14h.01M12 14h.01M15 11h.01M12 11h.01M9 11h.01M7 21h10a2 2 0 002-2V5a2 2 0 00-2-2H7a2 2 0 00-2 2v14a2 2 0 002 2z"/></svg>
+        </div>
+        <h3 class="text-lg font-heading font-bold text-navy-900" x-text="t('Engineering & Analysis','Konstruktion & Analys','Technik & Analyse','Ingegneria & Analisi')"></h3>
+        <p class="mt-3 text-slate-500 text-sm leading-relaxed" x-text="t('Structural Calcs, Wind Load, Glass Thickness, Mullion/Transom sizing, Thermal Analysis.','Strukturberäkningar, Vindlast, Glastjocklek, Spröjs/Tvärspröjs, Termisk Analys.','Statische Berechnungen, Windlast, Glasdicke, Pfosten/Riegel-Dimensionierung, Thermische Analyse.','Calcoli Strutturali, Carico del Vento, Spessore Vetro, Dimensionamento Montanti/Traversi, Analisi Termica.')"></p>
+        <span class="mt-5 inline-flex items-center gap-1 text-xs font-semibold text-navy-600 group-hover:text-navy-900 transition-colors" x-text="t('Learn more →','Läs mer →','Mehr erfahren →','Scopri di più →')"></span>
+      </div>
+      <div class="bg-white rounded-2xl p-7 card-lift reveal d2 group cursor-pointer" onclick="location.href='services.html'">
+        <div class="w-11 h-11 bg-navy-50 rounded-xl flex items-center justify-center mb-5 group-hover:bg-navy-100 transition-colors">
+          <svg class="w-5 h-5 text-navy-700" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="1.5"><path stroke-linecap="round" stroke-linejoin="round" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0z"/></svg>
+        </div>
+        <h3 class="text-lg font-heading font-bold text-navy-900" x-text="t('Project Support Services','Projektstödtjänster','Projektunterstützung','Supporto al Progetto')"></h3>
+        <p class="mt-3 text-slate-500 text-sm leading-relaxed" x-text="t('Design Coordination, IFC Review, Site Technical Support, Procurement Support.','Designkoordinering, IFC-granskning, Teknisk platssupport, Inköpsstöd.','Designkoordinierung, IFC-Prüfung, Technischer Vor-Ort-Support, Beschaffungsunterstützung.','Coordinamento Design, Revisione IFC, Supporto Tecnico in Loco, Supporto Acquisti.')"></p>
+        <span class="mt-5 inline-flex items-center gap-1 text-xs font-semibold text-navy-600 group-hover:text-navy-900 transition-colors" x-text="t('Learn more →','Läs mer →','Mehr erfahren →','Scopri di più →')"></span>
+      </div>
+      <div class="bg-navy-800 rounded-2xl p-7 card-lift reveal d3 cursor-pointer" onclick="location.href='services.html'">
+        <div class="w-11 h-11 bg-white/10 rounded-xl flex items-center justify-center mb-5">
+          <svg class="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="1.5"><path stroke-linecap="round" stroke-linejoin="round" d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z"/><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/></svg>
+        </div>
+        <h3 class="text-lg font-heading font-bold text-white" x-text="t('Automation & Digital Eng.','Automation & Digital Teknik','Automation & Digitaltechnik','Automazione & Ing. Digitale')"></h3>
+        <p class="mt-3 text-blue-200 text-sm leading-relaxed" x-text="t('Parametric Modeling, iLogic Automation, Revit Family Creation, BIM Workflows.','Parametrisk Modellering, iLogic Automation, Revit Familjeskapande, BIM-arbetsflöden.','Parametrisches Modellieren, iLogic-Automation, Revit-Family-Erstellung, BIM-Workflows.','Modellazione Parametrica, Automazione iLogic, Creazione Famiglie Revit, Workflow BIM.')"></p>
+        <span class="mt-5 inline-flex items-center gap-1 text-xs font-semibold text-blue-300 hover:text-white transition-colors" x-text="t('All Services →','Alla Tjänster →','Alle Leistungen →','Tutti i Servizi →')"></span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- WHY CHOOSE US -->
+<section class="py-24 bg-white">
+  <div class="max-w-7xl mx-auto px-5 lg:px-8">
+    <div class="grid lg:grid-cols-2 gap-16 items-start">
+      <div>
+        <p class="lbl reveal" x-text="t('The Advantage','Fördelen','Der Vorteil','Il Vantaggio')"></p>
+        <h2 class="mt-4 text-4xl lg:text-5xl font-heading font-extrabold text-navy-900 leading-tight reveal d1"
+            x-text="t('Why Engineering Firms Choose Structura Nordic','Varför Ingenjörsföretag Väljer Structura Nordic','Warum Ingenieurbüros Structura Nordic wählen','Perché le Aziende Scelgono Structura Nordic')">
+        </h2>
+        <p class="mt-6 text-slate-600 leading-relaxed reveal d2"
+           x-text="t('We are not a generalist firm. Every project, every drawing, every calculation is grounded in deep façade and mechanical engineering expertise.','Vi är inte ett generalistföretag. Varje projekt, varje ritning, varje beräkning grundar sig i djup fasad- och mekanisk ingenjörsexpertis.','Wir sind kein Generalisten-Unternehmen. Jedes Projekt, jede Zeichnung, jede Berechnung basiert auf tiefem Fassaden- und Maschinenbau-Fachwissen.','Non siamo un\'azienda generalista. Ogni progetto, ogni disegno, ogni calcolo si basa su una profonda competenza in ingegneria di facciata e meccanica.')">
+        </p>
+        <a href="contact.html" class="mt-8 inline-flex items-center gap-2 px-6 py-3 bg-navy-800 text-white font-semibold rounded-full hover:bg-navy-700 transition-colors cursor-pointer text-sm reveal d3"
+           x-text="t('Start a Conversation','Starta en Konversation','Gespräch beginnen','Inizia una Conversazione')">
+        </a>
+      </div>
+      <div class="space-y-6">
+        <div class="flex gap-5 reveal d1">
+          <div class="flex-shrink-0 w-10 h-10 bg-navy-50 rounded-xl flex items-center justify-center"><span class="text-xs font-bold text-navy-700">01</span></div>
+          <div><h3 class="font-heading font-bold text-navy-900" x-text="t('20+ Years Deep Expertise','20+ Års Djupexpertis','20+ Jahre tiefes Fachwissen','20+ Anni di Competenza Profonda')"></h3><p class="text-sm text-slate-500 mt-1 leading-relaxed" x-text="t('Specialized exclusively in façade and building envelope — not a generalist firm.','Specialiserade uteslutande på fasad och byggnadsskala.','Ausschließlich auf Fassaden und Gebäudehülle spezialisiert.','Specializzati esclusivamente in facciata e involucro edilizio.')"></p></div>
+        </div>
+        <div class="flex gap-5 reveal d2">
+          <div class="flex-shrink-0 w-10 h-10 bg-navy-50 rounded-xl flex items-center justify-center"><span class="text-xs font-bold text-navy-700">02</span></div>
+          <div><h3 class="font-heading font-bold text-navy-900" x-text="t('Fast Turnaround','Snabb Leverans','Schnelle Lieferung','Consegna Rapida')"></h3><p class="text-sm text-slate-500 mt-1 leading-relaxed" x-text="t('Streamlined digital workflows and BIM-first approach enabling faster delivery cycles.','Strömlinjeformade digitala arbetsflöden möjliggör snabbare leveranscykler.','Optimierte digitale Workflows und BIM-first-Ansatz für schnellere Lieferzyklen.','Flussi di lavoro digitali ottimizzati e approccio BIM-first per cicli di consegna più rapidi.')"></p></div>
+        </div>
+        <div class="flex gap-5 reveal d3">
+          <div class="flex-shrink-0 w-10 h-10 bg-navy-50 rounded-xl flex items-center justify-center"><span class="text-xs font-bold text-navy-700">03</span></div>
+          <div><h3 class="font-heading font-bold text-navy-900" x-text="t('Truly Global Remote Delivery','Verkligt Global Fjärrleverans','Globale Remote-Lieferung','Consegna Remota Globale')"></h3><p class="text-sm text-slate-500 mt-1 leading-relaxed" x-text="t('Clients served across Australia, Canada, USA, Saudi Arabia, and Europe.','Kunder i Australien, Kanada, USA, Saudiarabien och Europa.','Kunden in Australien, Kanada, USA, Saudi-Arabien und Europa.','Clienti in Australia, Canada, USA, Arabia Saudita ed Europa.')"></p></div>
+        </div>
+        <div class="flex gap-5 reveal d4">
+          <div class="flex-shrink-0 w-10 h-10 bg-navy-50 rounded-xl flex items-center justify-center"><span class="text-xs font-bold text-navy-700">04</span></div>
+          <div><h3 class="font-heading font-bold text-navy-900" x-text="t('Full-Stack Coverage','Fullständig Täckning','Vollständige Abdeckung','Copertura Completa')"></h3><p class="text-sm text-slate-500 mt-1 leading-relaxed" x-text="t('From concept design to fabrication-ready drawings — one partner for the entire lifecycle.','Från konceptdesign till tillverkningsfärdiga ritningar — en partner för hela livscykeln.','Vom Konzeptdesign bis zu fertigungsgerechten Zeichnungen — ein Partner für den gesamten Lebenszyklus.','Dal concept ai disegni pronti per la produzione — un partner per l\'intero ciclo di vita.')"></p></div>
+        </div>
+        <div class="flex gap-5 reveal d5">
+          <div class="flex-shrink-0 w-10 h-10 bg-navy-50 rounded-xl flex items-center justify-center"><span class="text-xs font-bold text-navy-700">05</span></div>
+          <div><h3 class="font-heading font-bold text-navy-900" x-text="t('Multi-Software Fluency','Multiprogram Kompetens','Multi-Software-Kompetenz','Competenza Multi-Software')"></h3><p class="text-sm text-slate-500 mt-1 leading-relaxed" x-text="t('Revit, Tekla, Rhino, SolidWorks, Inventor — we work in your environment.','Revit, Tekla, Rhino, SolidWorks, Inventor — vi arbetar i din miljö.','Revit, Tekla, Rhino, SolidWorks, Inventor — wir arbeiten in Ihrer Umgebung.','Revit, Tekla, Rhino, SolidWorks, Inventor — lavoriamo nel vostro ambiente.')"></p></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PROCESS -->
+<section class="py-24 bg-navy-900 relative overflow-hidden">
+  <div class="absolute inset-0 opacity-[0.04] pointer-events-none" style="background-image:linear-gradient(rgba(255,255,255,.15) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.15) 1px,transparent 1px);background-size:60px 60px"></div>
+  <div class="max-w-7xl mx-auto px-5 lg:px-8 relative z-10">
+    <div class="text-center mb-16">
+      <p class="lbl reveal" style="color:#00B4D8" x-text="t('Our Process','Vår Process','Unser Prozess','Il Nostro Processo')"></p>
+      <h2 class="mt-4 text-4xl lg:text-5xl font-heading font-extrabold text-white leading-tight reveal d1" x-text="t('How We Work','Hur Vi Arbetar','Wie Wir Arbeiten','Come Lavoriamo')"></h2>
+    </div>
+    <div class="grid md:grid-cols-5 gap-6">
+      <div class="text-center reveal d1"><div class="w-12 h-12 rounded-full border-2 bg-navy-800 flex items-center justify-center mx-auto text-white font-bold font-heading text-sm" style="border-color:#00B4D8">01</div><h3 class="mt-4 text-white font-heading font-semibold text-sm" x-text="t('Brief & Scope','Brief & Omfång','Briefing & Umfang','Brief & Ambito')"></h3><p class="mt-2 text-slate-400 text-xs leading-relaxed" x-text="t('Understand requirements, software preferences and timelines.','Förstå krav, mjukvarupreferenser och tidslinjer.','Anforderungen, Softwarepräferenzen und Zeitpläne verstehen.','Comprendere requisiti, preferenze software e tempistiche.')"></p></div>
+      <div class="text-center reveal d2"><div class="w-12 h-12 rounded-full border-2 bg-navy-800 flex items-center justify-center mx-auto text-white font-bold font-heading text-sm" style="border-color:#00B4D8">02</div><h3 class="mt-4 text-white font-heading font-semibold text-sm" x-text="t('Design & Model','Design & Modell','Design & Modell','Design & Modello')"></h3><p class="mt-2 text-slate-400 text-xs leading-relaxed" x-text="t('Develop accurate BIM models and design drawings to approved standards.','Exakta BIM-modeller och designritningar enligt godkänd standard.','Präzise BIM-Modelle und Entwurfszeichnungen nach genehmigten Standards entwickeln.','Sviluppare modelli BIM accurati e disegni di progetto secondo standard approvati.')"></p></div>
+      <div class="text-center reveal d3"><div class="w-12 h-12 rounded-full border-2 bg-navy-800 flex items-center justify-center mx-auto text-white font-bold font-heading text-sm" style="border-color:#00B4D8">03</div><h3 class="mt-4 text-white font-heading font-semibold text-sm" x-text="t('Coordination','Koordinering','Koordinierung','Coordinamento')"></h3><p class="mt-2 text-slate-400 text-xs leading-relaxed" x-text="t('Multi-discipline clash detection, IFC coordination, iterative review.','Kollisionsdetektering, IFC-koordinering, iterativ granskning.','Multidisziplinäre Kollisionserkennung, IFC-Koordinierung, iterative Prüfung.','Rilevamento clash multidisciplinare, coordinamento IFC, revisione iterativa.')"></p></div>
+      <div class="text-center reveal d4"><div class="w-12 h-12 rounded-full border-2 bg-navy-800 flex items-center justify-center mx-auto text-white font-bold font-heading text-sm" style="border-color:#00B4D8">04</div><h3 class="mt-4 text-white font-heading font-semibold text-sm" x-text="t('Production Output','Produktionsresultat','Produktionsergebnis','Output di Produzione')"></h3><p class="mt-2 text-slate-400 text-xs leading-relaxed" x-text="t('Shop drawings, fabrication details, BOM and MTO for manufacturing.','Verkstadsritningar, tillverkningsdetaljer, BOM och MTO.','Werkstattzeichnungen, Fertigungsdetails, Stücklisten und Materialmengenermittlung.','Disegni di officina, dettagli di fabbricazione, BOM e MTO per la produzione.')"></p></div>
+      <div class="text-center reveal d5"><div class="w-12 h-12 rounded-full border-2 bg-navy-800 flex items-center justify-center mx-auto text-white font-bold font-heading text-sm" style="border-color:#00B4D8">05</div><h3 class="mt-4 text-white font-heading font-semibold text-sm" x-text="t('Support & Close','Support & Avslut','Support & Abschluss','Supporto & Chiusura')"></h3><p class="mt-2 text-slate-400 text-xs leading-relaxed" x-text="t('Site queries, as-built updates, digital handover documentation.','Platsförfrågningar, som-byggt-uppdateringar, digital överlämning.','Baustellenanfragen, Ist-Aufnahmen, digitale Übergabedokumentation.','Richieste in loco, aggiornamenti as-built, documentazione di consegna digitale.')"></p></div>
+    </div>
+  </div>
+</section>
+
+<!-- FEATURED PROJECTS -->
+<section class="py-24 bg-white">
+  <div class="max-w-7xl mx-auto px-5 lg:px-8">
+    <div class="flex flex-col sm:flex-row sm:items-end justify-between gap-4 mb-14">
+      <div>
+        <p class="lbl reveal" x-text="t('Selected Work','Utvalt Arbete','Ausgewählte Arbeiten','Lavori Selezionati')"></p>
+        <h2 class="mt-4 text-4xl lg:text-5xl font-heading font-extrabold text-navy-900 leading-tight reveal d1" x-text="t('Featured Projects','Utvalda Projekt','Ausgewählte Projekte','Progetti in Evidenza')"></h2>
+      </div>
+      <a href="projects.html" class="reveal flex-shrink-0 inline-flex items-center gap-2 text-sm font-semibold text-navy-700 hover:text-navy-900 transition-colors cursor-pointer" x-text="t('View All Projects →','Se Alla Projekt →','Alle Projekte →','Vedi Tutti i Progetti →')"></a>
+    </div>
+    <div class="grid md:grid-cols-3 gap-6">
+      <div class="rounded-2xl overflow-hidden border border-slate-100 card-lift reveal d1 cursor-pointer" onclick="location.href='projects.html'">
+        <div class="h-52 relative overflow-hidden">
+          <img src="Image/Building image.png" alt="AMRF First Building" class="absolute inset-0 w-full h-full object-cover object-center" style="filter: brightness(0.78) saturate(1.15) contrast(1.08);">
+          <!-- Emerald-to-navy gradient tint — ties card to Green Star theme -->
+          <div class="absolute inset-0" style="background: linear-gradient(135deg, rgba(6,95,70,0.45) 0%, rgba(15,30,53,0.65) 100%);"></div>
+          <!-- Fine grid overlay -->
+          <div class="absolute inset-0" style="background-image: linear-gradient(rgba(255,255,255,0.07) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.07) 1px, transparent 1px); background-size: 28px 28px;"></div>
+          <!-- Centre badge -->
+          <div class="absolute inset-0 flex items-center justify-center">
+            <div class="text-center">
+              <div class="text-5xl font-heading font-extrabold text-white/40">6★</div>
+              <div class="text-sm font-semibold text-white/60 mt-1">Green Star</div>
+            </div>
+          </div>
+          <div class="absolute top-3 left-3 bg-emerald-600 text-white text-xs font-semibold px-2.5 py-1 rounded-full" x-text="t('Ongoing','Pågående','Laufend','In Corso')"></div>
+        </div>
+        <div class="p-6"><div class="text-xs text-slate-400 font-medium mb-2">Bringelly, Australia · RAICO</div><h3 class="font-heading font-bold text-navy-900 text-lg leading-tight" x-text="t('AMRF First Building','AMRF Första Byggnad','AMRF Erstes Gebäude','Primo Edificio AMRF')"></h3><p class="mt-2 text-slate-500 text-sm" x-text="t('Timber Façade — 6★ Green Star Certified','Träfasad — 6★ Green Star Certifierad','Holzfassade — 6★ Green Star Zertifiziert','Facciata in Legno — Certificata 6★ Green Star')"></p><div class="mt-4 flex items-center gap-2"><span class="text-xs bg-slate-100 text-slate-600 px-2.5 py-1 rounded-full" x-text="t('Timber Façade','Träfasad','Holzfassade','Facciata in Legno')"></span><span class="text-xs bg-slate-100 text-slate-600 px-2.5 py-1 rounded-full">LOD 400</span></div></div>
+      </div>
+      <div class="rounded-2xl overflow-hidden border border-slate-100 card-lift reveal d2 cursor-pointer" onclick="location.href='projects.html'">
+        <div class="h-52 bg-gradient-to-br from-slate-100 to-navy-50 flex items-center justify-center relative overflow-hidden">
+          <svg class="w-full h-full absolute inset-0 opacity-15" viewBox="0 0 400 208" fill="none"><rect x="80" y="5" width="90" height="198" stroke="#0F1E35" stroke-width="2"/><line x1="80" y1="35" x2="170" y2="35" stroke="#0F1E35" stroke-width="1"/><line x1="80" y1="65" x2="170" y2="65" stroke="#0F1E35" stroke-width="1"/><line x1="80" y1="95" x2="170" y2="95" stroke="#0F1E35" stroke-width="1"/><line x1="80" y1="125" x2="170" y2="125" stroke="#0F1E35" stroke-width="1"/><line x1="80" y1="155" x2="170" y2="155" stroke="#0F1E35" stroke-width="1"/><line x1="80" y1="175" x2="170" y2="175" stroke="#0F1E35" stroke-width="1"/><rect x="210" y="20" width="110" height="168" stroke="#00B4D8" stroke-width="2"/><line x1="210" y1="54" x2="320" y2="54" stroke="#00B4D8" stroke-width="1"/><line x1="210" y1="88" x2="320" y2="88" stroke="#00B4D8" stroke-width="1"/><line x1="210" y1="122" x2="320" y2="122" stroke="#00B4D8" stroke-width="1"/><line x1="210" y1="156" x2="320" y2="156" stroke="#00B4D8" stroke-width="1"/></svg>
+          <div class="relative text-center z-10"><div class="text-4xl font-heading font-extrabold text-navy-800 opacity-30">94F</div><div class="text-sm font-semibold text-navy-700 mt-1">306.3 m</div></div>
+          <div class="absolute top-3 left-3 bg-navy-800 text-white text-xs font-semibold px-2.5 py-1 rounded-full">2019–2021</div>
+        </div>
+        <div class="p-6"><div class="text-xs text-slate-400 font-medium mb-2">Toronto, Canada · GAMMA</div><h3 class="font-heading font-bold text-navy-900 text-lg leading-tight">The One, One Bloor West</h3><p class="mt-2 text-slate-500 text-sm" x-text="t('Unitized Curtain Wall — Tallest in Canada','Unitiserad Curtainwall — Högst i Kanada','Unitisierte Vorhangfassade — Höchstes in Kanada','Facciata Unitizzata — Il più alto in Canada')"></p><div class="mt-4 flex items-center gap-2"><span class="text-xs bg-slate-100 text-slate-600 px-2.5 py-1 rounded-full">Unitized CW</span><span class="text-xs bg-slate-100 text-slate-600 px-2.5 py-1 rounded-full">LOD 500</span></div></div>
+      </div>
+      <div class="rounded-2xl overflow-hidden border border-slate-100 card-lift reveal d3 cursor-pointer" onclick="location.href='projects.html'">
+        <div class="h-52 bg-gradient-to-br from-amber-50 to-orange-50 flex items-center justify-center relative overflow-hidden">
+          <svg class="w-full h-full absolute inset-0 opacity-15" viewBox="0 0 400 208" fill="none"><ellipse cx="200" cy="104" rx="140" ry="75" stroke="#92400e" stroke-width="2"/><ellipse cx="200" cy="104" rx="100" ry="50" stroke="#92400e" stroke-width="1.5"/><ellipse cx="200" cy="104" rx="55" ry="27" stroke="#92400e" stroke-width="1"/><line x1="60" y1="104" x2="340" y2="104" stroke="#92400e" stroke-width="1" stroke-dasharray="4 3"/><line x1="200" y1="29" x2="200" y2="179" stroke="#92400e" stroke-width="1" stroke-dasharray="4 3"/></svg>
+          <div class="relative text-center z-10"><div class="text-2xl font-heading font-extrabold text-amber-800 opacity-40">F+P</div><div class="text-sm font-semibold text-amber-800 mt-1">Foster + Partners</div></div>
+          <div class="absolute top-3 left-3 bg-amber-600 text-white text-xs font-semibold px-2.5 py-1 rounded-full">2022</div>
+        </div>
+        <div class="p-6"><div class="text-xs text-slate-400 font-medium mb-2">Riyadh, Saudi Arabia · Foster+Partners</div><h3 class="font-heading font-bold text-navy-900 text-lg leading-tight" x-text="t('Red Sea Marine Life Institute','Röda Havets Marina Institut','Meereslebensinstitut Rotes Meer','Istituto di Vita Marina del Mar Rosso')"></h3><p class="mt-2 text-slate-500 text-sm" x-text="t('Custom Glazing System — Bespoke Design','Anpassat Glassystem — Skräddarsydd Design','Maßgeschneidertes Glassystem — Individuelles Design','Sistema di Vetrazione Personalizzato — Design su Misura')"></p><div class="mt-4 flex items-center gap-2"><span class="text-xs bg-slate-100 text-slate-600 px-2.5 py-1 rounded-full" x-text="t('Custom Glazing','Anpassat Glas','Maßglasung','Vetrazione Personalizzata')"></span><span class="text-xs bg-slate-100 text-slate-600 px-2.5 py-1 rounded-full">LOD 400</span></div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="py-24 bg-slate-50">
+  <div class="max-w-4xl mx-auto px-5 lg:px-8 text-center">
+    <p class="lbl reveal" x-text="t('Ready to Start?','Redo att Börja?','Bereit loszulegen?','Pronto per Iniziare?')"></p>
+    <h2 class="mt-4 text-4xl lg:text-6xl font-heading font-extrabold text-navy-900 leading-tight reveal d1" x-text="t('Let\'s Build Together','Låt Oss Bygga Tillsammans','Lass uns gemeinsam bauen','Costruiamo Insieme')"></h2>
+    <p class="mt-6 text-slate-600 leading-relaxed max-w-2xl mx-auto reveal d2"
+       x-text="t('Partner with Structura Nordic AB for precision façade engineering that meets your schedule, budget, and quality standards.','Samarbeta med Structura Nordic AB för precisionsfasadteknik som uppfyller ditt schema, budget och kvalitetsstandarder.','Arbeiten Sie mit Structura Nordic AB für präzise Fassadentechnik, die Ihren Zeitplan, Ihr Budget und Ihre Qualitätsstandards erfüllt.','Collaborate con Structura Nordic AB per un\'ingegneria di facciata di precisione che soddisfa tempi, budget e standard di qualità.')">
+    </p>
+    <div class="mt-10 flex flex-wrap justify-center gap-4 reveal d3">
+      <a href="contact.html" class="inline-flex items-center gap-2 px-8 py-4 bg-navy-800 text-white font-semibold rounded-full hover:bg-navy-700 transition-colors cursor-pointer">
+        <span x-text="t('Start a Project','Starta ett Projekt','Projekt starten','Avvia un Progetto')"></span>
+        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M17 8l4 4m0 0l-4 4m4-4H3"/></svg>
+      </a>
+      <a href="services.html" class="inline-flex items-center gap-2 px-8 py-4 border-2 border-navy-800 text-navy-800 font-semibold rounded-full hover:bg-navy-800 hover:text-white transition-all cursor-pointer" x-text="t('View All Services','Se Alla Tjänster','Alle Leistungen ansehen','Vedi Tutti i Servizi')"></a>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer class="bg-navy-900 py-16">
+  <div class="max-w-7xl mx-auto px-5 lg:px-8">
+    <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-10">
+      <div class="lg:col-span-2">
+        <img src="../Company Logo/Logo Structura Nordic AB.png" alt="Structura Nordic AB" class="h-20 w-auto rounded-lg ring-1 ring-white/20">
+        <p class="mt-4 text-slate-400 text-sm leading-relaxed max-w-xs" x-text="t('Advanced Façade Engineering & Mechanical Design — based in Gothenburg, Sweden, serving clients globally.','Avancerad Fasadteknik & Mekanisk Design — baserade i Göteborg, Sverige, betjänar kunder globalt.','Avancierte Fassadentechnik & Maschinenbau — mit Sitz in Göteborg, Schweden, weltweit tätig.','Ingegneria di Facciata Avanzata & Design Meccanico — con sede a Göteborg, Svezia, al servizio di clienti globalmente.')"></p>
+        <div class="mt-5 space-y-2">
+          <div class="flex items-start gap-2 text-slate-400 text-sm"><svg class="w-4 h-4 flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="1.5"><path stroke-linecap="round" stroke-linejoin="round" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"/><path stroke-linecap="round" stroke-linejoin="round" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"/></svg><span>Häradsdomarevägen 86, 42244, Gothenburg, Sweden</span></div>
+          <div class="flex items-center gap-2 text-slate-400 text-sm"><svg class="w-4 h-4 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="1.5"><path stroke-linecap="round" stroke-linejoin="round" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"/></svg><a href="tel:+46761715919" class="hover:text-white transition-colors cursor-pointer">+46 761 715 919</a></div>
+          <div class="flex items-center gap-2 text-slate-400 text-sm"><svg class="w-4 h-4 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="1.5"><path stroke-linecap="round" stroke-linejoin="round" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/></svg><a href="mailto:info@structuranordic.se" class="hover:text-white transition-colors cursor-pointer">info@structuranordic.se</a></div>
+        </div>
+      </div>
+      <div>
+        <h4 class="text-xs font-semibold uppercase tracking-widest text-slate-400 mb-5" x-text="t('Navigation','Navigation','Navigation','Navigazione')"></h4>
+        <ul class="space-y-3">
+          <li><a href="about.html" class="text-slate-400 hover:text-white text-sm transition-colors cursor-pointer" x-text="t('About Us','Om Oss','Über Uns','Chi Siamo')"></a></li>
+          <li><a href="services.html" class="text-slate-400 hover:text-white text-sm transition-colors cursor-pointer" x-text="t('Services','Tjänster','Leistungen','Servizi')"></a></li>
+          <li><a href="projects.html" class="text-slate-400 hover:text-white text-sm transition-colors cursor-pointer" x-text="t('Projects','Projekt','Projekte','Progetti')"></a></li>
+          <li><a href="contact.html" class="text-slate-400 hover:text-white text-sm transition-colors cursor-pointer" x-text="t('Contact','Kontakt','Kontakt','Contatto')"></a></li>
+        </ul>
+      </div>
+      <div>
+        <h4 class="text-xs font-semibold uppercase tracking-widest text-slate-400 mb-5" x-text="t('Services','Tjänster','Leistungen','Servizi')"></h4>
+        <ul class="space-y-3">
+          <li class="text-slate-400 text-sm" x-text="t('Façade Engineering','Fasadteknik','Fassadentechnik','Ingegneria di Facciata')"></li>
+          <li class="text-slate-400 text-sm">BIM & 3D Modeling</li>
+          <li class="text-slate-400 text-sm" x-text="t('Shop Drawings','Verkstadsritningar','Werkstattzeichnungen','Disegni di Officina')"></li>
+          <li class="text-slate-400 text-sm" x-text="t('Structural Analysis','Strukturanalys','Statische Analyse','Analisi Strutturale')"></li>
+          <li class="text-slate-400 text-sm" x-text="t('iLogic Automation','iLogic Automation')"></li>
+        </ul>
+      </div>
+    </div>
+    <div class="mt-12 pt-8 border-t border-navy-700 flex flex-col md:flex-row items-center justify-between gap-4">
+      <p class="text-slate-500 text-sm">© 2024 Structura Nordic AB. <span x-text="t('All rights reserved.','Alla rättigheter förbehållna.','Alle Rechte vorbehalten.','Tutti i diritti riservati.')"></span></p>
+      <p class="text-slate-500 text-sm"><span x-text="t('Owner & Director: ','Ägare & Direktör: ','Inhaber & Direktor: ','Proprietario & Direttore: ')"></span><span class="text-slate-400">Premchand Potdar</span></p>
+    </div>
+  </div>
+</footer>
+
+<script>
+const obs = new IntersectionObserver(entries => {
+  entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible') });
+}, { threshold: 0.08, rootMargin: '0px 0px -40px 0px' });
+document.querySelectorAll('.reveal,.reveal-l,.reveal-r').forEach(el => obs.observe(el));
+</script>
+</body>
+</html>
