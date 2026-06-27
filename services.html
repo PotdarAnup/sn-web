@@ -43,6 +43,7 @@
     .service-icon{width:48px;height:48px;background:#EDF3FB;border-radius:12px;display:flex;align-items:center;justify-content:center;margin-bottom:20px;transition:background .2s}
     .service-card:hover .service-icon{background:#CADCF0}
     @media(prefers-reduced-motion:reduce){.reveal,.reveal-l{opacity:1;transform:none;transition:none}.ha{animation:none;opacity:1}*{transition-duration:.01ms!important;animation-duration:.01ms!important}}
+    [x-cloak]{display:none!important}
   </style>
 </head>
 
@@ -55,7 +56,7 @@
 <header :class="scrolled?'nav-glass shadow-sm':'bg-white/80 backdrop-blur'" class="fixed top-0 left-0 right-0 z-50 transition-all duration-300">
   <div class="max-w-7xl mx-auto px-5 lg:px-8">
     <div class="flex items-center justify-between h-16">
-      <a href="index.html" class="flex items-center cursor-pointer flex-shrink-0"><img src="../Company Logo/Logo Structura Nordic AB.png" alt="Structura Nordic AB" class="h-[60px] w-auto rounded-lg"></a>
+      <a href="index.html" class="flex items-center cursor-pointer flex-shrink-0"><img src="Image/Logo.jpg" alt="Structura Nordic AB" class="h-[60px] w-auto rounded-lg"></a>
       <nav class="hidden md:flex items-center gap-7">
         <a href="index.html" class="text-sm font-medium text-slate-600 hover:text-navy-800 transition-colors cursor-pointer" x-text="t('Home','Hem','Startseite','Home')"></a>
         <a href="about.html" class="text-sm font-medium text-slate-600 hover:text-navy-800 transition-colors cursor-pointer" x-text="t('About','Om Oss','Über Uns','Chi Siamo')"></a>
@@ -108,7 +109,7 @@
 <!-- HERO -->
 <section class="pt-32 pb-16 bg-white relative overflow-hidden">
   <div class="absolute inset-0 pointer-events-none select-none" aria-hidden="true">
-    <img src="../Company Logo/Logo Structura Nordic AB.png" alt="" class="w-full h-full object-cover" style="opacity:0.20;">
+    <img src="Image/Logo.jpg" alt="" class="w-full h-full object-cover" style="opacity:0.20;">
   </div>
   <div class="max-w-7xl mx-auto px-5 lg:px-8 relative z-10">
     <div class="max-w-3xl">
@@ -329,43 +330,8 @@
       </div>
     </div>
 
-    <!-- Service 7 — Mechanical Design & Engineering -->
-    <div class="grid lg:grid-cols-2 gap-12 items-center mb-20 pb-20 border-b border-slate-200">
-      <div class="reveal-l">
-        <div class="service-icon service-card">
-          <svg class="w-6 h-6 text-navy-700" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="1.5"><path stroke-linecap="round" stroke-linejoin="round" d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z"/><path stroke-linecap="round" stroke-linejoin="round" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/></svg>
-        </div>
-        <h2 class="text-2xl lg:text-3xl font-heading font-extrabold text-navy-900" x-text="t('07 — Mechanical Design & Engineering','07 — Mekanisk Design & Teknik','07 — Mechanisches Design & Engineering','07 — Design Meccanico & Ingegneria')"></h2>
-        <p class="mt-4 text-slate-600 leading-relaxed" x-text="t('Precision mechanical engineering for jigs, fixtures, SPMs and material handling systems — designed for accuracy, repeatability, and manufacturability across automotive, heavy engineering, and industrial sectors.','Precisions mekanisk ingenjörskonst för jigg, fixturer, SPM och materialhanteringssystem — utformad för noggrannhet, repeterbarhet och tillverkningsbarhet inom fordon, tung industri och industrisektorer.','Präzisionsmaschinenbau für Vorrichtungen, Spannmittel, Sondermaschinen und Materialflusssysteme — ausgelegt für Genauigkeit, Wiederholbarkeit und Fertigungstauglichkeit in Automobil-, Schwer- und Industriesektoren.','Ingegneria meccanica di precisione per attrezzature, fixture, SPM e sistemi di movimentazione materiali — progettata per precisione, ripetibilità e produzione in settori automotive, ingegneria pesante e industriale.')"></p>
-        <ul class="mt-5 space-y-2">
-          <template x-for="item in [
-            t('Jigs & Fixtures Design','Jigg & Fixturdesign','Vorrichtungs- & Spannmittelkonstruktion','Progetto Attrezzature & Fixture'),
-            t('SPM (Special Purpose Machine) Design & Development','SPM Design & Utveckling','Sondermaschinen Design & Entwicklung','Progetto & Sviluppo SPM'),
-            t('CAD Modeling & 3D Design (SolidWorks · CATIA)','CAD-modellering & 3D-design (SolidWorks · CATIA)','CAD-Modellierung & 3D-Design (SolidWorks · CATIA)','Modellazione CAD & Design 3D (SolidWorks · CATIA)'),
-            t('Material Handling System Design','Design av Materialhanteringssystem','Materialflusssystemkonstruktion','Progetto Sistemi di Movimentazione Materiali'),
-            t('GD&T & Tolerance Stack-up Analysis','GD&T & Toleransanalys','GD&T & Toleranzkettenanalyse','Analisi GD&T & Catena di Tolleranze'),
-            t('Finite Element Analysis (FEA)','Finita Elementanalys (FEA)','Finite-Elemente-Analyse (FEA)','Analisi agli Elementi Finiti (FEA)'),
-            t('Welding Fixtures & Quality Gauges','Svetsfixturer & Kvalitetsmätare','Schweißvorrichtungen & Qualitätsmesszeuge','Fixture Saldatura & Calibri di Qualità'),
-            t('Process Optimization','Processoptimering','Prozessoptimierung','Ottimizzazione dei Processi')
-          ]">
-            <li class="flex items-center gap-3 text-sm text-slate-600">
-              <svg class="w-4 h-4 text-navy-600 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg>
-              <span x-text="item"></span>
-            </li>
-          </template>
-        </ul>
-        <a href="contact.html" class="mt-6 inline-flex items-center gap-2 px-5 py-2.5 bg-navy-800 text-white text-sm font-semibold rounded-full hover:bg-navy-700 transition-colors cursor-pointer" x-text="t('Enquire About This Service','Fråga om Denna Tjänst','Anfrage zu dieser Leistung','Richiesta su questo Servizio')"></a>
-      </div>
-      <div class="grid grid-cols-2 gap-3 reveal">
-        <div class="rounded-xl overflow-hidden h-40"><img src="Mechanical Engg. Projects/Fixture and SPM/Fixture1.png" alt="Jig & Fixture Design" class="w-full h-full object-cover"></div>
-        <div class="rounded-xl overflow-hidden h-40"><img src="Mechanical Engg. Projects/Fixture and SPM/SPM1.png" alt="SPM Design" class="w-full h-full object-cover object-top"></div>
-        <div class="rounded-xl overflow-hidden h-40"><img src="Mechanical Engg. Projects/Material movement/1.jpg" alt="Material Handling" class="w-full h-full object-cover"></div>
-        <div class="rounded-xl overflow-hidden h-40"><img src="Mechanical Engg. Projects/Material movement/3.jpg" alt="Material Movement System" class="w-full h-full object-cover"></div>
-      </div>
-    </div>
-
-    <!-- Services 5, 6 & 8 side by side -->
-    <div class="grid md:grid-cols-3 gap-8">
+    <!-- Services 5 & 6 side by side -->
+    <div class="grid md:grid-cols-2 gap-8">
       <div class="bg-white rounded-2xl p-8 border border-slate-100 card-lift reveal d1">
         <div class="service-icon service-card">
           <svg class="w-6 h-6 text-navy-700" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="1.5"><path stroke-linecap="round" stroke-linejoin="round" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0z"/></svg>
@@ -410,29 +376,83 @@
           </template>
         </ul>
       </div>
-      <div class="bg-slate-50 rounded-2xl p-8 border border-slate-100 card-lift reveal d3">
+    </div>
+
+    <!-- Service 7 — Mechanical Design & Engineering -->
+    <div class="grid lg:grid-cols-2 gap-12 items-center mt-20 pt-20 border-t border-slate-200 mb-20 pb-20 border-b border-slate-200">
+      <div class="reveal-l">
         <div class="service-icon service-card">
-          <svg class="w-6 h-6 text-navy-700" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="1.5"><path stroke-linecap="round" stroke-linejoin="round" d="M9 17v-2m3 2v-4m3 4v-6m2 10H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/></svg>
+          <svg class="w-6 h-6 text-navy-700" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="1.5"><path stroke-linecap="round" stroke-linejoin="round" d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z"/><path stroke-linecap="round" stroke-linejoin="round" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/></svg>
         </div>
-        <h3 class="text-xl font-heading font-extrabold text-navy-900" x-text="t('08 — Project Management','08 — Projektledning','08 — Projektmanagement','08 — Gestione del Progetto')"></h3>
-        <p class="mt-3 text-slate-600 text-sm leading-relaxed" x-text="t('Structured oversight from brief to handover — milestone planning, resource coordination, budget control, risk management, and client reporting.','Strukturerad övervakning från brief till överlämning — milstolpeplanering, resurskoordinering, budgetkontroll, riskhantering och kundrapportering.','Strukturierte Überwachung vom Briefing bis zur Übergabe — Meilensteinplanung, Ressourcenkoordination, Budgetkontrolle, Risikomanagement und Kundenberichte.','Supervisione strutturata dal brief alla consegna — pianificazione milestone, coordinamento risorse, controllo budget, gestione rischi e reportistica cliente.')"></p>
+        <h2 class="text-2xl lg:text-3xl font-heading font-extrabold text-navy-900" x-text="t('07 — Mechanical Design & Engineering','07 — Mekanisk Design & Teknik','07 — Mechanisches Design & Engineering','07 — Design Meccanico & Ingegneria')"></h2>
+        <p class="mt-4 text-slate-600 leading-relaxed" x-text="t('Precision mechanical engineering for jigs, fixtures, SPMs and material handling systems — designed for accuracy, repeatability, and manufacturability across automotive, heavy engineering, and industrial sectors.','Precisions mekanisk ingenjörskonst för jigg, fixturer, SPM och materialhanteringssystem — utformad för noggrannhet, repeterbarhet och tillverkningsbarhet inom fordon, tung industri och industrisektorer.','Präzisionsmaschinenbau für Vorrichtungen, Spannmittel, Sondermaschinen und Materialflusssysteme — ausgelegt für Genauigkeit, Wiederholbarkeit und Fertigungstauglichkeit in Automobil-, Schwer- und Industriesektoren.','Ingegneria meccanica di precisione per attrezzature, fixture, SPM e sistemi di movimentazione materiali — progettata per precisione, ripetibilità e produzione in settori automotive, ingegneria pesante e industriale.')"></p>
         <ul class="mt-5 space-y-2">
           <template x-for="item in [
-            t('Scheduling & Milestone Planning','Schemaläggning & Milstolpeplanering','Terminplanung & Meilensteinplanung','Pianificazione Schedulazione & Milestone'),
-            t('Budget Control & Cost Reporting','Budgetkontroll & Kostnadsrapportering','Budgetkontrolle & Kostenbericht','Controllo Budget & Reporting Costi'),
-            t('Resource Coordination','Resurskoordinering','Ressourcenkoordination','Coordinamento Risorse'),
-            t('Risk Management','Riskhantering','Risikomanagement','Gestione dei Rischi'),
-            t('Client Communication & Reporting','Kundkommunikation & Rapportering','Kundenkommunikation & Berichterstattung','Comunicazione Cliente & Reportistica'),
-            t('Project Handover Documentation','Projektöverlämningsdokumentation','Projektübergabedokumentation','Documentazione di Consegna Progetto')
+            t('Jigs & Fixtures Design','Jigg & Fixturdesign','Vorrichtungs- & Spannmittelkonstruktion','Progetto Attrezzature & Fixture'),
+            t('SPM (Special Purpose Machine) Design & Development','SPM Design & Utveckling','Sondermaschinen Design & Entwicklung','Progetto & Sviluppo SPM'),
+            t('CAD Modeling & 3D Design (SolidWorks · CATIA)','CAD-modellering & 3D-design (SolidWorks · CATIA)','CAD-Modellierung & 3D-Design (SolidWorks · CATIA)','Modellazione CAD & Design 3D (SolidWorks · CATIA)'),
+            t('Material Handling System Design','Design av Materialhanteringssystem','Materialflusssystemkonstruktion','Progetto Sistemi di Movimentazione Materiali'),
+            t('GD&T & Tolerance Stack-up Analysis','GD&T & Toleransanalys','GD&T & Toleranzkettenanalyse','Analisi GD&T & Catena di Tolleranze'),
+            t('Finite Element Analysis (FEA)','Finita Elementanalys (FEA)','Finite-Elemente-Analyse (FEA)','Analisi agli Elementi Finiti (FEA)'),
+            t('Welding Fixtures & Quality Gauges','Svetsfixturer & Kvalitetsmätare','Schweißvorrichtungen & Qualitätsmesszeuge','Fixture Saldatura & Calibri di Qualità'),
+            t('Process Optimization','Processoptimering','Prozessoptimierung','Ottimizzazione dei Processi')
           ]">
-            <li class="flex items-center gap-2.5 text-sm text-slate-600">
-              <div class="w-1.5 h-1.5 bg-navy-500 rounded-full flex-shrink-0"></div>
+            <li class="flex items-center gap-3 text-sm text-slate-600">
+              <svg class="w-4 h-4 text-navy-600 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg>
               <span x-text="item"></span>
             </li>
           </template>
         </ul>
+        <a href="contact.html" class="mt-6 inline-flex items-center gap-2 px-5 py-2.5 bg-navy-800 text-white text-sm font-semibold rounded-full hover:bg-navy-700 transition-colors cursor-pointer" x-text="t('Enquire About This Service','Fråga om Denna Tjänst','Anfrage zu dieser Leistung','Richiesta su questo Servizio')"></a>
+      </div>
+      <div class="grid grid-cols-2 gap-3 reveal">
+        <div class="rounded-xl overflow-hidden h-36 relative group">
+          <img src="Mechanical Engg. Projects/Fixture and SPM/HMC Hydraulic Fixture1.png" alt="HMC Hydraulic Fixture" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105">
+          <div class="absolute bottom-0 left-0 right-0 bg-navy-900/70 text-white text-xs font-semibold px-2 py-1">HMC Hydraulic Fixture</div>
+        </div>
+        <div class="rounded-xl overflow-hidden h-36 relative group">
+          <img src="Mechanical Engg. Projects/Fixture and SPM/HMC Hydraulic Fixture2.png" alt="HMC Hydraulic Fixture 4-Station" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105">
+          <div class="absolute bottom-0 left-0 right-0 bg-navy-900/70 text-white text-xs font-semibold px-2 py-1">HMC Fixture 4-Station</div>
+        </div>
+        <div class="rounded-xl overflow-hidden h-36 relative group">
+          <img src="Mechanical Engg. Projects/Fixture and SPM/VMC Hydraulic Fixture.png" alt="VMC Hydraulic Fixture" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105">
+          <div class="absolute bottom-0 left-0 right-0 bg-navy-900/70 text-white text-xs font-semibold px-2 py-1">VMC Hydraulic Fixture</div>
+        </div>
+        <div class="rounded-xl overflow-hidden h-36 relative group">
+          <img src="Mechanical Engg. Projects/Fixture and SPM/SPM1.png" alt="SPM Design" class="w-full h-full object-cover object-top transition-transform duration-500 group-hover:scale-105">
+          <div class="absolute bottom-0 left-0 right-0 bg-navy-900/70 text-white text-xs font-semibold px-2 py-1">Special Purpose Machine</div>
+        </div>
+        <div class="rounded-xl overflow-hidden h-36 relative group">
+          <img src="Mechanical Engg. Projects/Material movement/1.jpg" alt="Material Handling" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105">
+          <div class="absolute bottom-0 left-0 right-0 bg-navy-900/70 text-white text-xs font-semibold px-2 py-1">Material Handling</div>
+        </div>
       </div>
     </div>
+
+    <!-- Service 8 — Project Management -->
+    <div class="bg-slate-50 rounded-2xl p-8 border border-slate-100 card-lift reveal max-w-2xl">
+      <div class="service-icon service-card">
+        <svg class="w-6 h-6 text-navy-700" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="1.5"><path stroke-linecap="round" stroke-linejoin="round" d="M9 17v-2m3 2v-4m3 4v-6m2 10H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/></svg>
+      </div>
+      <h2 class="text-2xl lg:text-3xl font-heading font-extrabold text-navy-900" x-text="t('08 — Project Management','08 — Projektledning','08 — Projektmanagement','08 — Gestione del Progetto')"></h2>
+      <p class="mt-4 text-slate-600 leading-relaxed" x-text="t('Structured oversight from brief to handover — milestone planning, resource coordination, budget control, risk management, and client reporting.','Strukturerad övervakning från brief till överlämning — milstolpeplanering, resurskoordinering, budgetkontroll, riskhantering och kundrapportering.','Strukturierte Überwachung vom Briefing bis zur Übergabe — Meilensteinplanung, Ressourcenkoordination, Budgetkontrolle, Risikomanagement und Kundenberichte.','Supervisione strutturata dal brief alla consegna — pianificazione milestone, coordinamento risorse, controllo budget, gestione rischi e reportistica cliente.')"></p>
+      <ul class="mt-5 space-y-2">
+        <template x-for="item in [
+          t('Scheduling & Milestone Planning','Schemaläggning & Milstolpeplanering','Terminplanung & Meilensteinplanung','Pianificazione Schedulazione & Milestone'),
+          t('Budget Control & Cost Reporting','Budgetkontroll & Kostnadsrapportering','Budgetkontrolle & Kostenbericht','Controllo Budget & Reporting Costi'),
+          t('Resource Coordination','Resurskoordinering','Ressourcenkoordination','Coordinamento Risorse'),
+          t('Risk Management','Riskhantering','Risikomanagement','Gestione dei Rischi'),
+          t('Client Communication & Reporting','Kundkommunikation & Rapportering','Kundenkommunikation & Berichterstattung','Comunicazione Cliente & Reportistica'),
+          t('Project Handover Documentation','Projektöverlämningsdokumentation','Projektübergabedokumentation','Documentazione di Consegna Progetto')
+        ]">
+          <li class="flex items-center gap-2.5 text-sm text-slate-600">
+            <div class="w-1.5 h-1.5 bg-navy-500 rounded-full flex-shrink-0"></div>
+            <span x-text="item"></span>
+          </li>
+        </template>
+      </ul>
+    </div>
+
   </div>
 </section>
 
@@ -453,38 +473,10 @@
   </div>
 </section>
 
-<!-- FACADE SYSTEMS -->
-<section class="py-24 bg-white">
-  <div class="max-w-7xl mx-auto px-5 lg:px-8">
-    <p class="lbl reveal" x-text="t('Systems We Design','System Vi Designar','Systeme die wir entwerfen','Sistemi che Progettiamo')"></p>
-    <h2 class="mt-4 text-3xl lg:text-4xl font-heading font-extrabold text-navy-900 leading-tight reveal d1 mb-14"
-        x-text="t('Façade System Expertise','Fasadsystem Expertis','Fassadensystem-Expertise','Competenza nei Sistemi di Facciata')">
-    </h2>
-    <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-5">
-      <template x-for="(sys, i) in [
-        {title:t('Unitized Curtain Wall','Unitiserat Curtainwall','Unitisierte Vorhangfassade','Curtain Wall Unitizzata'),desc:t('Hook-and-anchor unit systems, kiss mullion, crane-installation panels — LOD 400/500 Revit modelling.','Krokhake-enhetsystem, kissing mullion, kranmonterade paneler — LOD 400/500 Revit-modellering.','Haken-Anker-Einheitssysteme, Kiss-Pfosten, Kranmontage-Paneele — LOD 400/500 Revit-Modellierung.','Sistemi a unità con gancio e ancoraggio, kiss mullion, pannelli a installazione con gru — modellazione Revit LOD 400/500.')},
-        {title:t('Stick System Façade','Pinnfasadsystem','Stabsystem-Fassade','Facciata a Sistema a Montanti'),desc:t('Mullion/transom sizing, structural calculation, section detailing per RAICO and Schüco catalogues.','Spröjs/tvärspröjs dimensionering, strukturberäkning, sektionsdetaljer per RAICO och Schüco.','Pfosten-/Riegeldimensionierung, Statikberechnung, Schnittdetails nach RAICO und Schüco-Katalogen.','Dimensionamento montanti/traversi, calcolo strutturale, dettagli di sezione per cataloghi RAICO e Schüco.')},
-        {title:t('Structural Glazing','Strukturell Glasning','Strukturverglasung','Vetrata Strutturale'),desc:t('DGU/TGU glazing design, glass load calculations using MEPLA ISO, U-value optimisation — U=0.7 W/(m²K) achieved.','DGU/TGU glassdesign, glaslastberäkningar med MEPLA ISO, U-värdesoptimering — U=0.7 W/(m²K) uppnådd.','DGU/TGU-Verglasungsdesign, Glaslastberechnungen mit MEPLA ISO, U-Wert-Optimierung — U=0.7 W/(m²K) erreicht.','Progetto vetrate DGU/TGU, calcoli carico vetro con MEPLA ISO, ottimizzazione valore U — U=0,7 W/(m²K) raggiunto.')},
-        {title:t('Timber Façade Systems','Träfasadsystem','Holzfassadensysteme','Sistemi di Facciata in Legno'),desc:t('Glulam timber stick wall systems with double-skin configuration — BREEAM/Green Star compliance.','Limträ träpinnväggsystem med dubbelskalig konfiguration — BREEAM/Green Star-efterlevnad.','Brettschichtholz-Stabwandsysteme mit zweischaliger Konfiguration — BREEAM/Green Star-Konformität.','Sistemi a pareti in legno lamellare con configurazione a doppia pelle — conformità BREEAM/Green Star.')},
-        {title:t('Bracket & Anchorage','Fäste & Förankring','Konsole & Verankerung','Staffa & Ancoraggio'),desc:t('Custom 3-axis ±35mm adjustable bracket engineering, anchor bolt design per EN 1991.','Anpassad 3-axlig ±35mm justerbar fästekonstruktion, ankarbultdesign per EN 1991.','Individuelle 3-Achsen ±35mm verstellbare Konsolenkonstruktion, Ankerschraubendesign nach EN 1991.','Ingegneria di staffe regolabili a 3 assi ±35mm, progetto bulloni di ancoraggio per EN 1991.')},
-        {title:t('Skylight & Atrium Glazing','Takljus & Atrium Glasning','Dachfenster & Atrium-Verglasung','Lucernario & Vetrata Atrio'),desc:t('Structural glass roof design, radial rafter systems, cleaning maintenance access and U-value.','Strukturell glastak design, radiella sparresystem, underhållsaccess och U-värde.','Strukturelle Glastachodesign, radiale Sparrensysteme, Wartungszugang und U-Wert.','Progetto tetto in vetro strutturale, sistemi di puntoni radiali, accesso manutenzione e valore U.')},
-        {title:t('Rainscreen Cladding','Regnskärmsbeklädnad','Regenschutzverkleidung','Rivestimento Ventilato'),desc:t('ACP, aluminium, terracotta — drainage path design, air seal, pressure-equalised cavity detailing.','ACP, aluminium, terrakotta — dräneringsvägsdesign, lufttätning, trycksatt kavitetsdetalj.','ACP, Aluminium, Terrakotta — Entwurf des Dränagepfads, Luftabdichtung, druckausgeglichene Hohlraumdetails.','ACP, alluminio, terracotta — progetto percorso di drenaggio, tenuta aria, dettaglio cavità a pressione equalizzata.')},
-        {title:t('Detail Design (Bygghandling)','Detaljdesign (Bygghandling)','Detailplanung (Bygghandling)','Progettazione di Dettaglio (Bygghandling)'),desc:t('Approval, shop, and GA drawings prepared per Nordic and international standards.','Godkännande-, verkstads- och GA-ritningar enligt nordiska och internationella standarder.','Genehmigungs-, Werkstatt- und GA-Zeichnungen nach nordischen und internationalen Standards.','Disegni di approvazione, officina e GA preparati secondo standard nordici e internazionali.')}
-      ]" :key="i">
-        <div class="bg-slate-50 rounded-2xl p-6 border border-slate-100 card-lift reveal" :class="'d'+Math.min(i%4+1,5)">
-          <div class="text-2xl font-heading font-extrabold text-navy-200 mb-3" x-text="String(i+1).padStart(2,'0')"></div>
-          <h3 class="font-heading font-bold text-navy-900 text-sm leading-tight" x-text="sys.title"></h3>
-          <p class="mt-2 text-slate-500 text-xs leading-relaxed" x-text="sys.desc"></p>
-        </div>
-      </template>
-    </div>
-  </div>
-</section>
-
 <!-- CTA -->
 <section class="py-20 bg-navy-900 relative overflow-hidden">
   <div class="absolute inset-0 flex items-center justify-center pointer-events-none select-none" aria-hidden="true">
-    <img src="../Company Logo/Logo Structura Nordic AB.png" alt="" class="w-full h-full object-contain" style="opacity:0.20;">
+    <img src="Image/Logo.jpg" alt="" class="w-full h-full object-contain" style="opacity:0.20;">
   </div>
   <div class="max-w-4xl mx-auto px-5 lg:px-8 text-center relative z-10">
     <h2 class="text-3xl lg:text-5xl font-heading font-extrabold text-white leading-tight reveal" x-text="t('Ready to Discuss Your Project?','Redo att Diskutera Ditt Projekt?','Bereit Ihr Projekt zu besprechen?','Pronti a discutere il vostro progetto?')"></h2>
@@ -499,7 +491,7 @@
 <footer class="bg-navy-900 border-t border-navy-700 py-10">
   <div class="max-w-7xl mx-auto px-5 lg:px-8">
     <div class="flex flex-col md:flex-row items-center justify-between gap-6">
-      <img src="../Company Logo/Logo Structura Nordic AB.png" alt="Structura Nordic AB" class="h-20 w-auto rounded-lg ring-1 ring-white/20">
+      <img src="Image/Logo.jpg" alt="Structura Nordic AB" class="h-20 w-auto rounded-lg ring-1 ring-white/20">
       <nav class="flex flex-wrap justify-center gap-x-6 gap-y-2">
         <a href="index.html" class="text-slate-400 hover:text-white text-sm transition-colors cursor-pointer" x-text="t('Home','Hem','Startseite','Home')"></a>
         <a href="about.html" class="text-slate-400 hover:text-white text-sm transition-colors cursor-pointer" x-text="t('About','Om Oss','Über Uns','Chi Siamo')"></a>
@@ -509,8 +501,31 @@
       </nav>
       <p class="text-slate-500 text-sm">© 2026 Structura Nordic AB</p>
     </div>
+    <div class="mt-5 pt-5 border-t border-navy-800 flex flex-wrap items-center justify-center gap-x-4 gap-y-1">
+      <a href="privacy-policy.html" class="text-slate-500 hover:text-slate-300 text-xs transition-colors" x-text="t('Privacy Policy','Integritetspolicy','Datenschutz','Privacy Policy')"></a>
+      <span class="text-navy-700 text-xs select-none">·</span>
+      <a href="terms-of-service.html" class="text-slate-500 hover:text-slate-300 text-xs transition-colors" x-text="t('Terms of Service','Användarvillkor','Nutzungsbedingungen','Termini')"></a>
+      <span class="text-navy-700 text-xs select-none">·</span>
+      <a href="privacy-policy.html#cookies" class="text-slate-500 hover:text-slate-300 text-xs transition-colors" x-text="t('Cookie Policy','Cookiepolicy','Cookie-Richtlinie','Cookie Policy')"></a>
+    </div>
   </div>
 </footer>
+
+<!-- COOKIE CONSENT BANNER -->
+<div x-data="{show:!localStorage.getItem('sn-cookie-consent'),accept(){localStorage.setItem('sn-cookie-consent','accepted');this.show=false},reject(){localStorage.setItem('sn-cookie-consent','rejected');this.show=false}}" x-cloak x-show="show" class="fixed bottom-0 inset-x-0 z-[200] p-3 md:p-5">
+  <div class="max-w-5xl mx-auto bg-navy-900 rounded-2xl shadow-2xl border border-navy-700 p-5">
+    <div class="flex flex-col sm:flex-row items-start sm:items-center gap-4">
+      <div class="flex-1 min-w-0">
+        <p class="text-white font-heading font-bold text-sm mb-1.5">Cookie Notice</p>
+        <p class="text-slate-300 text-xs leading-relaxed">We use essential cookies to remember your language preference. Resources from Google Fonts and jsDelivr CDN are loaded to deliver this site. We use <strong class="text-white">no tracking or advertising cookies</strong>. <a href="privacy-policy.html" class="text-gold-400 underline hover:text-gold-300 transition-colors">Privacy &amp; Cookie Policy</a></p>
+      </div>
+      <div class="flex gap-2 flex-shrink-0 flex-wrap">
+        <button @click="reject()" class="px-4 py-2 border border-slate-600 text-slate-300 text-xs font-semibold rounded-full hover:border-slate-400 hover:text-white transition-all cursor-pointer whitespace-nowrap">Reject Non-Essential</button>
+        <button @click="accept()" class="px-4 py-2 bg-gold-500 text-navy-900 text-xs font-semibold rounded-full hover:bg-gold-400 transition-all cursor-pointer whitespace-nowrap">Accept All</button>
+      </div>
+    </div>
+  </div>
+</div>
 
 <script>
 const obs = new IntersectionObserver(entries => {

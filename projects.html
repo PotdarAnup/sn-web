@@ -41,6 +41,7 @@
     /* Lightbox */
     .lb-overlay{position:fixed;inset:0;z-index:9999;background:rgba(0,0,0,.9);display:flex;align-items:center;justify-content:center;padding:1rem}
     .lb-img{max-height:90vh;max-width:90vw;border-radius:12px;object-fit:contain}
+    [x-cloak]{display:none!important}
   </style>
 </head>
 
@@ -51,24 +52,62 @@
     scrolled:false,
     lb:null,
     lbTitle:'',
+    lbIdx:0,
+    lbImages:[
+      {src:'Facade Engg. Projects/Andaz Doha, by Hyatt , Qatar.jpeg',title:'Andaz Doha by Hyatt — Doha, Qatar'},
+      {src:'Facade Engg. Projects/Nothvolt Office, First Timber Facade system, Stick Built, Sweden.jpeg',title:'Northvolt Office — First Timber Façade System, Stick Built, Sweden'},
+      {src:'Facade Engg. Projects/Project unique solution with sandwich core.png',title:'Kronprinsen, Malmö — Unique Sandwich Core Façade Solution, Sweden'},
+      {src:'Facade Engg. Projects/NIbe, Timber Facade System, Stick Built, Sweden.jpeg',title:'NIbe Project — Timber Façade System, Stick Built, Sweden'},
+      {src:'Facade Engg. Projects/Vapenrocken Projekt, Sweden, First Module Project using Timber Structure.jpeg',title:'Vapenrocken Projekt — First Modular Timber Structure, Sweden'},
+      {src:'Facade Engg. Projects/201 Brookline Ave,Boston, USA.jpeg',title:'201 Brookline Ave — Boston, USA'},
+      {src:'Facade Engg. Projects/WhatsApp Image 2026-06-24 at 12.27.52 AM.jpeg',title:'AMRF First Building — Bringelly, Australia'},
+      {src:'Facade Engg. Projects/WhatsApp Image 2026-06-24 at 12.36.06 AM.jpeg',title:'The One, One Bloor West — Toronto, Canada'},
+      {src:'Facade Engg. Projects/WhatsApp Image 2026-06-24 at 12.36.19 AM.jpeg',title:'Red Sea Marine Life Institute — Riyadh, Saudi Arabia'},
+      {src:'Facade Engg. Projects/image-117-2048x1366.jpg',title:'Fasadglas Bäcklin AB Project — Sweden'},
+      {src:'Mechanical Engg. Projects/Fixture and SPM/HMC Hydraulic Fixture1.png',title:'HMC Hydraulic Fixture — Multi-Face Hydraulic Clamping Fixture for Horizontal Machining Centre'},
+      {src:'Mechanical Engg. Projects/Fixture and SPM/HMC Hydraulic Fixture2.png',title:'HMC Hydraulic Fixture — 4-Station Assembly with Hydraulic Circuit & Quick-Connect Fittings'},
+      {src:'Mechanical Engg. Projects/Fixture and SPM/VMC Hydraulic Fixture.png',title:'VMC Hydraulic Fixture — Hydraulic Clamping Fixture Installed on Vertical Machining Centre'},
+      {src:'Mechanical Engg. Projects/Fixture and SPM/SPM1.png',title:'Special Purpose Machine — Press'},
+      {src:'Mechanical Engg. Projects/Fixture and SPM/SPM2.png',title:'Special Purpose Machine — Industrial Automation'},
+      {src:'Mechanical Engg. Projects/Material movement/1.jpg',title:'Trolley Design — Material Handling'},
+      {src:'Mechanical Engg. Projects/Material movement/2.jpg',title:'Transfer Trolley — Industrial Material Movement'},
+      {src:'Mechanical Engg. Projects/Material movement/3.jpg',title:'Lifting & Tilting Device — Manufacturing Line'},
+      {src:'Mechanical Engg. Projects/Material movement/4.jpg',title:'Rack'},
+      {src:'Mechanical Engg. Projects/Material movement/5.jpg',title:'Automated Roller Conveyor — Production Facility'}
+    ],
     t(e,s,d,i){const v={en:e,sv:s,de:d,it:i};return v[this.lang]??e},
     setLang(l){this.lang=l;localStorage.setItem('sn-lang',l)},
-    openLb(src,title){this.lb=src;this.lbTitle=title},
-    closeLb(){this.lb=null}
+    openLb(src,title){this.lb=src;this.lbTitle=title;this.lbIdx=this.lbImages.findIndex(i=>i.src===src)},
+    closeLb(){this.lb=null},
+    lbNext(){const n=(this.lbIdx+1)%this.lbImages.length;const i=this.lbImages[n];this.openLb(i.src,i.title)},
+    lbPrev(){const p=(this.lbIdx-1+this.lbImages.length)%this.lbImages.length;const i=this.lbImages[p];this.openLb(i.src,i.title)}
   }"
   x-init="window.addEventListener('scroll',()=>{scrolled=window.scrollY>60})"
   @keydown.escape.window="closeLb()"
+  @keydown.arrowleft.window="lb&&lbPrev()"
+  @keydown.arrowright.window="lb&&lbNext()"
   :lang="lang">
 
 <!-- LIGHTBOX -->
 <div x-show="lb" x-transition class="lb-overlay" @click.self="closeLb()" style="display:none">
-  <button @click="closeLb()" class="absolute top-4 right-4 text-white/70 hover:text-white cursor-pointer p-2">
+  <!-- Close -->
+  <button @click="closeLb()" class="absolute top-4 right-4 text-white/70 hover:text-white cursor-pointer p-2 z-10">
     <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="1.5"><path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12"/></svg>
   </button>
-  <div class="text-center">
+  <!-- Prev -->
+  <button @click="lbPrev()" class="absolute left-3 md:left-6 top-1/2 -translate-y-1/2 bg-white/10 hover:bg-white/25 text-white rounded-full p-3 cursor-pointer transition-all z-10" aria-label="Previous">
+    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M15 19l-7-7 7-7"/></svg>
+  </button>
+  <!-- Image -->
+  <div class="text-center px-16">
     <img :src="lb" :alt="lbTitle" class="lb-img shadow-2xl">
-    <p class="text-white/70 text-sm mt-4 font-medium" x-text="lbTitle"></p>
+    <p class="text-white/80 text-sm mt-4 font-medium" x-text="lbTitle"></p>
+    <p class="text-white/40 text-xs mt-1" x-text="(lbIdx+1)+' / '+lbImages.length"></p>
   </div>
+  <!-- Next -->
+  <button @click="lbNext()" class="absolute right-3 md:right-6 top-1/2 -translate-y-1/2 bg-white/10 hover:bg-white/25 text-white rounded-full p-3 cursor-pointer transition-all z-10" aria-label="Next">
+    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7"/></svg>
+  </button>
 </div>
 
 <!-- NAV -->
@@ -76,7 +115,7 @@
   <div class="max-w-7xl mx-auto px-5 lg:px-8">
     <div class="flex items-center justify-between h-16">
       <a href="index.html" class="flex items-center cursor-pointer flex-shrink-0">
-        <img src="../Company Logo/Logo Structura Nordic AB.png" alt="Structura Nordic AB" class="h-[60px] w-auto rounded-lg">
+        <img src="Image/Logo.jpg" alt="Structura Nordic AB" class="h-[60px] w-auto rounded-lg">
       </a>
       <nav class="hidden md:flex items-center gap-7">
         <a href="index.html" class="text-sm font-medium text-slate-600 hover:text-navy-800 transition-colors cursor-pointer" x-text="t('Home','Hem','Startseite','Home')"></a>
@@ -179,7 +218,7 @@
         <div class="h-72 relative overflow-hidden">
           <img src="Facade Engg. Projects/Nothvolt Office, First Timber Facade system, Stick Built, Sweden.jpeg" alt="Northvolt Office Timber Façade Sweden" class="proj-img absolute inset-0 w-full h-full object-cover object-center">
           <div class="absolute inset-0" style="background:linear-gradient(to top,rgba(10,22,40,0.9) 0%,transparent 60%)"></div>
-          <div class="absolute top-3 left-3 bg-emerald-600 text-white text-xs font-semibold px-2.5 py-1 rounded-full">Ongoing</div>
+          <div class="absolute top-3 left-3 bg-navy-700 text-white text-xs font-semibold px-2.5 py-1 rounded-full">Completed</div>
           <div class="absolute bottom-0 left-0 right-0 p-5">
             <div class="text-xs text-slate-300 mb-1">Timber Façade · Sweden</div>
             <h3 class="font-heading font-bold text-white text-xl leading-tight">Northvolt Office</h3>
@@ -201,7 +240,7 @@
         <div class="h-72 relative overflow-hidden">
           <img src="Facade Engg. Projects/Project unique solution with sandwich core.png" alt="Kronprinsen Malmö Sandwich Core" class="proj-img absolute inset-0 w-full h-full object-cover object-center">
           <div class="absolute inset-0" style="background:linear-gradient(to top,rgba(10,22,40,0.9) 0%,transparent 60%)"></div>
-          <div class="absolute top-3 left-3 bg-navy-700 text-white text-xs font-semibold px-2.5 py-1 rounded-full">Completed 2022</div>
+          <div class="absolute top-3 left-3 bg-navy-700 text-white text-xs font-semibold px-2.5 py-1 rounded-full">Completed</div>
           <div class="absolute bottom-0 left-0 right-0 p-5">
             <div class="text-xs text-slate-300 mb-1">27 Floors · Sandwich Core · Malmö</div>
             <h3 class="font-heading font-bold text-white text-xl leading-tight">Kronprinsen, Malmö</h3>
@@ -247,7 +286,7 @@
         <div class="h-56 relative overflow-hidden">
           <img src="Facade Engg. Projects/Vapenrocken Projekt, Sweden, First Module Project using Timber Structure.jpeg" alt="Vapenrocken Projekt Timber Module Sweden" class="proj-img absolute inset-0 w-full h-full object-cover object-center">
           <div class="absolute inset-0" style="background:linear-gradient(to top,rgba(10,22,40,0.88) 0%,transparent 55%)"></div>
-          <div class="absolute top-3 left-3 bg-emerald-600 text-white text-xs font-semibold px-2 py-0.5 rounded-full">Completed</div>
+          <div class="absolute top-3 left-3 bg-navy-700 text-white text-xs font-semibold px-2 py-0.5 rounded-full">Completed</div>
           <div class="absolute bottom-0 left-0 right-0 p-4">
             <div class="text-xs text-slate-300 mb-0.5">Modular Timber · Sweden</div>
             <h3 class="font-heading font-bold text-white text-base leading-tight">Vapenrocken Projekt</h3>
@@ -381,46 +420,45 @@
     <h3 class="text-2xl font-heading font-bold text-navy-800 mb-6 reveal" x-text="t('Fixtures & Special Purpose Machines','Fixturer & Specialmaskiner','Vorrichtungen & Sondermaschinen','Fixture e Macchine Speciali')"></h3>
     <div class="grid md:grid-cols-3 lg:grid-cols-5 gap-4 mb-12">
 
-      <div class="proj-card rounded-2xl overflow-hidden border border-slate-100 card-lift reveal d1 cursor-pointer" @click="openLb('Mechanical Engg. Projects/Fixture and SPM/Fixture1.png','Welding Fixture Design — Automotive, India')">
+      <div class="proj-card rounded-2xl overflow-hidden border border-slate-100 card-lift reveal d1 cursor-pointer" @click="openLb('Mechanical Engg. Projects/Fixture and SPM/HMC Hydraulic Fixture1.png','HMC Hydraulic Fixture — Multi-Face Hydraulic Clamping Fixture for Horizontal Machining Centre')">
         <div class="h-48 relative overflow-hidden bg-slate-200">
-          <img src="Mechanical Engg. Projects/Fixture and SPM/Fixture1.png" alt="Fixture Design 1" class="proj-img absolute inset-0 w-full h-full object-cover object-center">
+          <img src="Mechanical Engg. Projects/Fixture and SPM/HMC Hydraulic Fixture1.png" alt="HMC Hydraulic Fixture" class="proj-img absolute inset-0 w-full h-full object-cover object-center">
           <div class="absolute inset-0" style="background:linear-gradient(to top,rgba(10,22,40,0.85) 0%,transparent 55%)"></div>
           <div class="absolute bottom-0 left-0 right-0 p-3">
-            <h3 class="font-heading font-bold text-white text-sm">Welding Fixture</h3>
-            <p class="text-xs text-slate-400">Automotive</p>
+            <h3 class="font-heading font-bold text-white text-sm">HMC Hydraulic Fixture</h3>
           </div>
         </div>
       </div>
 
-      <div class="proj-card rounded-2xl overflow-hidden border border-slate-100 card-lift reveal d2 cursor-pointer" @click="openLb('Mechanical Engg. Projects/Fixture and SPM/Fixture2.png','Drill Jig Design — Manufacturing, India')">
+      <div class="proj-card rounded-2xl overflow-hidden border border-slate-100 card-lift reveal d5 cursor-pointer" @click="openLb('Mechanical Engg. Projects/Fixture and SPM/HMC Hydraulic Fixture2.png','HMC Hydraulic Fixture — 4-Station Assembly with Hydraulic Circuit & Quick-Connect Fittings')">
         <div class="h-48 relative overflow-hidden bg-slate-200">
-          <img src="Mechanical Engg. Projects/Fixture and SPM/Fixture2.png" alt="Fixture Design 2" class="proj-img absolute inset-0 w-full h-full object-cover object-center">
+          <img src="Mechanical Engg. Projects/Fixture and SPM/HMC Hydraulic Fixture2.png" alt="HMC Hydraulic Fixture 2" class="proj-img absolute inset-0 w-full h-full object-cover object-center">
           <div class="absolute inset-0" style="background:linear-gradient(to top,rgba(10,22,40,0.85) 0%,transparent 55%)"></div>
           <div class="absolute bottom-0 left-0 right-0 p-3">
-            <h3 class="font-heading font-bold text-white text-sm">Drill Jig</h3>
-            <p class="text-xs text-slate-400">Manufacturing</p>
+            <h3 class="font-heading font-bold text-white text-sm">HMC Hydraulic Fixture</h3>
+            <p class="text-slate-300 text-xs mt-0.5">4-Station · Hydraulic Circuit</p>
           </div>
         </div>
       </div>
 
-      <div class="proj-card rounded-2xl overflow-hidden border border-slate-100 card-lift reveal d3 cursor-pointer" @click="openLb('Mechanical Engg. Projects/Fixture and SPM/Fixture3.png','Assembly Fixture Design — Precision Manufacturing')">
+      <div class="proj-card rounded-2xl overflow-hidden border border-slate-100 card-lift reveal d1 cursor-pointer" @click="openLb('Mechanical Engg. Projects/Fixture and SPM/VMC Hydraulic Fixture.png','VMC Hydraulic Fixture — Hydraulic Clamping Fixture Installed on Vertical Machining Centre')">
         <div class="h-48 relative overflow-hidden bg-slate-200">
-          <img src="Mechanical Engg. Projects/Fixture and SPM/Fixture3.png" alt="Fixture Design 3" class="proj-img absolute inset-0 w-full h-full object-cover object-center">
+          <img src="Mechanical Engg. Projects/Fixture and SPM/VMC Hydraulic Fixture.png" alt="VMC Hydraulic Fixture" class="proj-img absolute inset-0 w-full h-full object-cover object-center">
           <div class="absolute inset-0" style="background:linear-gradient(to top,rgba(10,22,40,0.85) 0%,transparent 55%)"></div>
           <div class="absolute bottom-0 left-0 right-0 p-3">
-            <h3 class="font-heading font-bold text-white text-sm">Assembly Fixture</h3>
-            <p class="text-xs text-slate-400">Precision Mfg.</p>
+            <h3 class="font-heading font-bold text-white text-sm">VMC Hydraulic Fixture</h3>
+            <p class="text-slate-300 text-xs mt-0.5">Vertical Machining Centre</p>
           </div>
         </div>
       </div>
 
-      <div class="proj-card rounded-2xl overflow-hidden border border-slate-100 card-lift reveal d4 cursor-pointer" @click="openLb('Mechanical Engg. Projects/Fixture and SPM/SPM1.png','Special Purpose Machine — Tooltech Global Engineering')">
+      <div class="proj-card rounded-2xl overflow-hidden border border-slate-100 card-lift reveal d4 cursor-pointer" @click="openLb('Mechanical Engg. Projects/Fixture and SPM/SPM1.png','Special Purpose Machine — Press')">
         <div class="h-48 relative overflow-hidden bg-slate-200">
           <img src="Mechanical Engg. Projects/Fixture and SPM/SPM1.png" alt="SPM Design 1" class="proj-img absolute inset-0 w-full h-full object-cover object-center">
           <div class="absolute inset-0" style="background:linear-gradient(to top,rgba(10,22,40,0.85) 0%,transparent 55%)"></div>
           <div class="absolute bottom-0 left-0 right-0 p-3">
             <h3 class="font-heading font-bold text-white text-sm">SPM Design</h3>
-            <p class="text-xs text-slate-400">Tooltech Global</p>
+            <p class="text-xs text-slate-400">Press</p>
           </div>
         </div>
       </div>
@@ -442,12 +480,12 @@
     <h3 class="text-2xl font-heading font-bold text-navy-800 mb-6 reveal" x-text="t('Material Movement & Handling','Materialflöde & Hantering','Materialfluss & Handhabung','Movimentazione e Gestione Materiali')"></h3>
     <div class="grid md:grid-cols-3 lg:grid-cols-5 gap-4">
 
-      <div class="proj-card rounded-2xl overflow-hidden border border-slate-100 card-lift reveal d1 cursor-pointer" @click="openLb('Mechanical Engg. Projects/Material movement/1.jpg','Conveyor Design — Material Handling System')">
+      <div class="proj-card rounded-2xl overflow-hidden border border-slate-100 card-lift reveal d1 cursor-pointer" @click="openLb('Mechanical Engg. Projects/Material movement/1.jpg','Trolley Design — Material Handling')">
         <div class="h-48 relative overflow-hidden bg-slate-200">
           <img src="Mechanical Engg. Projects/Material movement/1.jpg" alt="Material Handling 1" class="proj-img absolute inset-0 w-full h-full object-cover object-center">
           <div class="absolute inset-0" style="background:linear-gradient(to top,rgba(10,22,40,0.85) 0%,transparent 55%)"></div>
           <div class="absolute bottom-0 left-0 right-0 p-3">
-            <h3 class="font-heading font-bold text-white text-sm">Conveyor System</h3>
+            <h3 class="font-heading font-bold text-white text-sm">Trolley Design</h3>
             <p class="text-xs text-slate-400">Material Handling</p>
           </div>
         </div>
@@ -475,13 +513,12 @@
         </div>
       </div>
 
-      <div class="proj-card rounded-2xl overflow-hidden border border-slate-100 card-lift reveal d4 cursor-pointer" @click="openLb('Mechanical Engg. Projects/Material movement/4.jpg','Pallet Handling System — Warehouse & Logistics')">
+      <div class="proj-card rounded-2xl overflow-hidden border border-slate-100 card-lift reveal d4 cursor-pointer" @click="openLb('Mechanical Engg. Projects/Material movement/4.jpg','Rack')">
         <div class="h-48 relative overflow-hidden bg-slate-200">
           <img src="Mechanical Engg. Projects/Material movement/4.jpg" alt="Material Handling 4" class="proj-img absolute inset-0 w-full h-full object-cover object-center">
           <div class="absolute inset-0" style="background:linear-gradient(to top,rgba(10,22,40,0.85) 0%,transparent 55%)"></div>
           <div class="absolute bottom-0 left-0 right-0 p-3">
-            <h3 class="font-heading font-bold text-white text-sm">Pallet Handling</h3>
-            <p class="text-xs text-slate-400">Warehouse</p>
+            <h3 class="font-heading font-bold text-white text-sm">Rack</h3>
           </div>
         </div>
       </div>
@@ -520,7 +557,7 @@
   <div class="max-w-7xl mx-auto px-5 lg:px-8">
     <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-10">
       <div class="lg:col-span-2">
-        <img src="../Company Logo/Logo Structura Nordic AB.png" alt="Structura Nordic AB" class="h-20 w-auto rounded-lg ring-1 ring-white/20">
+        <img src="Image/Logo.jpg" alt="Structura Nordic AB" class="h-20 w-auto rounded-lg ring-1 ring-white/20">
         <p class="mt-4 text-slate-400 text-sm max-w-xs" x-text="t('Advanced Façade Engineering & Mechanical Design — Gothenburg, Sweden.','Fasadteknik & Mekanisk Design — Göteborg, Sverige.','Fassadentechnik & Maschinenbau — Göteborg, Schweden.','Ingegneria di Facciata — Göteborg, Svezia.')"></p>
         <div class="mt-4 space-y-2">
           <div class="flex items-center gap-2 text-slate-400 text-sm"><svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="1.5"><path stroke-linecap="round" stroke-linejoin="round" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/></svg><a href="mailto:info@structuranordic.se" class="hover:text-white transition-colors">info@structuranordic.se</a></div>
@@ -545,11 +582,33 @@
       </div>
     </div>
     <div class="mt-12 pt-8 border-t border-navy-700 flex flex-col md:flex-row items-center justify-between gap-4">
-      <p class="text-slate-500 text-sm">© 2025 Structura Nordic AB. <span x-text="t('All rights reserved.','Alla rättigheter förbehållna.','Alle Rechte vorbehalten.','Tutti i diritti riservati.')"></span></p>
-      <p class="text-slate-500 text-sm">Owner & Director: Premchand Potdar</p>
+      <p class="text-slate-500 text-sm">© 2026 Structura Nordic AB. <span x-text="t('All rights reserved.','Alla rättigheter förbehållna.','Alle Rechte vorbehalten.','Tutti i diritti riservati.')"></span></p>
+      <div class="flex flex-wrap items-center gap-x-4 gap-y-1">
+        <a href="privacy-policy.html" class="text-slate-500 hover:text-slate-300 text-xs transition-colors" x-text="t('Privacy Policy','Integritetspolicy','Datenschutz','Privacy Policy')"></a>
+        <span class="text-navy-700 text-xs select-none">·</span>
+        <a href="terms-of-service.html" class="text-slate-500 hover:text-slate-300 text-xs transition-colors" x-text="t('Terms of Service','Användarvillkor','Nutzungsbedingungen','Termini')"></a>
+        <span class="text-navy-700 text-xs select-none">·</span>
+        <a href="privacy-policy.html#cookies" class="text-slate-500 hover:text-slate-300 text-xs transition-colors" x-text="t('Cookie Policy','Cookiepolicy','Cookie-Richtlinie','Cookie Policy')"></a>
+      </div>
     </div>
   </div>
 </footer>
+
+<!-- COOKIE CONSENT BANNER -->
+<div x-data="{show:!localStorage.getItem('sn-cookie-consent'),accept(){localStorage.setItem('sn-cookie-consent','accepted');this.show=false},reject(){localStorage.setItem('sn-cookie-consent','rejected');this.show=false}}" x-cloak x-show="show" class="fixed bottom-0 inset-x-0 z-[200] p-3 md:p-5">
+  <div class="max-w-5xl mx-auto bg-navy-900 rounded-2xl shadow-2xl border border-navy-700 p-5">
+    <div class="flex flex-col sm:flex-row items-start sm:items-center gap-4">
+      <div class="flex-1 min-w-0">
+        <p class="text-white font-heading font-bold text-sm mb-1.5">Cookie Notice</p>
+        <p class="text-slate-300 text-xs leading-relaxed">We use essential cookies to remember your language preference. Resources from Google Fonts and jsDelivr CDN are loaded to deliver this site. We use <strong class="text-white">no tracking or advertising cookies</strong>. <a href="privacy-policy.html" class="text-gold-400 underline hover:text-gold-300 transition-colors">Privacy &amp; Cookie Policy</a></p>
+      </div>
+      <div class="flex gap-2 flex-shrink-0 flex-wrap">
+        <button @click="reject()" class="px-4 py-2 border border-slate-600 text-slate-300 text-xs font-semibold rounded-full hover:border-slate-400 hover:text-white transition-all cursor-pointer whitespace-nowrap">Reject Non-Essential</button>
+        <button @click="accept()" class="px-4 py-2 bg-gold-500 text-navy-900 text-xs font-semibold rounded-full hover:bg-gold-400 transition-all cursor-pointer whitespace-nowrap">Accept All</button>
+      </div>
+    </div>
+  </div>
+</div>
 
 <script>
 const obs = new IntersectionObserver(entries => {

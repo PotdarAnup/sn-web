@@ -50,6 +50,7 @@
     .proj-card-img{transition:transform .5s ease}
     .proj-card:hover .proj-card-img{transform:scale(1.05)}
     @media(prefers-reduced-motion:reduce){.reveal,.reveal-l,.reveal-r{opacity:1;transform:none;transition:none}.ha{animation:none;opacity:1}.float,.float2{animation:none}*{transition-duration:.01ms!important;animation-duration:.01ms!important}}
+    [x-cloak]{display:none!important}
   </style>
 </head>
 
@@ -63,7 +64,7 @@
   <div class="max-w-7xl mx-auto px-5 lg:px-8">
     <div class="flex items-center justify-between h-16">
       <a href="index.html" class="flex items-center cursor-pointer flex-shrink-0">
-        <img src="../Company Logo/Logo Structura Nordic AB.png" alt="Structura Nordic AB" class="h-[60px] w-auto rounded-lg transition-all duration-300">
+        <img src="Image/Logo.jpg" alt="Structura Nordic AB" class="h-[60px] w-auto rounded-lg transition-all duration-300">
       </a>
       <nav class="hidden md:flex items-center gap-7">
         <a href="index.html" :class="scrolled?'text-navy-900 border-navy-800':'text-white border-gold-400'" class="text-sm font-semibold border-b-2 pb-0.5 cursor-pointer transition-colors" x-text="t('Home','Hem','Startseite','Home')"></a>
@@ -191,13 +192,13 @@
       <div>
         <p class="lbl reveal" x-text="t('Who We Are','Vilka Vi Är','Wer Wir Sind','Chi Siamo')"></p>
         <h2 class="mt-4 text-4xl lg:text-5xl font-heading font-extrabold text-navy-900 leading-tight reveal d1"
-            x-text="t('A Specialized Façade Engineering Firm','Ett Specialiserat Fasadingenjörsföretag','Ein spezialisiertes Fassadenunternehmen','Uno Studio di Ingegneria di Facciata')">
+            x-text="t('Façade & Mechanical Engineering Specialists','Specialister inom Fasad- och Mekanisk Teknik','Fassaden- & Maschinenbau-Spezialisten','Specialisti in Ingegneria di Facciata e Meccanica')">
         </h2>
         <p class="mt-6 text-slate-600 leading-relaxed reveal d2"
-           x-text="t('Structura Nordic AB is headquartered in Gothenburg, Sweden, with 20+ years of combined experience and 13+ years operating within Scandinavia. We deliver precision façade engineering and mechanical design solutions to clients across Australia, Canada, USA, Saudi Arabia, and Europe.','Structura Nordic AB har sitt säte i Göteborg, Sverige, med 20+ års samlad erfarenhet och 13+ år i Skandinavien. Vi levererar precisionsfasadteknik och mekaniska designlösningar till kunder i Australien, Kanada, USA, Saudiarabien och Europa.','Die Structura Nordic AB hat ihren Sitz in Göteborg, Schweden, mit 20+ Jahren kombinierter Erfahrung und 13+ Jahren in Skandinavien. Wir liefern präzise Fassadentechnik und Konstruktionslösungen an Kunden in Australien, Kanada, USA, Saudi-Arabien und Europa.','Structura Nordic AB ha sede a Göteborg, Svezia, con 20+ anni di esperienza combinata e 13+ anni operativi in Scandinavia. Fornisce soluzioni di ingegneria di facciata e design meccanico di precisione a clienti in Australia, Canada, USA, Arabia Saudita ed Europa.')">
+           x-text="t('Structura Nordic AB is a newly established firm headquartered in Gothenburg, Sweden — built to bring deep, senior-level engineering expertise directly to clients without the overhead of a large organisation. The company is led by Premchand Potdar, a façade engineer and BIM specialist with 20+ years of hands-on experience, including 13+ years working within Scandinavia.','Structura Nordic AB är ett nyetablerat företag med säte i Göteborg, Sverige — byggt för att leverera djup, seniornivå ingenjörskompetens direkt till kunder utan en stor organisations overhead. Företaget leds av Premchand Potdar, fasadingenjör och BIM-specialist med 20+ års erfarenhet, varav 13+ år i Skandinavien.','Structura Nordic AB ist ein neu gegründetes Unternehmen mit Sitz in Göteborg, Schweden — gegründet, um tiefgehende Ingenieurkompetenz direkt zu Kunden zu bringen, ohne den Overhead einer großen Organisation. Das Unternehmen wird von Premchand Potdar geleitet, einem Fassadeningenieur und BIM-Spezialisten mit 20+ Jahren Erfahrung, davon 13+ Jahre in Skandinavien.','Structura Nordic AB è una società di nuova costituzione con sede a Göteborg, in Svezia — nata per portare ai clienti competenze ingegneristiche senior direttamente, senza le strutture di una grande azienda. È guidata da Premchand Potdar, ingegnere di facciata e specialista BIM con 20+ anni di esperienza, di cui 13+ in Scandinavia.')">
         </p>
         <p class="mt-4 text-slate-600 leading-relaxed reveal d3"
-           x-text="t('With full LOD 500 BIM delivery capability and fluency across 6+ software platforms, we serve as a single engineering partner from concept through fabrication-ready documentation.','Med fullständig LOD 500 BIM-leveranskapacitet och kompetens i 6+ mjukvaruplattformar fungerar vi som en enda ingenjörspartner från koncept till tillverkningsfärdig dokumentation.','Mit vollständiger LOD 500 BIM-Lieferfähigkeit und Kompetenz in 6+ Softwareplattformen sind wir Ihr einziger Ingenieurpartner vom Konzept bis zur fertigungsgerechten Dokumentation.','Con piena capacità di consegna BIM LOD 500 e competenza in oltre 6 piattaforme software, siamo il vostro unico partner ingegneristico dal concetto alla documentazione pronta per la produzione.')">
+           x-text="t('That expertise is now the foundation of everything we deliver — precision façade engineering and mechanical design solutions for clients across Australia, Canada, USA, Saudi Arabia, and Europe — from LOD 500 BIM curtain wall packages to jigs, fixtures and SPM design, with full client accountability on every project.','Denna expertis är nu grunden för allt vi levererar — precisionsfasadteknik och mekaniska designlösningar till kunder i Australien, Kanada, USA, Saudiarabien och Europa — från LOD 500 BIM-fasadpaket till jigg-, fixture- och SPM-design, med fullständigt kundansvar i varje projekt.','Diese Expertise bildet heute die Grundlage für alles, was wir liefern — präzise Fassadentechnik und Maschinenbaulösungen für Kunden in Australien, Kanada, USA, Saudi-Arabien und Europa — von LOD 500 BIM-Fassadenpaketen bis hin zu Vorrichtungs- und Sondermaschinendesign, mit vollständiger Kundenverantwortung.','Questa competenza è oggi il fondamento di tutto ciò che consegniamo — soluzioni di ingegneria di facciata e design meccanico per clienti in Australia, Canada, USA, Arabia Saudita ed Europa — dai pacchetti BIM LOD 500 alle attrezzature e SPM, con piena responsabilità verso il cliente in ogni progetto.')">
         </p>
         <a href="about.html" class="mt-8 inline-flex items-center gap-2 font-semibold text-navy-700 hover:text-navy-900 transition-colors cursor-pointer text-sm reveal d4">
           <span x-text="t('Meet our director →','Möt vår direktör →','Unseren Direktor kennenlernen →','Incontra il nostro direttore →')"></span>
@@ -371,37 +372,69 @@
     </div>
 
     <!-- Flow diagram -->
-    <div class="flex flex-col md:flex-row items-center justify-center gap-4 mb-14 reveal d3">
-      <!-- Client -->
-      <div class="flex-shrink-0 bg-white border-2 border-slate-200 rounded-2xl px-8 py-5 text-center shadow-sm">
+    <div class="flex flex-col md:flex-row items-center justify-center gap-0 mb-14 reveal d3">
+
+      <!-- Client node -->
+      <div class="flex-shrink-0 bg-white border-2 border-slate-200 rounded-2xl px-8 py-6 text-center shadow-sm min-w-[160px]">
         <div class="text-xs font-bold text-slate-400 uppercase tracking-widest mb-1">You</div>
         <div class="text-lg font-heading font-extrabold text-navy-900">Client</div>
-        <div class="text-xs text-slate-500 mt-1">Project Owner / Architect</div>
+        <div class="text-xs text-slate-500 mt-1">Project Owner<br>/ Architect</div>
       </div>
-      <!-- Arrow -->
-      <div class="flex items-center gap-2 text-slate-300">
-        <div class="hidden md:block w-12 h-px bg-slate-300"></div>
-        <svg class="w-5 h-5 rotate-90 md:rotate-0 text-gold-500" fill="currentColor" viewBox="0 0 20 20"><path d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z"/></svg>
-        <div class="hidden md:block w-12 h-px bg-slate-300"></div>
+
+      <!-- Bidirectional arrow 1 -->
+      <div class="flex flex-col md:flex-row items-center">
+        <!-- Mobile: vertical arrows -->
+        <div class="flex md:hidden flex-col items-center py-2 gap-1">
+          <svg class="w-8 h-8 text-gold-500 drop-shadow" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd"/></svg>
+          <svg class="w-8 h-8 text-navy-400" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M14.707 12.707a1 1 0 01-1.414 0L10 9.414l-3.293 3.293a1 1 0 01-1.414-1.414l4-4a1 1 0 011.414 0l4 4a1 1 0 010 1.414z" clip-rule="evenodd"/></svg>
+        </div>
+        <!-- Desktop: horizontal arrows with lines -->
+        <div class="hidden md:flex flex-col items-center gap-2 px-1">
+          <div class="flex items-center">
+            <div class="w-10 h-0.5 bg-gold-400"></div>
+            <svg class="w-7 h-7 text-gold-500 -ml-1 drop-shadow" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z" clip-rule="evenodd"/></svg>
+          </div>
+          <div class="flex items-center">
+            <svg class="w-7 h-7 text-navy-400 rotate-180 -mr-1" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z" clip-rule="evenodd"/></svg>
+            <div class="w-10 h-0.5 bg-navy-300"></div>
+          </div>
+        </div>
       </div>
-      <!-- SN AB -->
-      <div class="flex-shrink-0 bg-navy-800 rounded-2xl px-8 py-5 text-center shadow-xl ring-4 ring-gold-500/30">
+
+      <!-- Structura Nordic AB node -->
+      <div class="flex-shrink-0 bg-navy-800 rounded-2xl px-8 py-6 text-center shadow-xl ring-4 ring-gold-500/30 min-w-[200px]">
         <div class="text-xs font-bold text-gold-400 uppercase tracking-widest mb-1">Full Accountability</div>
         <div class="text-lg font-heading font-extrabold text-white">Structura Nordic AB</div>
-        <div class="text-xs text-blue-300 mt-1">Premchand Potdar — Owner & Director</div>
+        <div class="text-xs text-blue-300 mt-1">Premchand Potdar<br>Founder &amp; Director</div>
       </div>
-      <!-- Arrow -->
-      <div class="flex items-center gap-2 text-slate-300">
-        <div class="hidden md:block w-12 h-px bg-slate-300"></div>
-        <svg class="w-5 h-5 rotate-90 md:rotate-0 text-gold-500" fill="currentColor" viewBox="0 0 20 20"><path d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z"/></svg>
-        <div class="hidden md:block w-12 h-px bg-slate-300"></div>
+
+      <!-- Bidirectional arrow 2 -->
+      <div class="flex flex-col md:flex-row items-center">
+        <!-- Mobile: vertical arrows -->
+        <div class="flex md:hidden flex-col items-center py-2 gap-1">
+          <svg class="w-8 h-8 text-gold-500 drop-shadow" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd"/></svg>
+          <svg class="w-8 h-8 text-navy-400" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M14.707 12.707a1 1 0 01-1.414 0L10 9.414l-3.293 3.293a1 1 0 01-1.414-1.414l4-4a1 1 0 011.414 0l4 4a1 1 0 010 1.414z" clip-rule="evenodd"/></svg>
+        </div>
+        <!-- Desktop: horizontal arrows with lines -->
+        <div class="hidden md:flex flex-col items-center gap-2 px-1">
+          <div class="flex items-center">
+            <div class="w-10 h-0.5 bg-gold-400"></div>
+            <svg class="w-7 h-7 text-gold-500 -ml-1 drop-shadow" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z" clip-rule="evenodd"/></svg>
+          </div>
+          <div class="flex items-center">
+            <svg class="w-7 h-7 text-navy-400 rotate-180 -mr-1" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z" clip-rule="evenodd"/></svg>
+            <div class="w-10 h-0.5 bg-navy-300"></div>
+          </div>
+        </div>
       </div>
-      <!-- JV Partners -->
-      <div class="flex-shrink-0 bg-white border-2 border-slate-200 rounded-2xl px-8 py-5 text-center shadow-sm">
+
+      <!-- JV Partners node -->
+      <div class="flex-shrink-0 bg-white border-2 border-slate-200 rounded-2xl px-8 py-6 text-center shadow-sm min-w-[160px]">
         <div class="text-xs font-bold text-slate-400 uppercase tracking-widest mb-1">Production</div>
         <div class="text-lg font-heading font-extrabold text-navy-900">JV Partners</div>
-        <div class="text-xs text-slate-500 mt-1">Specialist Engineering Teams</div>
+        <div class="text-xs text-slate-500 mt-1">Specialist<br>Engineering Teams</div>
       </div>
+
     </div>
 
     <!-- JV Partner tiles -->
@@ -458,7 +491,7 @@
         </div>
       </div>
     </div>
-    <p class="text-center text-xs text-slate-400 mt-8 reveal d5">Every client relationship is managed directly by <span class="font-semibold text-navy-700">Premchand Potdar</span>, Owner &amp; Director — Structura Nordic AB.</p>
+    <p class="text-center text-xs text-slate-400 mt-8 reveal d5">Every client relationship is managed directly by <span class="font-semibold text-navy-700">Premchand Potdar</span>, Founder &amp; Director — Structura Nordic AB.</p>
   </div>
 </section>
 
@@ -579,7 +612,7 @@
   <div class="max-w-7xl mx-auto px-5 lg:px-8">
     <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-10">
       <div class="lg:col-span-2">
-        <img src="../Company Logo/Logo Structura Nordic AB.png" alt="Structura Nordic AB" class="h-20 w-auto rounded-lg ring-1 ring-white/20">
+        <img src="Image/Logo.jpg" alt="Structura Nordic AB" class="h-20 w-auto rounded-lg ring-1 ring-white/20">
         <p class="mt-4 text-slate-400 text-sm leading-relaxed max-w-xs" x-text="t('Advanced Façade Engineering & Mechanical Design — based in Gothenburg, Sweden, serving clients globally.','Avancerad Fasadteknik & Mekanisk Design — baserade i Göteborg, Sverige, betjänar kunder globalt.','Avancierte Fassadentechnik & Maschinenbau — mit Sitz in Göteborg, Schweden, weltweit tätig.','Ingegneria di Facciata Avanzata & Design Meccanico — con sede a Göteborg, Svezia, al servizio di clienti globalmente.')"></p>
         <div class="mt-5 space-y-2">
           <div class="flex items-start gap-2 text-slate-400 text-sm"><svg class="w-4 h-4 flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="1.5"><path stroke-linecap="round" stroke-linejoin="round" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"/><path stroke-linecap="round" stroke-linejoin="round" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"/></svg><span>Häradsdomarevägen 86, 42244, Gothenburg, Sweden</span></div>
@@ -608,11 +641,33 @@
       </div>
     </div>
     <div class="mt-12 pt-8 border-t border-navy-700 flex flex-col md:flex-row items-center justify-between gap-4">
-      <p class="text-slate-500 text-sm">© 2025 Structura Nordic AB. <span x-text="t('All rights reserved.','Alla rättigheter förbehållna.','Alle Rechte vorbehalten.','Tutti i diritti riservati.')"></span></p>
-      <p class="text-slate-500 text-sm"><span x-text="t('Owner & Director: ','Ägare & Direktör: ','Inhaber & Direktor: ','Proprietario & Direttore: ')"></span><span class="text-slate-400">Premchand Potdar</span></p>
+      <p class="text-slate-500 text-sm">© 2026 Structura Nordic AB. <span x-text="t('All rights reserved.','Alla rättigheter förbehållna.','Alle Rechte vorbehalten.','Tutti i diritti riservati.')"></span></p>
+      <div class="flex flex-wrap items-center gap-x-4 gap-y-1">
+        <a href="privacy-policy.html" class="text-slate-500 hover:text-slate-300 text-xs transition-colors" x-text="t('Privacy Policy','Integritetspolicy','Datenschutz','Privacy Policy')"></a>
+        <span class="text-navy-700 text-xs select-none">·</span>
+        <a href="terms-of-service.html" class="text-slate-500 hover:text-slate-300 text-xs transition-colors" x-text="t('Terms of Service','Användarvillkor','Nutzungsbedingungen','Termini')"></a>
+        <span class="text-navy-700 text-xs select-none">·</span>
+        <a href="privacy-policy.html#cookies" class="text-slate-500 hover:text-slate-300 text-xs transition-colors" x-text="t('Cookie Policy','Cookiepolicy','Cookie-Richtlinie','Cookie Policy')"></a>
+      </div>
     </div>
   </div>
 </footer>
+
+<!-- COOKIE CONSENT BANNER -->
+<div x-data="{show:!localStorage.getItem('sn-cookie-consent'),accept(){localStorage.setItem('sn-cookie-consent','accepted');this.show=false},reject(){localStorage.setItem('sn-cookie-consent','rejected');this.show=false}}" x-cloak x-show="show" class="fixed bottom-0 inset-x-0 z-[200] p-3 md:p-5">
+  <div class="max-w-5xl mx-auto bg-navy-900 rounded-2xl shadow-2xl border border-navy-700 p-5">
+    <div class="flex flex-col sm:flex-row items-start sm:items-center gap-4">
+      <div class="flex-1 min-w-0">
+        <p class="text-white font-heading font-bold text-sm mb-1.5">Cookie Notice</p>
+        <p class="text-slate-300 text-xs leading-relaxed">We use essential cookies to remember your language preference. Resources from Google Fonts and jsDelivr CDN are loaded to deliver this site. We use <strong class="text-white">no tracking or advertising cookies</strong>. <a href="privacy-policy.html" class="text-gold-400 underline hover:text-gold-300 transition-colors">Privacy &amp; Cookie Policy</a></p>
+      </div>
+      <div class="flex gap-2 flex-shrink-0 flex-wrap">
+        <button @click="reject()" class="px-4 py-2 border border-slate-600 text-slate-300 text-xs font-semibold rounded-full hover:border-slate-400 hover:text-white transition-all cursor-pointer whitespace-nowrap">Reject Non-Essential</button>
+        <button @click="accept()" class="px-4 py-2 bg-gold-500 text-navy-900 text-xs font-semibold rounded-full hover:bg-gold-400 transition-all cursor-pointer whitespace-nowrap">Accept All</button>
+      </div>
+    </div>
+  </div>
+</div>
 
 <script>
 const obs = new IntersectionObserver(entries => {
