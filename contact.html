@@ -47,6 +47,7 @@
     @media(prefers-reduced-motion:reduce){.reveal,.reveal-l,.reveal-r{opacity:1;transform:none;transition:none}.ha{animation:none;opacity:1}*{transition-duration:.01ms!important;animation-duration:.01ms!important}}
     [x-cloak]{display:none!important}
   </style>
+  <script src="https://js.hcaptcha.com/1/api.js" async defer></script>
 </head>
 
 <body
@@ -56,14 +57,42 @@
     scrolled:false,
     submitted:false,
     sending:false,
-    form:{name:'',email:'',company:'',service:'',message:''},
+    error:false,
+    captchaErr:false,
+    form:{name:'',email:'',company:'',phone:'',service:'',message:''},
     t(e,s,d,i){const v={en:e,sv:s,de:d,it:i};return v[this.lang]??e},
     setLang(l){this.lang=l;localStorage.setItem('sn-lang',l)},
     async handleSubmit(){
       this.sending=true;
-      await new Promise(r=>setTimeout(r,1200));
+      this.error=false;
+      this.captchaErr=false;
+      const captcha=typeof hcaptcha!=='undefined'?hcaptcha.getResponse():'';
+      if(!captcha){this.captchaErr=true;this.sending=false;return;}
+      try {
+        const res = await fetch('https://api.web3forms.com/submit',{
+          method:'POST',
+          headers:{'Content-Type':'application/json','Accept':'application/json'},
+          body:JSON.stringify({
+            access_key:'d9e7d26f-1016-471a-a04b-f312de904731',
+            subject:'New Enquiry — Structura Nordic AB',
+            from_name:'Structura Nordic AB Website',
+            name:this.form.name,
+            email:this.form.email,
+            phone:this.form.phone,
+            company:this.form.company,
+            service:this.form.service,
+            message:this.form.message,
+            'h-captcha-response':captcha
+          })
+        });
+        const data = await res.json();
+        if(data.success){this.submitted=true;}
+        else{this.error=true;if(typeof hcaptcha!=='undefined')hcaptcha.reset();}
+      } catch(e){
+        this.error=true;
+        if(typeof hcaptcha!=='undefined')hcaptcha.reset();
+      }
       this.sending=false;
-      this.submitted=true;
     }
   }"
   x-init="window.addEventListener('scroll',()=>{scrolled=window.scrollY>60})"
@@ -73,7 +102,7 @@
 <header :class="scrolled?'nav-glass shadow-sm':'bg-white/80 backdrop-blur'" class="fixed top-0 left-0 right-0 z-50 transition-all duration-300">
   <div class="max-w-7xl mx-auto px-5 lg:px-8">
     <div class="flex items-center justify-between h-16">
-      <a href="index.html" class="flex items-center cursor-pointer flex-shrink-0"><img src="Image/Logo.jpg" alt="Structura Nordic AB" class="h-[60px] w-auto rounded-lg"></a>
+      <a href="index.html" class="flex items-center cursor-pointer flex-shrink-0"><img src="Image/Logo.webp" alt="Structura Nordic AB" class="h-[60px] w-auto rounded-lg"></a>
       <nav class="hidden md:flex items-center gap-7">
         <a href="index.html" class="text-sm font-medium text-slate-600 hover:text-navy-800 transition-colors cursor-pointer" x-text="t('Home','Hem','Startseite','Home')"></a>
         <a href="about.html" class="text-sm font-medium text-slate-600 hover:text-navy-800 transition-colors cursor-pointer" x-text="t('About','Om Oss','Über Uns','Chi Siamo')"></a>
@@ -126,7 +155,7 @@
 <!-- HERO -->
 <section class="pt-32 pb-16 bg-white relative overflow-hidden">
   <div class="absolute inset-0 pointer-events-none select-none" aria-hidden="true">
-    <img src="Image/Logo.jpg" alt="" class="w-full h-full object-cover" style="opacity:0.20;">
+    <img src="Image/Logo.webp" alt="" class="w-full h-full object-cover" style="opacity:0.20;">
   </div>
   <div class="max-w-7xl mx-auto px-5 lg:px-8 relative z-10">
     <div class="max-w-2xl">
@@ -155,7 +184,7 @@
           </div>
           <h3 class="text-xl font-heading font-extrabold text-navy-900" x-text="t('Message Sent!','Meddelande Skickat!','Nachricht gesendet!','Messaggio inviato!')"></h3>
           <p class="mt-2 text-slate-600 text-sm" x-text="t('Thank you for reaching out. We\'ll get back to you within one business day.','Tack för att du hörde av dig. Vi återkommer inom en arbetsdag.','Vielen Dank für Ihre Nachricht. Wir melden uns innerhalb eines Werktages.','Grazie per averci contattato. Vi risponderemo entro un giorno lavorativo.')"></p>
-          <button @click="submitted=false;form={name:'',email:'',company:'',service:'',message:''}" class="mt-6 px-5 py-2.5 bg-navy-800 text-white text-sm font-semibold rounded-full hover:bg-navy-700 transition-colors cursor-pointer" x-text="t('Send Another','Skicka Igen','Weitere Nachricht senden','Invia un\'altra')"></button>
+          <button @click="submitted=false;error=false;captchaErr=false;form={name:'',email:'',company:'',phone:'',service:'',message:''};typeof hcaptcha!=='undefined'&&hcaptcha.reset()" class="mt-6 px-5 py-2.5 bg-navy-800 text-white text-sm font-semibold rounded-full hover:bg-navy-700 transition-colors cursor-pointer" x-text="t('Send Another','Skicka Igen','Weitere Nachricht senden','Invia un\'altra')"></button>
         </div>
 
         <!-- Form -->
@@ -163,7 +192,7 @@
           <div class="grid sm:grid-cols-2 gap-5">
             <div>
               <label class="form-label" x-text="t('Your Name *','Ditt Namn *','Ihr Name *','Il Vostro Nome *')"></label>
-              <input type="text" x-model="form.name" required class="form-input" :placeholder="t('Premchand Potdar','Förnamn Efternamn','Vorname Nachname','Nome Cognome')" aria-label="Name">
+              <input type="text" x-model="form.name" required class="form-input" :placeholder="t('Write your full name','Skriv ditt fullständiga namn','Vollständigen Namen eingeben','Scrivi il tuo nome completo')" aria-label="Name">
             </div>
             <div>
               <label class="form-label" x-text="t('Email Address *','E-postadress *','E-Mail-Adresse *','Indirizzo Email *')"></label>
@@ -172,24 +201,28 @@
           </div>
           <div class="grid sm:grid-cols-2 gap-5">
             <div>
-              <label class="form-label" x-text="t('Company / Organization','Företag / Organisation','Unternehmen / Organisation','Azienda / Organizzazione')"></label>
-              <input type="text" x-model="form.company" class="form-input" :placeholder="t('Company name','Företagsnamn','Unternehmensname','Nome azienda')" aria-label="Company">
+              <label class="form-label" x-text="t('Phone Number *','Telefonnummer *','Telefonnummer *','Numero di Telefono *')"></label>
+              <input type="tel" x-model="form.phone" required class="form-input" placeholder="+46 XXX XXX XXX" aria-label="Phone">
             </div>
             <div>
-              <label class="form-label" x-text="t('Service Needed','Tjänst som Behövs','Benötigte Leistung','Servizio Richiesto')"></label>
-              <select x-model="form.service" class="form-input cursor-pointer" aria-label="Service">
-                <option value="" x-text="t('Select a service…','Välj en tjänst…','Leistung auswählen…','Seleziona un servizio…')"></option>
-                <option x-text="t('Façade Design & Engineering','Fasaddesign & Teknik','Fassadendesign & Technik','Design & Ingegneria di Facciata')"></option>
-                <option x-text="t('BIM & 3D Modeling','BIM & 3D-Modellering','BIM & 3D-Modellierung','BIM & Modellazione 3D')"></option>
-                <option x-text="t('Shop Drawings & Documentation','Verkstadsritningar & Dokumentation','Werkstattzeichnungen & Dokumentation','Disegni di Officina & Documentazione')"></option>
-                <option x-text="t('Engineering & Structural Analysis','Konstruktion & Strukturanalys','Ingenieur- & Statikanalyse','Ingegneria & Analisi Strutturale')"></option>
-                <option x-text="t('Project Support Services','Projektstödtjänster','Projektunterstützungsleistungen','Servizi di Supporto al Progetto')"></option>
-                <option x-text="t('Automation & Digital Engineering','Automation & Digital Teknik','Automatisierung & Digitales Engineering','Automazione & Ingegneria Digitale')"></option>
-                <option x-text="t('Mechanical Design & Engineering','Mekanisk Design & Teknik','Mechanisches Design & Engineering','Design Meccanico & Ingegneria')"></option>
-                <option x-text="t('Project Management','Projektledning','Projektmanagement','Gestione del Progetto')"></option>
-                <option x-text="t('Other / Multiple Services','Annat / Flera Tjänster','Andere / Mehrere Leistungen','Altro / Più Servizi')"></option>
-              </select>
+              <label class="form-label" x-text="t('Company / Organization *','Företag / Organisation *','Unternehmen / Organisation *','Azienda / Organizzazione *')"></label>
+              <input type="text" x-model="form.company" required class="form-input" :placeholder="t('Company name','Företagsnamn','Unternehmensname','Nome azienda')" aria-label="Company">
             </div>
+          </div>
+          <div>
+            <label class="form-label" x-text="t('Service Needed','Tjänst som Behövs','Benötigte Leistung','Servizio Richiesto')"></label>
+            <select x-model="form.service" class="form-input cursor-pointer" aria-label="Service">
+              <option value="" x-text="t('Select a service…','Välj en tjänst…','Leistung auswählen…','Seleziona un servizio…')"></option>
+              <option x-text="t('Façade Design & Engineering','Fasaddesign & Teknik','Fassadendesign & Technik','Design & Ingegneria di Facciata')"></option>
+              <option x-text="t('BIM & 3D Modeling','BIM & 3D-Modellering','BIM & 3D-Modellierung','BIM & Modellazione 3D')"></option>
+              <option x-text="t('Shop Drawings & Documentation','Verkstadsritningar & Dokumentation','Werkstattzeichnungen & Dokumentation','Disegni di Officina & Documentazione')"></option>
+              <option x-text="t('Engineering & Structural Analysis','Konstruktion & Strukturanalys','Ingenieur- & Statikanalyse','Ingegneria & Analisi Strutturale')"></option>
+              <option x-text="t('Project Support Services','Projektstödtjänster','Projektunterstützungsleistungen','Servizi di Supporto al Progetto')"></option>
+              <option x-text="t('Automation & Digital Engineering','Automation & Digital Teknik','Automatisierung & Digitales Engineering','Automazione & Ingegneria Digitale')"></option>
+              <option x-text="t('Mechanical Design & Engineering','Mekanisk Design & Teknik','Mechanisches Design & Engineering','Design Meccanico & Ingegneria')"></option>
+              <option x-text="t('Project Management','Projektledning','Projektmanagement','Gestione del Progetto')"></option>
+              <option x-text="t('Other / Multiple Services','Annat / Flera Tjänster','Andere / Mehrere Leistungen','Altro / Più Servizi')"></option>
+            </select>
           </div>
           <div>
             <label class="form-label" x-text="t('Project Description *','Projektbeskrivning *','Projektbeschreibung *','Descrizione del Progetto *')"></label>
@@ -197,9 +230,13 @@
               :placeholder="t('Briefly describe your project — system type, scope, location, timeline, and any specific software requirements...','Beskriv kort ditt projekt — systemtyp, omfång, plats, tidslinje och eventuella specifika programvarukrav...','Beschreiben Sie kurz Ihr Projekt — Systemtyp, Umfang, Standort, Zeitplan und spezifische Softwareanforderungen...','Descrivi brevemente il tuo progetto — tipo di sistema, portata, posizione, tempi e requisiti software specifici...')"
               aria-label="Message"></textarea>
           </div>
+          <div>
+            <div class="h-captcha" data-sitekey="50b2fe65-b00b-4b9e-ad62-3ba471098be2"></div>
+            <p x-show="captchaErr" x-transition class="text-amber-500 text-xs mt-2" x-text="t('Please complete the CAPTCHA verification above before sending.','Slutför CAPTCHA-verifieringen ovan innan du skickar.','Bitte vervollständigen Sie die CAPTCHA-Überprüfung oben.','Completa la verifica CAPTCHA prima di inviare.')"></p>
+          </div>
           <button
             type="submit"
-            :disabled="sending || !form.name || !form.email || !form.message"
+            :disabled="sending || !form.name || !form.email || !form.phone || !form.company || !form.message"
             class="w-full sm:w-auto inline-flex items-center justify-center gap-3 px-8 py-3.5 bg-navy-800 text-white font-semibold rounded-full transition-all cursor-pointer text-sm disabled:opacity-50 disabled:cursor-not-allowed hover:bg-navy-700">
             <span x-show="!sending" x-text="t('Send Message','Skicka Meddelande','Nachricht senden','Invia Messaggio')"></span>
             <span x-show="sending" class="flex items-center gap-2">
@@ -209,6 +246,7 @@
             <svg x-show="!sending" class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M17 8l4 4m0 0l-4 4m4-4H3"/></svg>
           </button>
           <p class="text-xs text-slate-400" x-text="t('* Required fields. We respond within 1 business day.','* Obligatoriska fält. Vi svarar inom 1 arbetsdag.','* Pflichtfelder. Wir antworten innerhalb von 1 Werktag.','* Campi obbligatori. Rispondiamo entro 1 giorno lavorativo.')"></p>
+          <p x-show="error" x-transition class="text-red-500 text-xs mt-1" x-text="t('Something went wrong. Please try again or email us at info@structuranordic.se.','Något gick fel. Försök igen eller maila info@structuranordic.se.','Etwas ist schiefgelaufen. Bitte erneut versuchen oder an info@structuranordic.se schreiben.','Qualcosa è andato storto. Riprova o scrivi a info@structuranordic.se.')"></p>
         </form>
       </div>
 
@@ -217,7 +255,7 @@
         <!-- Director card -->
         <div class="bg-navy-800 rounded-2xl p-6 mb-6">
           <div class="flex items-center gap-4 mb-4">
-            <img src="Image/Premchand Potdar photo.jpeg" alt="Premchand Potdar" class="w-14 h-14 rounded-full object-cover object-top border-2 border-white/20">
+            <img src="Image/Premchand Potdar photo.webp" alt="Premchand Potdar" class="w-20 h-20 rounded-full object-cover object-center border-2 border-white/60">
             <div>
               <div class="font-heading font-extrabold text-white">Premchand Potdar</div>
               <div class="text-blue-300 text-xs mt-0.5" x-text="t('Founder & Director','Ägare & Direktör','Inhaber & Direktor','Proprietario & Direttore')"></div>
@@ -316,7 +354,7 @@
 <!-- BOTTOM CTA STRIP -->
 <section class="py-14 bg-navy-900 relative overflow-hidden">
   <div class="absolute inset-0 flex items-center justify-center pointer-events-none select-none" aria-hidden="true">
-    <img src="Image/Logo.jpg" alt="" class="w-full h-full object-contain" style="opacity:0.20;">
+    <img src="Image/Logo.webp" alt="" class="w-full h-full object-contain" style="opacity:0.20;">
   </div>
   <div class="max-w-7xl mx-auto px-5 lg:px-8 relative z-10">
     <div class="flex flex-col md:flex-row items-center justify-between gap-6">
@@ -342,7 +380,7 @@
 <footer class="bg-navy-900 border-t border-navy-700 py-10">
   <div class="max-w-7xl mx-auto px-5 lg:px-8">
     <div class="flex flex-col md:flex-row items-center justify-between gap-6">
-      <img src="Image/Logo.jpg" alt="Structura Nordic AB" class="h-20 w-auto rounded-lg ring-1 ring-white/20">
+      <img src="Image/Logo.webp" alt="Structura Nordic AB" class="h-20 w-auto rounded-lg ring-1 ring-white/20">
       <nav class="flex flex-wrap justify-center gap-x-6 gap-y-2">
         <a href="index.html" class="text-slate-400 hover:text-white text-sm transition-colors cursor-pointer" x-text="t('Home','Hem','Startseite','Home')"></a>
         <a href="about.html" class="text-slate-400 hover:text-white text-sm transition-colors cursor-pointer" x-text="t('About','Om Oss','Über Uns','Chi Siamo')"></a>
