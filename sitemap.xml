@@ -26,6 +26,11 @@
     <priority>0.6</priority>
   </url>
   <url>
+    <loc>https://structuranordic.se/newsletter.html</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
     <loc>https://structuranordic.se/privacy-policy.html</loc>
     <changefreq>yearly</changefreq>
     <priority>0.3</priority>

@@ -1,0 +1,272 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-4WPGVSPZ3V"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+
+    gtag('config', 'G-4WPGVSPZ3V');
+  </script>
+      <link rel="icon" type="image/x-icon" href="Image/favicon.ico">
+    <link rel="icon" type="image/png" sizes="32x32" href="Image/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="Image/favicon-16x16.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="Image/apple-touch-icon.png">
+    <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Newsletter — Structura Nordic AB</title>
+  <meta name="description" content="Company updates and insights from Structura Nordic AB — façade engineering and mechanical design news from Gothenburg, Sweden.">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            navy: { 50:'#EDF3FB',100:'#CADCF0',200:'#A8C0E0',300:'#7FA4CF',400:'#4E78A8',500:'#22487A',600:'#1B3A6B',700:'#142D55',800:'#0F1E35',900:'#0A1628' },
+            gold: { 300:'#FFD166',400:'#FFB800',500:'#F0A500',600:'#D4900A' },
+            brand: { cyan:'#00B4D8',grey:'#8A97A8' }
+          },
+          fontFamily: { heading:['"Plus Jakarta Sans"','sans-serif'], body:['Inter','sans-serif'] }
+        }
+      }
+    }
+  </script>
+  <style>
+    *,*::before,*::after{box-sizing:border-box}
+    body{font-family:'Inter',sans-serif;color:#0F172A;background:#FAFAFA;-webkit-font-smoothing:antialiased}
+    h1,h2,h3,h4,h5,h6{font-family:'Plus Jakarta Sans',sans-serif}
+    .reveal{opacity:0;transform:translateY(28px);transition:opacity .65s cubic-bezier(.16,1,.3,1),transform .65s cubic-bezier(.16,1,.3,1)}
+    .reveal.visible{opacity:1;transform:translateY(0)}
+    .reveal-l{opacity:0;transform:translateX(-28px);transition:opacity .65s cubic-bezier(.16,1,.3,1),transform .65s cubic-bezier(.16,1,.3,1)}
+    .reveal-l.visible{opacity:1;transform:translateX(0)}
+    .reveal-r{opacity:0;transform:translateX(28px);transition:opacity .65s cubic-bezier(.16,1,.3,1),transform .65s cubic-bezier(.16,1,.3,1)}
+    .reveal-r.visible{opacity:1;transform:translateX(0)}
+    .d1{transition-delay:.1s}.d2{transition-delay:.2s}.d3{transition-delay:.3s}.d4{transition-delay:.4s}.d5{transition-delay:.5s}
+    .nav-glass{background:rgba(250,250,250,.95);backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);border-bottom:1px solid rgba(226,232,240,.8)}
+    .lbl{font-size:.7rem;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:#F0A500}
+    .card-lift{transition:transform .25s ease,box-shadow .25s ease}
+    .card-lift:hover{transform:translateY(-6px);box-shadow:0 24px 64px rgba(15,30,53,.14)}
+    @media(prefers-reduced-motion:reduce){.reveal,.reveal-l,.reveal-r{opacity:1;transform:none;transition:none}*{transition-duration:.01ms!important;animation-duration:.01ms!important}}
+    [x-cloak]{display:none!important}
+  </style>
+</head>
+
+<body
+  x-data="{lang:localStorage.getItem('sn-lang')||'en',navOpen:false,scrolled:false,t(e,s,d,i){const v={en:e,sv:s,de:d,it:i};return v[this.lang]??e},setLang(l){this.lang=l;localStorage.setItem('sn-lang',l)}}"
+  x-init="window.addEventListener('scroll',()=>{scrolled=window.scrollY>60})"
+  :lang="lang">
+
+<!-- NAV -->
+<header :class="scrolled?'nav-glass shadow-sm':'nav-glass'" class="fixed top-0 left-0 right-0 z-50 transition-all duration-300">
+  <div class="max-w-7xl mx-auto px-5 lg:px-8">
+    <div class="flex items-center justify-between h-16">
+      <a href="index.html" class="flex items-center cursor-pointer flex-shrink-0">
+        <img src="Image/Logo.webp" alt="Structura Nordic AB" class="h-[60px] w-auto rounded-lg">
+      </a>
+      <nav class="hidden md:flex items-center gap-7">
+        <a href="index.html" class="text-sm font-medium text-slate-600 hover:text-navy-800 transition-colors cursor-pointer" x-text="t('Home','Hem','Startseite','Home')"></a>
+        <a href="about.html" class="text-sm font-medium text-slate-600 hover:text-navy-800 transition-colors cursor-pointer" x-text="t('About','Om Oss','Über Uns','Chi Siamo')"></a>
+        <a href="services.html" class="text-sm font-medium text-slate-600 hover:text-navy-800 transition-colors cursor-pointer" x-text="t('Services','Tjänster','Leistungen','Servizi')"></a>
+        <a href="projects.html" class="text-sm font-medium text-slate-600 hover:text-navy-800 transition-colors cursor-pointer" x-text="t('Projects','Projekt','Projekte','Progetti')"></a>
+        <a href="contact.html" class="text-sm font-medium text-slate-600 hover:text-navy-800 transition-colors cursor-pointer" x-text="t('Contact','Kontakt','Kontakt','Contatto')"></a>
+        <a href="newsletter.html" class="text-sm font-semibold text-navy-900 border-b-2 border-navy-800 pb-0.5 cursor-pointer" x-text="t('Newsletter','Nyhetsbrev','Newsletter','Newsletter')"></a>
+      </nav>
+      <div class="hidden md:flex items-center gap-3">
+        <div class="relative" x-data="{langOpen:false}">
+          <button @click="langOpen=!langOpen" class="flex items-center gap-1.5 px-3 py-1.5 rounded-full border border-slate-200 text-slate-600 hover:border-navy-800 hover:text-navy-800 text-xs font-bold transition-all cursor-pointer select-none">
+            <span x-text="{'en':'🇬🇧','sv':'🇸🇪','de':'🇩🇪','it':'🇮🇹'}[lang]"></span>
+            <span x-text="lang.toUpperCase()"></span>
+            <svg class="w-3 h-3 opacity-60" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7"/></svg>
+          </button>
+          <div x-show="langOpen" @click.away="langOpen=false" x-transition class="absolute right-0 top-full mt-2 bg-white rounded-xl shadow-lg border border-slate-100 py-1 z-[60] min-w-[130px]">
+            <button @click="setLang('en');langOpen=false" :class="lang==='en'?'bg-slate-50 text-navy-800 font-semibold':'text-slate-600'" class="flex items-center gap-2 w-full px-3 py-2 text-xs hover:bg-slate-50 transition-colors">🇬🇧 English</button>
+            <button @click="setLang('sv');langOpen=false" :class="lang==='sv'?'bg-slate-50 text-navy-800 font-semibold':'text-slate-600'" class="flex items-center gap-2 w-full px-3 py-2 text-xs hover:bg-slate-50 transition-colors">🇸🇪 Svenska</button>
+            <button @click="setLang('de');langOpen=false" :class="lang==='de'?'bg-slate-50 text-navy-800 font-semibold':'text-slate-600'" class="flex items-center gap-2 w-full px-3 py-2 text-xs hover:bg-slate-50 transition-colors">🇩🇪 Deutsch</button>
+            <button @click="setLang('it');langOpen=false" :class="lang==='it'?'bg-slate-50 text-navy-800 font-semibold':'text-slate-600'" class="flex items-center gap-2 w-full px-3 py-2 text-xs hover:bg-slate-50 transition-colors">🇮🇹 Italiano</button>
+          </div>
+        </div>
+        <a href="contact.html" class="px-5 py-2 text-sm font-semibold bg-navy-800 text-white rounded-full hover:bg-navy-700 transition-colors cursor-pointer" x-text="t('Get in Touch','Kontakta Oss','Kontakt aufnehmen','Contattaci')"></a>
+      </div>
+      <button @click="navOpen=!navOpen" class="md:hidden p-2 cursor-pointer text-navy-900">
+        <svg x-show="!navOpen" class="w-6 h-6" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M4 6h16M4 12h16M4 18h16"/></svg>
+        <svg x-show="navOpen" class="w-6 h-6" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12"/></svg>
+      </button>
+    </div>
+  </div>
+  <div x-show="navOpen" x-transition class="md:hidden nav-glass px-5 pb-5 pt-3">
+    <nav class="flex flex-col gap-1">
+      <a href="index.html" class="text-sm text-slate-700 py-2.5 border-b border-slate-100" x-text="t('Home','Hem','Startseite','Home')"></a>
+      <a href="about.html" class="text-sm text-slate-700 py-2.5 border-b border-slate-100" x-text="t('About','Om Oss','Über Uns','Chi Siamo')"></a>
+      <a href="services.html" class="text-sm text-slate-700 py-2.5 border-b border-slate-100" x-text="t('Services','Tjänster','Leistungen','Servizi')"></a>
+      <a href="projects.html" class="text-sm text-slate-700 py-2.5 border-b border-slate-100" x-text="t('Projects','Projekt','Projekte','Progetti')"></a>
+      <a href="contact.html" class="text-sm text-slate-700 py-2.5 border-b border-slate-100" x-text="t('Contact','Kontakt','Kontakt','Contatto')"></a>
+      <a href="newsletter.html" class="text-sm font-semibold text-navy-900 py-2.5" x-text="t('Newsletter','Nyhetsbrev','Newsletter','Newsletter')"></a>
+    </nav>
+  </div>
+</header>
+
+<!-- PAGE HERO -->
+<section class="pt-24 pb-16 bg-navy-900 relative overflow-hidden">
+  <div class="absolute inset-0 opacity-[0.04]" style="background-image:linear-gradient(rgba(255,255,255,.2) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.2) 1px,transparent 1px);background-size:64px 64px"></div>
+  <div class="max-w-7xl mx-auto px-5 lg:px-8 relative z-10">
+    <div class="max-w-3xl pt-4">
+      <span class="lbl" x-text="t('Newsletter','Nyhetsbrev','Newsletter','Newsletter')"></span>
+      <h1 class="mt-4 font-heading font-extrabold text-white leading-tight" style="font-size:clamp(2.4rem,5vw,4rem)"
+          x-text="t('Company Updates & Insights','Företagsnyheter & Insikter','Unternehmensnews & Einblicke','Aggiornamenti & Approfondimenti')">
+      </h1>
+      <p class="mt-6 text-slate-300 text-lg leading-relaxed max-w-2xl"
+         x-text="t('News from Structura Nordic AB — website launches, project milestones, and notes from the studio in Gothenburg.','Nyheter från Structura Nordic AB — webbplatslanseringar, projektmilstolpar och anteckningar från studion i Göteborg.','Neuigkeiten von Structura Nordic AB — Website-Starts, Projektmeilensteine und Notizen aus dem Studio in Göteborg.','Notizie da Structura Nordic AB — lanci del sito, traguardi di progetto e note dallo studio di Göteborg.')">
+      </p>
+    </div>
+  </div>
+</section>
+
+<!-- LATEST BRIEFING -->
+<section class="py-24 bg-white">
+  <div class="max-w-4xl mx-auto px-5 lg:px-8">
+
+    <article class="reveal">
+      <div class="flex flex-wrap items-center gap-3 mb-6">
+        <span class="inline-flex items-center px-3 py-1 rounded-full bg-navy-50 text-navy-700 text-xs font-bold uppercase tracking-wider">
+          <span x-text="t('Briefing No. 01','Briefing nr 01','Briefing Nr. 01','Briefing n. 01')"></span>
+        </span>
+        <span class="text-slate-400 text-sm">July 2026</span>
+      </div>
+
+      <h2 class="font-heading font-extrabold text-navy-900 leading-tight" style="font-size:clamp(1.9rem,3.6vw,2.75rem)"
+          x-text="t('Structura Nordic AB Is Now Live Online','Structura Nordic AB Är Nu Online','Structura Nordic AB Ist Jetzt Online','Structura Nordic AB È Ora Online')">
+      </h2>
+      <p class="mt-5 text-slate-600 text-lg leading-relaxed"
+         x-text="t('Our first newsletter marks a milestone: the Structura Nordic AB website is officially live, giving clients around the world a clear window into our façade engineering and mechanical design work.','Vårt första nyhetsbrev markerar en milstolpe: Structura Nordic ABs webbplats är nu officiellt lanserad, vilket ger kunder världen över en tydlig inblick i vårt arbete inom fasadteknik och mekanisk design.','Unser erster Newsletter markiert einen Meilenstein: Die Website von Structura Nordic AB ist offiziell online und gibt Kunden weltweit einen klaren Einblick in unsere Arbeit im Bereich Fassadentechnik und Maschinenbau.','La nostra prima newsletter segna una pietra miliare: il sito di Structura Nordic AB è ufficialmente online, offrendo ai clienti di tutto il mondo una visione chiara del nostro lavoro in ingegneria di facciata e design meccanico.')">
+      </p>
+
+      <div class="mt-12 space-y-10">
+
+        <!-- Item 1 -->
+        <div class="flex gap-5 reveal d1">
+          <div class="flex-shrink-0 w-11 h-11 bg-navy-50 rounded-xl flex items-center justify-center">
+            <svg class="w-5 h-5 text-navy-700" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="1.5"><path stroke-linecap="round" stroke-linejoin="round" d="M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/><path stroke-linecap="round" stroke-linejoin="round" d="M3.6 9h16.8M3.6 15h16.8M11.5 3a17 17 0 000 18M12.5 3a17 17 0 010 18"/></svg>
+          </div>
+          <div>
+            <h3 class="font-heading font-bold text-navy-900 text-lg" x-text="t('New Website, Four Languages','Ny Webbplats, Fyra Språk','Neue Website, Vier Sprachen','Nuovo Sito, Quattro Lingue')"></h3>
+            <p class="mt-2 text-slate-600 leading-relaxed" x-text="t('structuranordic.se is live, available in English, Swedish, German, and Italian — reflecting the international client base we serve from Gothenburg.','structuranordic.se är live, tillgänglig på engelska, svenska, tyska och italienska — vilket speglar den internationella kundbas vi betjänar från Göteborg.','structuranordic.se ist online, verfügbar auf Englisch, Schwedisch, Deutsch und Italienisch — als Spiegel unseres internationalen Kundenstamms, den wir von Göteborg aus betreuen.','structuranordic.se è online, disponibile in inglese, svedese, tedesco e italiano — a riflesso della base clienti internazionale che serviamo da Göteborg.')"></p>
+          </div>
+        </div>
+
+        <!-- Item 2 -->
+        <div class="flex gap-5 reveal d2">
+          <div class="flex-shrink-0 w-11 h-11 bg-navy-50 rounded-xl flex items-center justify-center">
+            <svg class="w-5 h-5 text-navy-700" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="1.5"><path stroke-linecap="round" stroke-linejoin="round" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14M14 8h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"/></svg>
+          </div>
+          <div>
+            <h3 class="font-heading font-bold text-navy-900 text-lg" x-text="t('Project Portfolio Now Online','Projektportfölj Nu Online','Projektportfolio Jetzt Online','Portfolio Progetti Ora Online')"></h3>
+            <p class="mt-2 text-slate-600 leading-relaxed" x-text="t('The Projects page now showcases façade and mechanical engineering work — from unitized curtain wall systems to timber façades and fixture design — across Australia, Canada, USA, Saudi Arabia, India, and Europe.','Projektsidan visar nu arbete inom fasad- och mekanisk teknik — från unitiserade fasadsystem till trä-fasader och fixturdesign — i Australien, Kanada, USA, Saudiarabien, Indien och Europa.','Die Projektseite zeigt nun Fassaden- und Maschinenbauarbeiten — von Unitized-Curtain-Wall-Systemen bis zu Holzfassaden und Vorrichtungsdesign — in Australien, Kanada, USA, Saudi-Arabien, Indien und Europa.','La pagina Progetti mostra ora i lavori di ingegneria di facciata e meccanica — dai sistemi curtain wall unitizzati alle facciate in legno e al design di attrezzature — in Australia, Canada, USA, Arabia Saudita, India ed Europa.')"></p>
+          </div>
+        </div>
+
+        <!-- Item 3 -->
+        <div class="flex gap-5 reveal d3">
+          <div class="flex-shrink-0 w-11 h-11 bg-navy-50 rounded-xl flex items-center justify-center">
+            <svg class="w-5 h-5 text-navy-700" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="1.5"><path stroke-linecap="round" stroke-linejoin="round" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"/></svg>
+          </div>
+          <div>
+            <h3 class="font-heading font-bold text-navy-900 text-lg" x-text="t('Behind the Scenes: SEO & Analytics','Bakom Kulisserna: SEO & Analys','Hinter den Kulissen: SEO & Analyse','Dietro le Quinte: SEO & Analytics')"></h3>
+            <p class="mt-2 text-slate-600 leading-relaxed" x-text="t('We\'ve added a sitemap, search console verification, and analytics tracking so the site is easier to find — and so we can keep improving it based on how visitors actually use it.','Vi har lagt till en sitemap, verifiering av sökkonsol och analysspårning så att webbplatsen är lättare att hitta — och så att vi kan fortsätta förbättra den baserat på hur besökare faktiskt använder den.','Wir haben eine Sitemap, eine Search-Console-Verifizierung und Analyse-Tracking hinzugefügt, damit die Website leichter zu finden ist — und wir sie basierend auf dem tatsächlichen Besucherverhalten weiter verbessern können.','Abbiamo aggiunto una sitemap, la verifica della Search Console e il tracciamento analitico, così il sito è più facile da trovare — e possiamo continuare a migliorarlo in base a come i visitatori lo usano davvero.')"></p>
+          </div>
+        </div>
+
+      </div>
+
+      <div class="mt-14 p-8 bg-slate-50 rounded-2xl reveal d4">
+        <p class="lbl" x-text="t('What\'s Next','Vad Kommer Härnäst','Was Kommt als Nächstes','Cosa Viene Dopo')"></p>
+        <h3 class="mt-3 font-heading font-bold text-navy-900 text-xl" x-text="t('More Briefings, More Project Spotlights','Fler Briefingar, Fler Projektfokus','Weitere Briefings, Weitere Projekt-Highlights','Altri Briefing, Altri Progetti in Evidenza')"></h3>
+        <p class="mt-3 text-slate-600 leading-relaxed" x-text="t('Future briefings will dig into individual projects, façade engineering techniques, and BIM workflows. Have a project in mind? Get in touch — we\'d love to hear from you.','Framtida briefingar kommer att fördjupa sig i enskilda projekt, fasadteknik och BIM-arbetsflöden. Har du ett projekt i åtanke? Hör av dig — vi vill gärna höra från dig.','Zukünftige Briefings werden sich mit einzelnen Projekten, Fassadentechniken und BIM-Workflows befassen. Haben Sie ein Projekt im Sinn? Kontaktieren Sie uns — wir freuen uns, von Ihnen zu hören.','I prossimi briefing approfondiranno singoli progetti, tecniche di ingegneria di facciata e flussi di lavoro BIM. Hai un progetto in mente? Contattaci — ci farebbe piacere sentirti.')"></p>
+        <a href="contact.html" class="mt-6 inline-flex items-center gap-2 px-6 py-3 bg-navy-800 text-white font-semibold rounded-full hover:bg-navy-700 transition-colors cursor-pointer text-sm">
+          <span x-text="t('Get in Touch','Kontakta Oss','Kontakt aufnehmen','Contattaci')"></span>
+          <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M17 8l4 4m0 0l-4 4m4-4H3"/></svg>
+        </a>
+      </div>
+    </article>
+
+    <!-- Coming soon placeholder -->
+    <div class="mt-14 pt-10 border-t border-slate-100 reveal d5">
+      <p class="text-slate-400 text-sm text-center" x-text="t('More briefings coming soon.','Fler briefingar kommer snart.','Weitere Briefings folgen in Kürze.','Altri briefing in arrivo presto.')"></p>
+    </div>
+
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer class="bg-navy-900 py-16 border-t border-white/5">
+  <div class="max-w-7xl mx-auto px-5 lg:px-8">
+    <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-10">
+      <div class="lg:col-span-2">
+        <img src="Image/Logo.webp" alt="Structura Nordic AB" class="h-20 w-auto rounded-lg ring-1 ring-white/20">
+        <p class="mt-4 text-slate-400 text-sm leading-relaxed max-w-xs" x-text="t('Advanced Façade Engineering & Mechanical Design — based in Gothenburg, Sweden, serving clients globally.','Avancerad Fasadteknik & Mekanisk Design — baserade i Göteborg, Sverige, betjänar kunder globalt.','Avancierte Fassadentechnik & Maschinenbau — mit Sitz in Göteborg, Schweden, weltweit tätig.','Ingegneria di Facciata Avanzata & Design Meccanico — con sede a Göteborg, Svezia, al servizio di clienti globalmente.')"></p>
+        <div class="mt-5 space-y-2">
+          <div class="flex items-center gap-2 text-slate-400 text-sm"><svg class="w-4 h-4 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="1.5"><path stroke-linecap="round" stroke-linejoin="round" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/></svg><a href="mailto:info@structuranordic.se" class="hover:text-white transition-colors">info@structuranordic.se</a></div>
+          <div class="flex items-center gap-2 text-slate-400 text-sm"><svg class="w-4 h-4 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="1.5"><path stroke-linecap="round" stroke-linejoin="round" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"/></svg><a href="tel:+46761715919" class="hover:text-white transition-colors">+46 761 715 919</a></div>
+        </div>
+      </div>
+      <div>
+        <h4 class="text-xs font-semibold uppercase tracking-widest text-slate-400 mb-5" x-text="t('Navigation','Navigation','Navigation','Navigazione')"></h4>
+        <ul class="space-y-3">
+          <li><a href="index.html" class="text-slate-400 hover:text-white text-sm transition-colors" x-text="t('Home','Hem','Startseite','Home')"></a></li>
+          <li><a href="about.html" class="text-slate-400 hover:text-white text-sm transition-colors" x-text="t('About','Om Oss','Über Uns','Chi Siamo')"></a></li>
+          <li><a href="services.html" class="text-slate-400 hover:text-white text-sm transition-colors" x-text="t('Services','Tjänster','Leistungen','Servizi')"></a></li>
+          <li><a href="projects.html" class="text-slate-400 hover:text-white text-sm transition-colors" x-text="t('Projects','Projekt','Projekte','Progetti')"></a></li>
+          <li><a href="contact.html" class="text-slate-400 hover:text-white text-sm transition-colors" x-text="t('Contact','Kontakt','Kontakt','Contatto')"></a></li>
+        </ul>
+      </div>
+      <div>
+        <h4 class="text-xs font-semibold uppercase tracking-widest text-slate-400 mb-5" x-text="t('Connect','Kontakta','Verbinden','Connetti')"></h4>
+        <ul class="space-y-3">
+          <li><a href="https://www.structuranordic.se" target="_blank" rel="noopener" class="text-slate-400 hover:text-white text-sm transition-colors">www.structuranordic.se</a></li>
+          <li><a href="https://linkedin.com/in/premchandpotdar" target="_blank" rel="noopener" class="text-slate-400 hover:text-white text-sm transition-colors">LinkedIn</a></li>
+          <li><a href="mailto:info@structuranordic.se" class="text-slate-400 hover:text-white text-sm transition-colors">info@structuranordic.se</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="mt-12 pt-8 border-t border-navy-700 flex flex-col md:flex-row items-center justify-between gap-4">
+      <p class="text-slate-500 text-sm">© 2026 Structura Nordic AB. <span x-text="t('All rights reserved.','Alla rättigheter förbehållna.','Alle Rechte vorbehalten.','Tutti i diritti riservati.')"></span></p>
+      <div class="flex flex-wrap items-center gap-x-4 gap-y-1">
+        <a href="privacy-policy.html" class="text-slate-500 hover:text-slate-300 text-xs transition-colors" x-text="t('Privacy Policy','Integritetspolicy','Datenschutz','Privacy Policy')"></a>
+        <span class="text-navy-700 text-xs select-none">·</span>
+        <a href="terms-of-service.html" class="text-slate-500 hover:text-slate-300 text-xs transition-colors" x-text="t('Terms of Service','Användarvillkor','Nutzungsbedingungen','Termini')"></a>
+        <span class="text-navy-700 text-xs select-none">·</span>
+        <a href="privacy-policy.html#cookies" class="text-slate-500 hover:text-slate-300 text-xs transition-colors" x-text="t('Cookie Policy','Cookiepolicy','Cookie-Richtlinie','Cookie Policy')"></a>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<!-- COOKIE CONSENT BANNER -->
+<div x-data="{show:!localStorage.getItem('sn-cookie-consent'),accept(){localStorage.setItem('sn-cookie-consent','accepted');this.show=false},reject(){localStorage.setItem('sn-cookie-consent','rejected');this.show=false}}" x-cloak x-show="show" class="fixed bottom-0 inset-x-0 z-[200] p-3 md:p-5">
+  <div class="max-w-5xl mx-auto bg-navy-900 rounded-2xl shadow-2xl border border-navy-700 p-5">
+    <div class="flex flex-col sm:flex-row items-start sm:items-center gap-4">
+      <div class="flex-1 min-w-0">
+        <p class="text-white font-heading font-bold text-sm mb-1.5">Cookie Notice</p>
+        <p class="text-slate-300 text-xs leading-relaxed">We use essential cookies to remember your language preference. Resources from Google Fonts and jsDelivr CDN are loaded to deliver this site. We use <strong class="text-white">no tracking or advertising cookies</strong>. <a href="privacy-policy.html" class="text-gold-400 underline hover:text-gold-300 transition-colors">Privacy &amp; Cookie Policy</a></p>
+      </div>
+      <div class="flex gap-2 flex-shrink-0 flex-wrap">
+        <button @click="reject()" class="px-4 py-2 border border-slate-600 text-slate-300 text-xs font-semibold rounded-full hover:border-slate-400 hover:text-white transition-all cursor-pointer whitespace-nowrap">Reject Non-Essential</button>
+        <button @click="accept()" class="px-4 py-2 bg-gold-500 text-navy-900 text-xs font-semibold rounded-full hover:bg-gold-400 transition-all cursor-pointer whitespace-nowrap">Accept All</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+const obs = new IntersectionObserver(entries => {
+  entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible') });
+}, { threshold: 0.08, rootMargin: '0px 0px -40px 0px' });
+document.querySelectorAll('.reveal,.reveal-l,.reveal-r').forEach(el => obs.observe(el));
+</script>
+</body>
+</html>

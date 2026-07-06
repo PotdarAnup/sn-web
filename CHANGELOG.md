@@ -74,12 +74,18 @@ Format follows [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
 ---
 
+## [1.1.0] — 2026-07-06
+
+### Added
+
+**`newsletter.html` — Newsletter**
+- New page archiving company newsletter issues (static content, no email service)
+- Issue No. 01 — "Structura Nordic AB Is Now Live Online": website launch, project portfolio, SEO/analytics behind-the-scenes, what's-next CTA
+- "Newsletter" link added to desktop nav, mobile nav, and footer navigation on all 7 existing pages
+
+---
+
 ## Unreleased
 
-- [ ] Blog / Insights section
 - [ ] Case study detail pages (per project)
-- [ ] LinkedIn / social media links in footer
-- [ ] Cookie consent banner
 - [ ] Form backend / email integration (currently static form)
-- [ ] SEO: sitemap.xml and robots.txt
-- [ ] Favicon set (multiple sizes)
