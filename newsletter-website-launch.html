@@ -16,19 +16,19 @@
     <link rel="apple-touch-icon" sizes="180x180" href="Image/apple-touch-icon.png">
     <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Newsletter — Structura Nordic AB</title>
-  <meta name="description" content="Company updates and insights from Structura Nordic AB — façade engineering and mechanical design news from Gothenburg, Sweden.">
-  <meta property="og:type" content="website">
+  <title>Structura Nordic AB Is Now Live Online — Newsletter</title>
+  <meta name="description" content="Our first newsletter marks a milestone: the Structura Nordic AB website is officially live, giving clients around the world a clear window into our façade engineering and mechanical design work.">
+  <meta property="og:type" content="article">
   <meta property="og:site_name" content="Structura Nordic AB">
-  <meta property="og:url" content="https://structuranordic.se/newsletter.html">
-  <meta property="og:title" content="Newsletter — Structura Nordic AB">
-  <meta property="og:description" content="Company updates and insights from Structura Nordic AB — façade engineering and mechanical design news from Gothenburg, Sweden.">
+  <meta property="og:url" content="https://structuranordic.se/newsletter-website-launch.html">
+  <meta property="og:title" content="Structura Nordic AB Is Now Live Online — Newsletter">
+  <meta property="og:description" content="Our first newsletter marks a milestone: the Structura Nordic AB website is officially live, giving clients around the world a clear window into our façade engineering and mechanical design work.">
   <meta property="og:image" content="https://structuranordic.se/Image/Logo.webp">
   <meta property="og:image:width" content="400">
   <meta property="og:image:height" content="150">
   <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="Newsletter — Structura Nordic AB">
-  <meta name="twitter:description" content="Company updates and insights from Structura Nordic AB — façade engineering and mechanical design news from Gothenburg, Sweden.">
+  <meta name="twitter:title" content="Structura Nordic AB Is Now Live Online — Newsletter">
+  <meta name="twitter:description" content="Our first newsletter marks a milestone: the Structura Nordic AB website is officially live, giving clients around the world a clear window into our façade engineering and mechanical design work.">
   <meta name="twitter:image" content="https://structuranordic.se/Image/Logo.webp">
   <script src="https://cdn.tailwindcss.com"></script>
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -58,8 +58,6 @@
     .d1{transition-delay:.1s}.d2{transition-delay:.2s}.d3{transition-delay:.3s}.d4{transition-delay:.4s}.d5{transition-delay:.5s}
     .nav-glass{background:rgba(250,250,250,.95);backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);border-bottom:1px solid rgba(226,232,240,.8)}
     .lbl{font-size:.7rem;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:#F0A500}
-    .card-lift{transition:transform .25s ease,box-shadow .25s ease}
-    .card-lift:hover{transform:translateY(-6px);box-shadow:0 24px 64px rgba(15,30,53,.14)}
     @media(prefers-reduced-motion:reduce){.reveal{opacity:1;transform:none;transition:none}*{transition-duration:.01ms!important;animation-duration:.01ms!important}}
     [x-cloak]{display:none!important}
   </style>
@@ -122,70 +120,85 @@
 <!-- PAGE HERO -->
 <section class="pt-24 pb-16 bg-navy-900 relative overflow-hidden">
   <div class="absolute inset-0 opacity-[0.04]" style="background-image:linear-gradient(rgba(255,255,255,.2) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.2) 1px,transparent 1px);background-size:64px 64px"></div>
-  <div class="max-w-7xl mx-auto px-5 lg:px-8 relative z-10">
-    <div class="max-w-3xl pt-4">
-      <span class="lbl" x-text="t('Newsletter','Nyhetsbrev','Newsletter','Newsletter')"></span>
-      <h1 class="mt-4 font-heading font-extrabold text-white leading-tight" style="font-size:clamp(2.4rem,5vw,4rem)"
-          x-text="t('Company Updates & Insights','Företagsnyheter & Insikter','Unternehmensnews & Einblicke','Aggiornamenti & Approfondimenti')">
-      </h1>
-      <p class="mt-6 text-slate-300 text-lg leading-relaxed max-w-2xl"
-         x-text="t('News from Structura Nordic AB — company updates, industry insights, and notes from the studio in Gothenburg.','Nyheter från Structura Nordic AB — företagsuppdateringar, branschinsikter och anteckningar från studion i Göteborg.','Neuigkeiten von Structura Nordic AB — Unternehmens-Updates, Brancheneinblicke und Notizen aus dem Studio in Göteborg.','Notizie da Structura Nordic AB — aggiornamenti aziendali, approfondimenti di settore e note dallo studio di Göteborg.')">
-      </p>
+  <div class="max-w-4xl mx-auto px-5 lg:px-8 relative z-10">
+    <a href="newsletter.html" class="inline-flex items-center gap-1.5 text-slate-400 hover:text-white text-sm transition-colors mb-6 cursor-pointer">
+      <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M10.5 19.5L3 12m0 0l7.5-7.5M3 12h18"/></svg>
+      <span x-text="t('Back to Newsletter','Tillbaka till Nyhetsbrev','Zurück zum Newsletter','Torna alla Newsletter')"></span>
+    </a>
+    <div class="flex flex-wrap items-center gap-3 mb-4">
+      <span class="inline-flex items-center px-3 py-1 rounded-full bg-white/10 text-white text-xs font-bold uppercase tracking-wider">
+        <span x-text="t('Briefing No. 01','Briefing nr 01','Briefing Nr. 01','Briefing n. 01')"></span>
+      </span>
+      <span class="text-slate-400 text-sm">July 2026</span>
     </div>
+    <h1 class="font-heading font-extrabold text-white leading-tight" style="font-size:clamp(2rem,4.5vw,3.25rem)"
+        x-text="t('Structura Nordic AB Is Now Live Online','Structura Nordic AB Är Nu Online','Structura Nordic AB Ist Jetzt Online','Structura Nordic AB È Ora Online')">
+    </h1>
   </div>
 </section>
 
-<!-- BRIEFINGS LIST -->
+<!-- BRIEFING CONTENT -->
 <section class="py-24 bg-white">
   <div class="max-w-4xl mx-auto px-5 lg:px-8">
 
-    <div class="space-y-6">
+    <article class="reveal">
+      <p class="text-slate-600 text-lg leading-relaxed"
+         x-text="t('Our first newsletter marks a milestone: the Structura Nordic AB website is officially live, giving clients around the world a clear window into our façade engineering and mechanical design work.','Vårt första nyhetsbrev markerar en milstolpe: Structura Nordic ABs webbplats är nu officiellt lanserad, vilket ger kunder världen över en tydlig inblick i vårt arbete inom fasadteknik och mekanisk design.','Unser erster Newsletter markiert einen Meilenstein: Die Website von Structura Nordic AB ist offiziell online und gibt Kunden weltweit einen klaren Einblick in unsere Arbeit im Bereich Fassadentechnik und Maschinenbau.','La nostra prima newsletter segna una pietra miliare: il sito di Structura Nordic AB è ufficialmente online, offrendo ai clienti di tutto il mondo una visione chiara del nostro lavoro in ingegneria di facciata e design meccanico.')">
+      </p>
 
-      <!-- Briefing No. 02 -->
-      <a href="newsletter-bep-blueprint.html" class="card-lift block bg-white border border-slate-100 rounded-2xl p-8 shadow-sm cursor-pointer reveal">
-        <div class="flex flex-wrap items-center gap-3 mb-4">
-          <span class="inline-flex items-center px-3 py-1 rounded-full bg-navy-50 text-navy-700 text-xs font-bold uppercase tracking-wider">
-            <span x-text="t('Briefing No. 02','Briefing nr 02','Briefing Nr. 02','Briefing n. 02')"></span>
-          </span>
-          <span class="text-slate-400 text-sm">July 2026</span>
+      <div class="mt-12 space-y-10">
+
+        <!-- Item 1 -->
+        <div class="flex gap-5 reveal d1">
+          <div class="flex-shrink-0 w-11 h-11 bg-navy-50 rounded-xl flex items-center justify-center">
+            <svg class="w-5 h-5 text-navy-700" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="1.5"><path stroke-linecap="round" stroke-linejoin="round" d="M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/><path stroke-linecap="round" stroke-linejoin="round" d="M3.6 9h16.8M3.6 15h16.8M11.5 3a17 17 0 000 18M12.5 3a17 17 0 010 18"/></svg>
+          </div>
+          <div>
+            <h3 class="font-heading font-bold text-navy-900 text-lg" x-text="t('New Website, Four Languages','Ny Webbplats, Fyra Språk','Neue Website, Vier Sprachen','Nuovo Sito, Quattro Lingue')"></h3>
+            <p class="mt-2 text-slate-600 leading-relaxed" x-text="t('structuranordic.se is live, available in English, Swedish, German, and Italian — reflecting the international client base we serve from Gothenburg.','structuranordic.se är live, tillgänglig på engelska, svenska, tyska och italienska — vilket speglar den internationella kundbas vi betjänar från Göteborg.','structuranordic.se ist online, verfügbar auf Englisch, Schwedisch, Deutsch und Italienisch — als Spiegel unseres internationalen Kundenstamms, den wir von Göteborg aus betreuen.','structuranordic.se è online, disponibile in inglese, svedese, tedesco e italiano — a riflesso della base clienti internazionale che serviamo da Göteborg.')"></p>
+          </div>
         </div>
-        <h2 class="font-heading font-extrabold text-navy-900 leading-tight" style="font-size:clamp(1.5rem,2.6vw,2rem)"
-            x-text="t('BEP: The Blueprint for Façade Project Success','BEP: Ritningen för Fasadprojektens Framgång','BEP: Der Bauplan für den Erfolg von Fassadenprojekten','BEP: Il Progetto per il Successo dei Progetti di Facciata')">
-        </h2>
-        <p class="mt-3 text-slate-600 leading-relaxed"
-           x-text="t('What a BIM Execution Plan is, why it matters, and the 8-step process to plan smarter, coordinate better, and build façade projects right the first time.','Vad en BIM Execution Plan är, varför den är viktig, och den 8-stegsprocess som gör att du planerar smartare, samordnar bättre och bygger fasadprojekt rätt från början.','Was ein BIM Execution Plan ist, warum er wichtig ist, und der 8-Schritte-Prozess, um klüger zu planen, besser zu koordinieren und Fassadenprojekte gleich beim ersten Mal richtig zu bauen.','Cosa sia un BIM Execution Plan, perché sia importante, e il processo in 8 passaggi per pianificare in modo più intelligente, coordinare meglio e costruire progetti di facciata nel modo giusto fin dal primo tentativo.')">
-        </p>
-        <span class="mt-5 inline-flex items-center gap-1.5 text-navy-800 text-sm font-semibold">
-          <span x-text="t('Read Full Briefing','Läs Hela Briefingen','Vollständiges Briefing Lesen','Leggi il Briefing Completo')"></span>
-          <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M17 8l4 4m0 0l-4 4m4-4H3"/></svg>
-        </span>
-      </a>
 
-      <!-- Briefing No. 01 -->
-      <a href="newsletter-website-launch.html" class="card-lift block bg-white border border-slate-100 rounded-2xl p-8 shadow-sm cursor-pointer reveal d1">
-        <div class="flex flex-wrap items-center gap-3 mb-4">
-          <span class="inline-flex items-center px-3 py-1 rounded-full bg-navy-50 text-navy-700 text-xs font-bold uppercase tracking-wider">
-            <span x-text="t('Briefing No. 01','Briefing nr 01','Briefing Nr. 01','Briefing n. 01')"></span>
-          </span>
-          <span class="text-slate-400 text-sm">July 2026</span>
+        <!-- Item 2 -->
+        <div class="flex gap-5 reveal d2">
+          <div class="flex-shrink-0 w-11 h-11 bg-navy-50 rounded-xl flex items-center justify-center">
+            <svg class="w-5 h-5 text-navy-700" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="1.5"><path stroke-linecap="round" stroke-linejoin="round" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14M14 8h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"/></svg>
+          </div>
+          <div>
+            <h3 class="font-heading font-bold text-navy-900 text-lg" x-text="t('Project Portfolio Now Online','Projektportfölj Nu Online','Projektportfolio Jetzt Online','Portfolio Progetti Ora Online')"></h3>
+            <p class="mt-2 text-slate-600 leading-relaxed" x-text="t('The Projects page now showcases façade and mechanical engineering work — from unitized curtain wall systems to timber façades and fixture design — across Australia, Canada, USA, Saudi Arabia, India, and Europe.','Projektsidan visar nu arbete inom fasad- och mekanisk teknik — från unitiserade fasadsystem till trä-fasader och fixturdesign — i Australien, Kanada, USA, Saudiarabien, Indien och Europa.','Die Projektseite zeigt nun Fassaden- und Maschinenbauarbeiten — von Unitized-Curtain-Wall-Systemen bis zu Holzfassaden und Vorrichtungsdesign — in Australien, Kanada, USA, Saudi-Arabien, Indien und Europa.','La pagina Progetti mostra ora i lavori di ingegneria di facciata e meccanica — dai sistemi curtain wall unitizzati alle facciate in legno e al design di attrezzature — in Australia, Canada, USA, Arabia Saudita, India ed Europa.')"></p>
+          </div>
         </div>
-        <h2 class="font-heading font-extrabold text-navy-900 leading-tight" style="font-size:clamp(1.5rem,2.6vw,2rem)"
-            x-text="t('Structura Nordic AB Is Now Live Online','Structura Nordic AB Är Nu Online','Structura Nordic AB Ist Jetzt Online','Structura Nordic AB È Ora Online')">
-        </h2>
-        <p class="mt-3 text-slate-600 leading-relaxed"
-           x-text="t('Our first newsletter marks a milestone: the Structura Nordic AB website is officially live, giving clients around the world a clear window into our façade engineering and mechanical design work.','Vårt första nyhetsbrev markerar en milstolpe: Structura Nordic ABs webbplats är nu officiellt lanserad, vilket ger kunder världen över en tydlig inblick i vårt arbete inom fasadteknik och mekanisk design.','Unser erster Newsletter markiert einen Meilenstein: Die Website von Structura Nordic AB ist offiziell online und gibt Kunden weltweit einen klaren Einblick in unsere Arbeit im Bereich Fassadentechnik und Maschinenbau.','La nostra prima newsletter segna una pietra miliare: il sito di Structura Nordic AB è ufficialmente online, offrendo ai clienti di tutto il mondo una visione chiara del nostro lavoro in ingegneria di facciata e design meccanico.')">
-        </p>
-        <span class="mt-5 inline-flex items-center gap-1.5 text-navy-800 text-sm font-semibold">
-          <span x-text="t('Read Full Briefing','Läs Hela Briefingen','Vollständiges Briefing Lesen','Leggi il Briefing Completo')"></span>
+
+        <!-- Item 3 -->
+        <div class="flex gap-5 reveal d3">
+          <div class="flex-shrink-0 w-11 h-11 bg-navy-50 rounded-xl flex items-center justify-center">
+            <svg class="w-5 h-5 text-navy-700" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="1.5"><path stroke-linecap="round" stroke-linejoin="round" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"/></svg>
+          </div>
+          <div>
+            <h3 class="font-heading font-bold text-navy-900 text-lg" x-text="t('Behind the Scenes: SEO & Analytics','Bakom Kulisserna: SEO & Analys','Hinter den Kulissen: SEO & Analyse','Dietro le Quinte: SEO & Analytics')"></h3>
+            <p class="mt-2 text-slate-600 leading-relaxed" x-text="t('We\'ve added a sitemap, search console verification, and analytics tracking so the site is easier to find — and so we can keep improving it based on how visitors actually use it.','Vi har lagt till en sitemap, verifiering av sökkonsol och analysspårning så att webbplatsen är lättare att hitta — och så att vi kan fortsätta förbättra den baserat på hur besökare faktiskt använder den.','Wir haben eine Sitemap, eine Search-Console-Verifizierung und Analyse-Tracking hinzugefügt, damit die Website leichter zu finden ist — und wir sie basierend auf dem tatsächlichen Besucherverhalten weiter verbessern können.','Abbiamo aggiunto una sitemap, la verifica della Search Console e il tracciamento analitico, così il sito è più facile da trovare — e possiamo continuare a migliorarlo in base a come i visitatori lo usano davvero.')"></p>
+          </div>
+        </div>
+
+      </div>
+
+      <div class="mt-14 p-8 bg-slate-50 rounded-2xl reveal d4">
+        <p class="lbl" x-text="t('What\'s Next','Vad Kommer Härnäst','Was Kommt als Nächstes','Cosa Viene Dopo')"></p>
+        <h3 class="mt-3 font-heading font-bold text-navy-900 text-xl" x-text="t('More Briefings, More Project Spotlights','Fler Briefingar, Fler Projektfokus','Weitere Briefings, Weitere Projekt-Highlights','Altri Briefing, Altri Progetti in Evidenza')"></h3>
+        <p class="mt-3 text-slate-600 leading-relaxed" x-text="t('Future briefings will dig into individual projects, façade engineering techniques, and BIM workflows. Have a project in mind? Get in touch — we\'d love to hear from you.','Framtida briefingar kommer att fördjupa sig i enskilda projekt, fasadteknik och BIM-arbetsflöden. Har du ett projekt i åtanke? Hör av dig — vi vill gärna höra från dig.','Zukünftige Briefings werden sich mit einzelnen Projekten, Fassadentechniken und BIM-Workflows befassen. Haben Sie ein Projekt im Sinn? Kontaktieren Sie uns — wir freuen uns, von Ihnen zu hören.','I prossimi briefing approfondiranno singoli progetti, tecniche di ingegneria di facciata e flussi di lavoro BIM. Hai un progetto in mente? Contattaci — ci farebbe piacere sentirti.')"></p>
+        <a href="contact.html" class="mt-6 inline-flex items-center gap-2 px-6 py-3 bg-navy-800 text-white font-semibold rounded-full hover:bg-navy-700 transition-colors cursor-pointer text-sm">
+          <span x-text="t('Get in Touch','Kontakta Oss','Kontakt aufnehmen','Contattaci')"></span>
           <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M17 8l4 4m0 0l-4 4m4-4H3"/></svg>
-        </span>
+        </a>
+      </div>
+    </article>
+
+    <div class="mt-14 pt-10 border-t border-slate-100 text-center">
+      <a href="newsletter.html" class="inline-flex items-center gap-1.5 text-navy-700 hover:text-navy-900 text-sm font-semibold transition-colors cursor-pointer">
+        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M10.5 19.5L3 12m0 0l7.5-7.5M3 12h18"/></svg>
+        <span x-text="t('Back to All Briefings','Tillbaka till Alla Briefingar','Zurück zu Allen Briefings','Torna a Tutti i Briefing')"></span>
       </a>
-
-    </div>
-
-    <!-- Coming soon placeholder -->
-    <div class="mt-14 pt-10 border-t border-slate-100 reveal d2">
-      <p class="text-slate-400 text-sm text-center" x-text="t('More briefings coming soon.','Fler briefingar kommer snart.','Weitere Briefings folgen in Kürze.','Altri briefing in arrivo presto.')"></p>
     </div>
 
   </div>
