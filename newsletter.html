@@ -66,13 +66,47 @@
     .card-lift:hover{transform:translateY(-6px);box-shadow:0 24px 64px rgba(15,30,53,.14)}
     @media(prefers-reduced-motion:reduce){.reveal,.reveal-l,.reveal-r{opacity:1;transform:none;transition:none}*{transition-duration:.01ms!important;animation-duration:.01ms!important}}
     [x-cloak]{display:none!important}
+    .no-copy{-webkit-user-select:none;-moz-user-select:none;user-select:none;-webkit-user-drag:none;-webkit-touch-callout:none;pointer-events:auto}
+    .no-copy img{-webkit-user-drag:none;user-drag:none;pointer-events:none}
+    .bep-lb-overlay{position:fixed;inset:0;z-index:9999;background:rgba(0,0,0,.92);display:flex;flex-direction:column;align-items:center}
+    .bep-lb-scroll{flex:1;width:100%;overflow:auto;overscroll-behavior:contain;padding:4.5rem 1rem 1rem;-webkit-overflow-scrolling:touch}
+    .bep-lb-img{display:block;margin:0 auto;width:auto;max-width:none;border-radius:12px}
+    .bep-lb-controls{display:flex;align-items:center;gap:.4rem;padding:.5rem;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.12);border-radius:999px;margin-bottom:.75rem}
+    .bep-lb-hint{padding-bottom:1.25rem;text-align:center}
   </style>
 </head>
 
 <body
-  x-data="{lang:localStorage.getItem('sn-lang')||'en',navOpen:false,scrolled:false,t(e,s,d,i){const v={en:e,sv:s,de:d,it:i};return v[this.lang]??e},setLang(l){this.lang=l;localStorage.setItem('sn-lang',l)}}"
+  x-data="{lang:localStorage.getItem('sn-lang')||'en',navOpen:false,scrolled:false,bepLb:false,bepZoom:1,bepZoomIn(){this.bepZoom=Math.min(2.2,+(this.bepZoom+0.2).toFixed(2))},bepZoomOut(){this.bepZoom=Math.max(0.6,+(this.bepZoom-0.2).toFixed(2))},t(e,s,d,i){const v={en:e,sv:s,de:d,it:i};return v[this.lang]??e},setLang(l){this.lang=l;localStorage.setItem('sn-lang',l)}}"
   x-init="window.addEventListener('scroll',()=>{scrolled=window.scrollY>60})"
+  @keydown.escape.window="bepLb=false"
+  @keydown.window="if(bepLb&&($event.key==='+'||$event.key==='='))bepZoomIn();if(bepLb&&$event.key==='-')bepZoomOut()"
+  @contextmenu="if($event.target.closest('.no-copy'))$event.preventDefault()"
   :lang="lang">
+
+<!-- BEP INFOGRAPHIC LIGHTBOX (view-only, no download, zoom + pan) -->
+<div x-show="bepLb" x-cloak x-transition class="bep-lb-overlay no-copy" @click.self="bepLb=false">
+  <button @click="bepLb=false" class="absolute top-4 right-4 text-white/70 hover:text-white cursor-pointer p-2 z-20">
+    <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="1.5"><path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12"/></svg>
+  </button>
+
+  <div class="bep-lb-scroll" @wheel="if($event.ctrlKey||$event.metaKey){$event.preventDefault();$event.deltaY<0?bepZoomIn():bepZoomOut()}">
+    <img src="Image/Newsletter-BEP-Infographic.jpeg" alt="BEP: The Blueprint for Façade Project Success — full infographic" class="bep-lb-img shadow-2xl" draggable="false" :style="'height:'+(bepZoom*210)+'vh'">
+  </div>
+
+  <div class="bep-lb-controls no-copy" @click.stop>
+    <button @click="bepZoomOut()" :disabled="bepZoom<=0.6" class="w-9 h-9 flex items-center justify-center rounded-full bg-white/10 hover:bg-white/25 disabled:opacity-30 text-white cursor-pointer transition-colors" aria-label="Zoom out">
+      <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M19.5 12h-15"/></svg>
+    </button>
+    <span class="text-white/80 text-xs font-semibold w-11 text-center" x-text="Math.round(bepZoom*100)+'%'"></span>
+    <button @click="bepZoomIn()" :disabled="bepZoom>=2.2" class="w-9 h-9 flex items-center justify-center rounded-full bg-white/10 hover:bg-white/25 disabled:opacity-30 text-white cursor-pointer transition-colors" aria-label="Zoom in">
+      <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M12 4.5v15m7.5-7.5h-15"/></svg>
+    </button>
+    <button @click="bepZoom=1" class="ml-1 px-3 h-9 flex items-center justify-center rounded-full bg-white/10 hover:bg-white/25 text-white text-xs font-semibold cursor-pointer transition-colors" x-text="t('Reset','Återställ','Zurücksetzen','Ripristina')"></button>
+  </div>
+
+  <p class="bep-lb-hint text-white/40 text-xs" x-text="t('Scroll up/down to pan · Ctrl+scroll or pinch to zoom · right-click and download disabled','Scrolla upp/ner för att panorera · Ctrl+scroll eller nyp för att zooma · högerklick och nedladdning inaktiverat','Nach oben/unten scrollen zum Verschieben · Strg+Scrollen oder Zusammenziehen zum Zoomen · Rechtsklick und Download deaktiviert','Scorri su/giù per spostarti · Ctrl+scroll o pizzica per zoomare · clic destro e download disabilitati')"></p>
+</div>
 
 <!-- NAV -->
 <header :class="scrolled?'nav-glass shadow-sm':'nav-glass'" class="fixed top-0 left-0 right-0 z-50 transition-all duration-300">
@@ -133,7 +167,7 @@
           x-text="t('Company Updates & Insights','Företagsnyheter & Insikter','Unternehmensnews & Einblicke','Aggiornamenti & Approfondimenti')">
       </h1>
       <p class="mt-6 text-slate-300 text-lg leading-relaxed max-w-2xl"
-         x-text="t('News from Structura Nordic AB — website launches, project milestones, and notes from the studio in Gothenburg.','Nyheter från Structura Nordic AB — webbplatslanseringar, projektmilstolpar och anteckningar från studion i Göteborg.','Neuigkeiten von Structura Nordic AB — Website-Starts, Projektmeilensteine und Notizen aus dem Studio in Göteborg.','Notizie da Structura Nordic AB — lanci del sito, traguardi di progetto e note dallo studio di Göteborg.')">
+         x-text="t('News from Structura Nordic AB — company updates, industry insights, and notes from the studio in Gothenburg.','Nyheter från Structura Nordic AB — företagsuppdateringar, branschinsikter och anteckningar från studion i Göteborg.','Neuigkeiten von Structura Nordic AB — Unternehmens-Updates, Brancheneinblicke und Notizen aus dem Studio in Göteborg.','Notizie da Structura Nordic AB — aggiornamenti aziendali, approfondimenti di settore e note dallo studio di Göteborg.')">
       </p>
     </div>
   </div>
@@ -143,6 +177,402 @@
 <section class="py-24 bg-white">
   <div class="max-w-4xl mx-auto px-5 lg:px-8">
 
+    <!-- Briefing No. 02 -->
+    <article class="reveal">
+      <div class="flex flex-wrap items-center gap-3 mb-6">
+        <span class="inline-flex items-center px-3 py-1 rounded-full bg-navy-50 text-navy-700 text-xs font-bold uppercase tracking-wider">
+          <span x-text="t('Briefing No. 02','Briefing nr 02','Briefing Nr. 02','Briefing n. 02')"></span>
+        </span>
+        <span class="text-slate-400 text-sm">July 2026</span>
+      </div>
+
+      <h2 class="font-heading font-extrabold text-navy-900 leading-tight" style="font-size:clamp(1.9rem,3.6vw,2.75rem)"
+          x-text="t('BEP: The Blueprint for Façade Project Success','BEP: Ritningen för Fasadprojektens Framgång','BEP: Der Bauplan für den Erfolg von Fassadenprojekten','BEP: Il Progetto per il Successo dei Progetti di Facciata')">
+      </h2>
+      <p class="mt-3 font-heading font-bold text-gold-600 text-sm uppercase tracking-wide"
+         x-text="t('Plan Smart. Coordinate Better. Build Perfect.','Planera smart. Koordinera bättre. Bygg perfekt.','Klug planen. Besser koordinieren. Perfekt bauen.','Pianifica con intelligenza. Coordina meglio. Costruisci alla perfezione.')">
+      </p>
+      <p class="mt-5 text-slate-600 text-lg leading-relaxed"
+         x-text="t('A BIM Execution Plan (BEP) is a project-specific document that outlines how Building Information Modeling will be used to achieve project goals — by whom, when, and to what standards. For façade projects, it\'s the roadmap that ensures seamless collaboration, accurate fabrication, and successful installation, from first coordination model to handover.','En BIM Execution Plan (BEP) är ett projektspecifikt dokument som beskriver hur Building Information Modeling ska användas för att uppnå projektmålen — av vem, när och enligt vilka standarder. För fasadprojekt är den ritningen som säkerställer sömlöst samarbete, korrekt tillverkning och lyckad installation, från första samordningsmodell till överlämning.','Ein BIM Execution Plan (BEP) ist ein projektspezifisches Dokument, das festlegt, wie Building Information Modeling zur Erreichung der Projektziele eingesetzt wird — von wem, wann und nach welchen Standards. Für Fassadenprojekte ist er der Bauplan, der nahtlose Zusammenarbeit, präzise Fertigung und erfolgreiche Montage sicherstellt, vom ersten Koordinationsmodell bis zur Übergabe.','Un BIM Execution Plan (BEP) è un documento specifico del progetto che definisce come verrà utilizzato il Building Information Modeling per raggiungere gli obiettivi del progetto — da chi, quando e secondo quali standard. Per i progetti di facciata, è il progetto guida che garantisce una collaborazione senza interruzioni, una fabbricazione accurata e un\'installazione di successo, dal primo modello di coordinamento alla consegna.')">
+      </p>
+
+      <button @click="bepZoom=1;bepLb=true" type="button" class="no-copy mt-8 flex items-start gap-4 p-4 bg-slate-50 rounded-2xl reveal hover:bg-slate-100 transition-colors group max-w-md text-left cursor-pointer">
+        <img src="Image/Newsletter-BEP-Infographic.jpeg" alt="BEP: The Blueprint for Façade Project Success — full infographic" class="w-20 h-20 object-cover rounded-lg shadow-md flex-shrink-0" draggable="false">
+        <div class="pt-1">
+          <p class="font-heading font-bold text-navy-900 text-sm" x-text="t('View the Full Infographic','Visa Hela Infografiken','Vollständige Infografik Ansehen','Visualizza l\'Infografica Completa')"></p>
+          <p class="mt-1 text-xs text-slate-500 group-hover:text-navy-700 transition-colors" x-text="t('Opens a view-only preview','Öppnar en förhandsvisning (endast visning)','Öffnet eine reine Ansichtsvorschau','Apre un\'anteprima di sola visualizzazione')"></p>
+        </div>
+      </button>
+
+      <div class="mt-12 reveal d1">
+        <h3 class="font-heading font-bold text-navy-900 text-xl"
+            x-text="t('Why BEP Matters','Varför BEP Är Viktigt','Warum der BEP Wichtig Ist','Perché il BEP È Importante')">
+        </h3>
+        <div class="mt-6 grid sm:grid-cols-2 gap-6">
+
+          <div class="flex gap-4">
+            <div class="flex-shrink-0 w-11 h-11 bg-navy-50 rounded-xl flex items-center justify-center">
+              <svg class="w-5 h-5 text-navy-700" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="1.5"><path stroke-linecap="round" stroke-linejoin="round" d="M12 18v-5.25m0 0a6.01 6.01 0 001.5-.189m-1.5.189a6.01 6.01 0 01-1.5-.189m3.75 7.478a12.06 12.06 0 01-4.5 0m3.75 2.383a14.406 14.406 0 01-3 0M14.25 18v-.192c0-.983.658-1.823 1.508-2.316a7.5 7.5 0 10-7.517 0c.85.493 1.509 1.333 1.509 2.316V18"/></svg>
+            </div>
+            <div>
+              <h4 class="font-heading font-bold text-navy-900" x-text="t('Clear Direction','Tydlig Riktning','Klare Ausrichtung','Direzione Chiara')"></h4>
+              <p class="mt-1.5 text-slate-600 text-sm leading-relaxed" x-text="t('Defines goals, roles, responsibilities, LOD/LOI, deliverables, and approval processes.','Definierar mål, roller, ansvar, LOD/LOI, leveranser och godkännandeprocesser.','Definiert Ziele, Rollen, Verantwortlichkeiten, LOD/LOI, Liefergegenstände und Freigabeprozesse.','Definisce obiettivi, ruoli, responsabilità, LOD/LOI, deliverable e processi di approvazione.')"></p>
+            </div>
+          </div>
+
+          <div class="flex gap-4">
+            <div class="flex-shrink-0 w-11 h-11 bg-navy-50 rounded-xl flex items-center justify-center">
+              <svg class="w-5 h-5 text-navy-700" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="1.5"><path stroke-linecap="round" stroke-linejoin="round" d="M15 19.128a9.38 9.38 0 002.625.372 9.337 9.337 0 004.121-.952 4.125 4.125 0 00-7.533-2.493M15 19.128v-.003c0-1.113-.285-2.16-.786-3.07M15 19.128v.106A12.318 12.318 0 018.624 21c-2.331 0-4.512-.645-6.374-1.766l-.001-.109a6.375 6.375 0 0111.964-3.07M12 6.375a3.375 3.375 0 11-6.75 0 3.375 3.375 0 016.75 0zm8.25 2.25a2.625 2.625 0 11-5.25 0 2.625 2.625 0 015.25 0z"/></svg>
+            </div>
+            <div>
+              <h4 class="font-heading font-bold text-navy-900" x-text="t('Better Coordination','Bättre Samordning','Bessere Koordination','Migliore Coordinamento')"></h4>
+              <p class="mt-1.5 text-slate-600 text-sm leading-relaxed" x-text="t('Improves clash detection and interface management across disciplines.','Förbättrar kollisionskontroll och gränssnittshantering mellan discipliner.','Verbessert die Kollisionserkennung und das Schnittstellenmanagement zwischen den Gewerken.','Migliora il rilevamento delle interferenze e la gestione delle interfacce tra le discipline.')"></p>
+            </div>
+          </div>
+
+          <div class="flex gap-4">
+            <div class="flex-shrink-0 w-11 h-11 bg-navy-50 rounded-xl flex items-center justify-center">
+              <svg class="w-5 h-5 text-navy-700" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="1.5"><path stroke-linecap="round" stroke-linejoin="round" d="M2.25 18L9 11.25l4.306 4.306a11.95 11.95 0 015.814-5.518l2.74-1.22m0 0l-5.94-2.281m5.94 2.28l-2.28 5.941"/></svg>
+            </div>
+            <div>
+              <h4 class="font-heading font-bold text-navy-900" x-text="t('Cost & Time Savings','Kostnads- & Tidsbesparingar','Kosten- & Zeitersparnis','Risparmio di Costi & Tempo')"></h4>
+              <p class="mt-1.5 text-slate-600 text-sm leading-relaxed" x-text="t('Reduces rework, RFIs, delays, and on-site errors.','Minskar omarbete, RFI:er, förseningar och fel på plats.','Reduziert Nacharbeit, RFIs, Verzögerungen und Fehler auf der Baustelle.','Riduce le rilavorazioni, le RFI, i ritardi e gli errori in cantiere.')"></p>
+            </div>
+          </div>
+
+          <div class="flex gap-4">
+            <div class="flex-shrink-0 w-11 h-11 bg-navy-50 rounded-xl flex items-center justify-center">
+              <svg class="w-5 h-5 text-navy-700" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="1.5"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75L11.25 15 15 9.75M21 12c0 1.268-.63 2.39-1.593 3.068a3.745 3.745 0 01-1.043 3.296 3.745 3.745 0 01-3.296 1.043A3.745 3.745 0 0112 21c-1.268 0-2.39-.63-3.068-1.593a3.746 3.746 0 01-3.296-1.043 3.745 3.745 0 01-1.043-3.296A3.745 3.745 0 013 12c0-1.268.63-2.39 1.593-3.068a3.745 3.745 0 011.043-3.296 3.746 3.746 0 013.296-1.043A3.746 3.746 0 0112 3c1.268 0 2.39.63 3.068 1.593a3.746 3.746 0 013.296 1.043 3.746 3.746 0 011.043 3.296A3.745 3.745 0 0121 12z"/></svg>
+            </div>
+            <div>
+              <h4 class="font-heading font-bold text-navy-900" x-text="t('Quality & Accuracy','Kvalitet & Precision','Qualität & Präzision','Qualità & Precisione')"></h4>
+              <p class="mt-1.5 text-slate-600 text-sm leading-relaxed" x-text="t('Ensures precise fabrication, installation, and compliance with standards.','Säkerställer exakt tillverkning, installation och efterlevnad av standarder.','Sichert präzise Fertigung, Montage und Einhaltung von Standards.','Garantisce una fabbricazione e un\'installazione precise e la conformità agli standard.')"></p>
+            </div>
+          </div>
+
+          <div class="flex gap-4">
+            <div class="flex-shrink-0 w-11 h-11 bg-navy-50 rounded-xl flex items-center justify-center">
+              <svg class="w-5 h-5 text-navy-700" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="1.5"><path stroke-linecap="round" stroke-linejoin="round" d="M12 9v3.75m-9.303 3.376c-.866 1.5.217 3.374 1.948 3.374h14.71c1.73 0 2.813-1.874 1.948-3.374L13.949 3.378c-.866-1.5-3.032-1.5-3.898 0L2.697 16.126zM12 15.75h.007v.008H12v-.008z"/></svg>
+            </div>
+            <div>
+              <h4 class="font-heading font-bold text-navy-900" x-text="t('Risk Management','Riskhantering','Risikomanagement','Gestione del Rischio')"></h4>
+              <p class="mt-1.5 text-slate-600 text-sm leading-relaxed" x-text="t('Identifies potential issues early and mitigates project risks.','Identifierar potentiella problem tidigt och minskar projektrisker.','Erkennt potenzielle Probleme frühzeitig und mindert Projektrisiken.','Identifica tempestivamente i problemi potenziali e mitiga i rischi di progetto.')"></p>
+            </div>
+          </div>
+
+          <div class="flex gap-4">
+            <div class="flex-shrink-0 w-11 h-11 bg-navy-50 rounded-xl flex items-center justify-center">
+              <svg class="w-5 h-5 text-navy-700" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="1.5"><path stroke-linecap="round" stroke-linejoin="round" d="M20.25 8.511c.884.284 1.5 1.128 1.5 2.097v4.286c0 1.136-.847 2.1-1.98 2.193-.34.027-.68.052-1.02.072v3.091l-3-3c-1.354 0-2.694-.055-4.02-.163a2.115 2.115 0 01-.825-.242m9.345-8.334a2.126 2.126 0 00-.476-.095 48.64 48.64 0 00-8.048 0c-1.131.094-1.976 1.057-1.976 2.192v4.286c0 .837.46 1.58 1.155 1.951m9.345-8.334V6.637c0-1.621-1.152-3.026-2.76-3.235A48.455 48.455 0 0011.25 3c-2.115 0-4.198.137-6.24.402-1.608.209-2.76 1.614-2.76 3.235v6.226c0 1.621 1.152 3.024 2.76 3.235.577.075 1.157.14 1.74.194V21l4.155-4.155"/></svg>
+            </div>
+            <div>
+              <h4 class="font-heading font-bold text-navy-900" x-text="t('Transparent Communication','Transparent Kommunikation','Transparente Kommunikation','Comunicazione Trasparente')"></h4>
+              <p class="mt-1.5 text-slate-600 text-sm leading-relaxed" x-text="t('Aligns all stakeholders through clear information exchange and workflows.','Samordnar alla intressenter genom tydligt informationsutbyte och arbetsflöden.','Bringt alle Beteiligten durch klaren Informationsaustausch und klare Arbeitsabläufe auf eine Linie.','Allinea tutte le parti interessate attraverso uno scambio di informazioni e flussi di lavoro chiari.')"></p>
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+      <div class="mt-14 reveal d2">
+        <h3 class="font-heading font-bold text-navy-900 text-xl"
+            x-text="t('How to Execute a BEP — Step by Step','Så Genomför Du en BEP — Steg för Steg','So Setzen Sie einen BEP Um — Schritt für Schritt','Come Eseguire un BEP — Passo per Passo')">
+        </h3>
+        <div class="mt-6 grid sm:grid-cols-2 lg:grid-cols-4 gap-x-6 gap-y-8">
+
+          <div>
+            <div class="flex items-center gap-2.5">
+              <span class="flex-shrink-0 w-7 h-7 rounded-full bg-navy-800 text-white text-xs font-bold flex items-center justify-center">1</span>
+              <h4 class="font-heading font-bold text-navy-900 text-sm" x-text="t('Define Objectives','Definiera Mål','Ziele Definieren','Definire gli Obiettivi')"></h4>
+            </div>
+            <p class="mt-2 text-slate-600 text-sm leading-relaxed pl-9" x-text="t('Understand project goals, scope, and BIM uses. Align with client\'s requirements.','Förstå projektmål, omfattning och BIM-användning. Anpassa efter kundens krav.','Projektziele, Umfang und BIM-Anwendungen verstehen. Auf die Anforderungen des Kunden abstimmen.','Comprendere gli obiettivi, l\'ambito e gli usi del BIM. Allinearsi ai requisiti del cliente.')"></p>
+          </div>
+
+          <div>
+            <div class="flex items-center gap-2.5">
+              <span class="flex-shrink-0 w-7 h-7 rounded-full bg-navy-800 text-white text-xs font-bold flex items-center justify-center">2</span>
+              <h4 class="font-heading font-bold text-navy-900 text-sm" x-text="t('Identify Stakeholders','Identifiera Intressenter','Beteiligte Identifizieren','Identificare gli Stakeholder')"></h4>
+            </div>
+            <p class="mt-2 text-slate-600 text-sm leading-relaxed pl-9" x-text="t('Define roles, responsibilities, and communication protocols.','Definiera roller, ansvar och kommunikationsprotokoll.','Rollen, Verantwortlichkeiten und Kommunikationsprotokolle festlegen.','Definire ruoli, responsabilità e protocolli di comunicazione.')"></p>
+          </div>
+
+          <div>
+            <div class="flex items-center gap-2.5">
+              <span class="flex-shrink-0 w-7 h-7 rounded-full bg-navy-800 text-white text-xs font-bold flex items-center justify-center">3</span>
+              <h4 class="font-heading font-bold text-navy-900 text-sm" x-text="t('Develop BIM Strategy','Utveckla BIM-Strategi','BIM-Strategie Entwickeln','Sviluppare la Strategia BIM')"></h4>
+            </div>
+            <p class="mt-2 text-slate-600 text-sm leading-relaxed pl-9" x-text="t('Determine BIM uses, LOD/LOI, standards, and workflows.','Fastställ BIM-användning, LOD/LOI, standarder och arbetsflöden.','BIM-Anwendungen, LOD/LOI, Standards und Arbeitsabläufe festlegen.','Determinare gli usi del BIM, LOD/LOI, standard e flussi di lavoro.')"></p>
+          </div>
+
+          <div>
+            <div class="flex items-center gap-2.5">
+              <span class="flex-shrink-0 w-7 h-7 rounded-full bg-navy-800 text-white text-xs font-bold flex items-center justify-center">4</span>
+              <h4 class="font-heading font-bold text-navy-900 text-sm" x-text="t('Plan Deliverables & Milestones','Planera Leveranser & Milstolpar','Liefergegenstände & Meilensteine Planen','Pianificare Deliverable & Milestone')"></h4>
+            </div>
+            <p class="mt-2 text-slate-600 text-sm leading-relaxed pl-9" x-text="t('Define deliverables, submission schedule, and approval process.','Definiera leveranser, inlämningsschema och godkännandeprocess.','Liefergegenstände, Einreichungsplan und Freigabeprozess definieren.','Definire i deliverable, il programma di consegna e il processo di approvazione.')"></p>
+          </div>
+
+          <div>
+            <div class="flex items-center gap-2.5">
+              <span class="flex-shrink-0 w-7 h-7 rounded-full bg-navy-800 text-white text-xs font-bold flex items-center justify-center">5</span>
+              <h4 class="font-heading font-bold text-navy-900 text-sm" x-text="t('Establish QA/QC Process','Etablera QA/QC-Process','QA/QC-Prozess Etablieren','Stabilire il Processo QA/QC')"></h4>
+            </div>
+            <p class="mt-2 text-slate-600 text-sm leading-relaxed pl-9" x-text="t('Set modeling standards, clash detection, model audits and quality checks.','Fastställ modelleringsstandarder, kollisionskontroll, modellgranskningar och kvalitetskontroller.','Modellierungsstandards, Kollisionserkennung, Modellprüfungen und Qualitätskontrollen festlegen.','Definire standard di modellazione, rilevamento interferenze, audit dei modelli e controlli di qualità.')"></p>
+          </div>
+
+          <div>
+            <div class="flex items-center gap-2.5">
+              <span class="flex-shrink-0 w-7 h-7 rounded-full bg-navy-800 text-white text-xs font-bold flex items-center justify-center">6</span>
+              <h4 class="font-heading font-bold text-navy-900 text-sm" x-text="t('Implement & Collaborate','Implementera & Samarbeta','Umsetzen & Zusammenarbeiten','Implementare & Collaborare')"></h4>
+            </div>
+            <p class="mt-2 text-slate-600 text-sm leading-relaxed pl-9" x-text="t('Execute plan, conduct coordination meetings, and resolve issues proactively.','Genomför planen, håll samordningsmöten och lös problem proaktivt.','Plan umsetzen, Koordinationsmeetings durchführen und Probleme proaktiv lösen.','Eseguire il piano, condurre riunioni di coordinamento e risolvere i problemi in modo proattivo.')"></p>
+          </div>
+
+          <div>
+            <div class="flex items-center gap-2.5">
+              <span class="flex-shrink-0 w-7 h-7 rounded-full bg-navy-800 text-white text-xs font-bold flex items-center justify-center">7</span>
+              <h4 class="font-heading font-bold text-navy-900 text-sm" x-text="t('Monitor & Control','Övervaka & Kontrollera','Überwachen & Steuern','Monitorare & Controllare')"></h4>
+            </div>
+            <p class="mt-2 text-slate-600 text-sm leading-relaxed pl-9" x-text="t('Track progress, manage changes and ensure compliance.','Följ upp framsteg, hantera ändringar och säkerställ efterlevnad.','Fortschritt verfolgen, Änderungen verwalten und Compliance sicherstellen.','Monitorare i progressi, gestire le modifiche e garantire la conformità.')"></p>
+          </div>
+
+          <div>
+            <div class="flex items-center gap-2.5">
+              <span class="flex-shrink-0 w-7 h-7 rounded-full bg-navy-800 text-white text-xs font-bold flex items-center justify-center">8</span>
+              <h4 class="font-heading font-bold text-navy-900 text-sm" x-text="t('Review & Improve','Utvärdera & Förbättra','Überprüfen & Verbessern','Rivedere & Migliorare')"></h4>
+            </div>
+            <p class="mt-2 text-slate-600 text-sm leading-relaxed pl-9" x-text="t('Evaluate outcomes, capture lessons learned, and improve processes.','Utvärdera resultat, dokumentera lärdomar och förbättra processer.','Ergebnisse bewerten, gewonnene Erkenntnisse festhalten und Prozesse verbessern.','Valutare i risultati, raccogliere le lezioni apprese e migliorare i processi.')"></p>
+          </div>
+
+        </div>
+      </div>
+
+      <div class="mt-14 reveal d2">
+        <h3 class="font-heading font-bold text-navy-900 text-xl"
+            x-text="t('How a Façade Contractor Benefits at Each Step','Så Gynnas En Fasadentreprenör i Varje Steg','Wie ein Fassadenbauer bei Jedem Schritt Profitiert','Come Ne Beneficia un Appaltatore di Facciate ad Ogni Passo')">
+        </h3>
+        <div class="mt-6 divide-y divide-slate-100">
+
+          <div class="py-5">
+            <div class="flex items-center gap-2.5 mb-3">
+              <span class="flex-shrink-0 w-7 h-7 rounded-full bg-navy-800 text-white text-xs font-bold flex items-center justify-center">1</span>
+              <h4 class="font-heading font-bold text-navy-900 text-sm" x-text="t('Define Objectives','Definiera Mål','Ziele Definieren','Definire gli Obiettivi')"></h4>
+            </div>
+            <div class="grid md:grid-cols-3 gap-4 md:pl-9">
+              <ul class="md:col-span-2 space-y-1.5 text-sm text-slate-600 list-disc list-outside pl-4">
+                <li x-text="t('Understand performance, design intent, installation goals and constraints early.','Förstå prestanda, designintention, installationsmål och begränsningar tidigt.','Leistung, Planungsabsicht, Montageziele und Einschränkungen frühzeitig verstehen.','Comprendere tempestivamente prestazioni, intento progettuale, obiettivi di installazione e vincoli.')"></li>
+                <li x-text="t('Align expectations with client, architect and main contractor.','Anpassa förväntningar med kund, arkitekt och huvudentreprenör.','Erwartungen mit Kunde, Architekt und Hauptauftragnehmer abstimmen.','Allineare le aspettative con cliente, architetto e appaltatore principale.')"></li>
+              </ul>
+              <div class="flex items-start gap-2 bg-navy-50 rounded-lg p-3">
+                <svg class="w-4 h-4 text-navy-700 flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M2.25 18L9 11.25l4.306 4.306a11.95 11.95 0 015.814-5.518l2.74-1.22m0 0l-5.94-2.281m5.94 2.28l-2.28 5.941"/></svg>
+                <p class="text-xs font-semibold text-navy-800" x-text="t('Fewer change orders and disputes. Clear scope and success criteria.','Färre ändringsorder och tvister. Tydlig omfattning och framgångskriterier.','Weniger Nachträge und Streitigkeiten. Klarer Umfang und klare Erfolgskriterien.','Meno varianti e controversie. Ambito e criteri di successo chiari.')"></p>
+              </div>
+            </div>
+          </div>
+
+          <div class="py-5">
+            <div class="flex items-center gap-2.5 mb-3">
+              <span class="flex-shrink-0 w-7 h-7 rounded-full bg-navy-800 text-white text-xs font-bold flex items-center justify-center">2</span>
+              <h4 class="font-heading font-bold text-navy-900 text-sm" x-text="t('Identify Stakeholders','Identifiera Intressenter','Beteiligte Identifizieren','Identificare gli Stakeholder')"></h4>
+            </div>
+            <div class="grid md:grid-cols-3 gap-4 md:pl-9">
+              <ul class="md:col-span-2 space-y-1.5 text-sm text-slate-600 list-disc list-outside pl-4">
+                <li x-text="t('Early involvement with all relevant parties (design, structure, MEP, crane, safety).','Tidig involvering av alla relevanta parter (design, konstruktion, VVS/el, kran, säkerhet).','Frühzeitige Einbindung aller relevanten Parteien (Planung, Tragwerk, TGA, Kran, Sicherheit).','Coinvolgimento tempestivo di tutte le parti rilevanti (design, strutture, MEP, gru, sicurezza).')"></li>
+                <li x-text="t('Clear communication channels and decision-making flow.','Tydliga kommunikationskanaler och beslutsflöde.','Klare Kommunikationskanäle und Entscheidungsabläufe.','Canali di comunicazione chiari e flusso decisionale.')"></li>
+              </ul>
+              <div class="flex items-start gap-2 bg-navy-50 rounded-lg p-3">
+                <svg class="w-4 h-4 text-navy-700 flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M2.25 18L9 11.25l4.306 4.306a11.95 11.95 0 015.814-5.518l2.74-1.22m0 0l-5.94-2.281m5.94 2.28l-2.28 5.941"/></svg>
+                <p class="text-xs font-semibold text-navy-800" x-text="t('Stronger coordination and faster decision-making.','Starkare samordning och snabbare beslutsfattande.','Stärkere Koordination und schnellere Entscheidungsfindung.','Coordinamento più forte e decisioni più rapide.')"></p>
+              </div>
+            </div>
+          </div>
+
+          <div class="py-5">
+            <div class="flex items-center gap-2.5 mb-3">
+              <span class="flex-shrink-0 w-7 h-7 rounded-full bg-navy-800 text-white text-xs font-bold flex items-center justify-center">3</span>
+              <h4 class="font-heading font-bold text-navy-900 text-sm" x-text="t('Develop BIM Strategy','Utveckla BIM-Strategi','BIM-Strategie Entwickeln','Sviluppare la Strategia BIM')"></h4>
+            </div>
+            <div class="grid md:grid-cols-3 gap-4 md:pl-9">
+              <ul class="md:col-span-2 space-y-1.5 text-sm text-slate-600 list-disc list-outside pl-4">
+                <li x-text="t('Plan the optimal BIM uses (3D coordination, 4D sequencing, quantity take-off, 5D costing).','Planera optimal BIM-användning (3D-samordning, 4D-sekvensering, mängdavtagning, 5D-kostnadsberäkning).','Optimale BIM-Anwendungen planen (3D-Koordination, 4D-Terminplanung, Mengenermittlung, 5D-Kostenplanung).','Pianificare gli usi ottimali del BIM (coordinamento 3D, sequenziamento 4D, computo metrico, costing 5D).')"></li>
+                <li x-text="t('Define LOD/LOI and information exchange requirements.','Definiera LOD/LOI och krav på informationsutbyte.','LOD/LOI und Anforderungen an den Informationsaustausch definieren.','Definire LOD/LOI e i requisiti di scambio delle informazioni.')"></li>
+              </ul>
+              <div class="flex items-start gap-2 bg-navy-50 rounded-lg p-3">
+                <svg class="w-4 h-4 text-navy-700 flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M2.25 18L9 11.25l4.306 4.306a11.95 11.95 0 015.814-5.518l2.74-1.22m0 0l-5.94-2.281m5.94 2.28l-2.28 5.941"/></svg>
+                <p class="text-xs font-semibold text-navy-800" x-text="t('Efficient planning and accurate bids. Better resource allocation.','Effektiv planering och exakta anbud. Bättre resursallokering.','Effiziente Planung und präzise Angebote. Bessere Ressourcenzuteilung.','Pianificazione efficiente e offerte accurate. Migliore allocazione delle risorse.')"></p>
+              </div>
+            </div>
+          </div>
+
+          <div class="py-5">
+            <div class="flex items-center gap-2.5 mb-3">
+              <span class="flex-shrink-0 w-7 h-7 rounded-full bg-navy-800 text-white text-xs font-bold flex items-center justify-center">4</span>
+              <h4 class="font-heading font-bold text-navy-900 text-sm" x-text="t('Plan Deliverables & Milestones','Planera Leveranser & Milstolpar','Liefergegenstände & Meilensteine Planen','Pianificare Deliverable & Milestone')"></h4>
+            </div>
+            <div class="grid md:grid-cols-3 gap-4 md:pl-9">
+              <ul class="md:col-span-2 space-y-1.5 text-sm text-slate-600 list-disc list-outside pl-4">
+                <li x-text="t('Understand information delivery timeline for shop drawings, models, and approvals.','Förstå tidslinjen för leverans av information för verkstadsritningar, modeller och godkännanden.','Zeitplan für die Informationslieferung von Werkstattzeichnungen, Modellen und Freigaben verstehen.','Comprendere la tempistica di consegna delle informazioni per disegni di officina, modelli e approvazioni.')"></li>
+                <li x-text="t('Plan procurement, fabrication and installation with certainty.','Planera inköp, tillverkning och installation med säkerhet.','Beschaffung, Fertigung und Montage mit Sicherheit planen.','Pianificare approvvigionamento, fabbricazione e installazione con certezza.')"></li>
+              </ul>
+              <div class="flex items-start gap-2 bg-navy-50 rounded-lg p-3">
+                <svg class="w-4 h-4 text-navy-700 flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M2.25 18L9 11.25l4.306 4.306a11.95 11.95 0 015.814-5.518l2.74-1.22m0 0l-5.94-2.281m5.94 2.28l-2.28 5.941"/></svg>
+                <p class="text-xs font-semibold text-navy-800" x-text="t('On-time delivery and smooth project execution.','Leverans i tid och smidigt projektgenomförande.','Pünktliche Lieferung und reibungslose Projektausführung.','Consegna puntuale ed esecuzione fluida del progetto.')"></p>
+              </div>
+            </div>
+          </div>
+
+          <div class="py-5">
+            <div class="flex items-center gap-2.5 mb-3">
+              <span class="flex-shrink-0 w-7 h-7 rounded-full bg-navy-800 text-white text-xs font-bold flex items-center justify-center">5</span>
+              <h4 class="font-heading font-bold text-navy-900 text-sm" x-text="t('Establish QA/QC Process','Etablera QA/QC-Process','QA/QC-Prozess Etablieren','Stabilire il Processo QA/QC')"></h4>
+            </div>
+            <div class="grid md:grid-cols-3 gap-4 md:pl-9">
+              <ul class="md:col-span-2 space-y-1.5 text-sm text-slate-600 list-disc list-outside pl-4">
+                <li x-text="t('Ensure models are accurate, clash-free and fabrication-ready.','Säkerställ att modeller är exakta, kollisionsfria och redo för tillverkning.','Sicherstellen, dass Modelle präzise, kollisionsfrei und fertigungsbereit sind.','Garantire che i modelli siano accurati, privi di interferenze e pronti per la fabbricazione.')"></li>
+                <li x-text="t('Standardize checks for geometry, tolerances and specifications.','Standardisera kontroller för geometri, toleranser och specifikationer.','Prüfungen für Geometrie, Toleranzen und Spezifikationen standardisieren.','Standardizzare i controlli su geometria, tolleranze e specifiche.')"></li>
+              </ul>
+              <div class="flex items-start gap-2 bg-navy-50 rounded-lg p-3">
+                <svg class="w-4 h-4 text-navy-700 flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M2.25 18L9 11.25l4.306 4.306a11.95 11.95 0 015.814-5.518l2.74-1.22m0 0l-5.94-2.281m5.94 2.28l-2.28 5.941"/></svg>
+                <p class="text-xs font-semibold text-navy-800" x-text="t('Reduced rework and site issues. High-quality fabrication and installation.','Minskat omarbete och problem på plats. Fabrikation och installation av hög kvalitet.','Weniger Nacharbeit und Probleme auf der Baustelle. Hochwertige Fertigung und Montage.','Riduzione delle rilavorazioni e dei problemi in cantiere. Fabbricazione e installazione di alta qualità.')"></p>
+              </div>
+            </div>
+          </div>
+
+          <div class="py-5">
+            <div class="flex items-center gap-2.5 mb-3">
+              <span class="flex-shrink-0 w-7 h-7 rounded-full bg-navy-800 text-white text-xs font-bold flex items-center justify-center">6</span>
+              <h4 class="font-heading font-bold text-navy-900 text-sm" x-text="t('Implement & Collaborate','Implementera & Samarbeta','Umsetzen & Zusammenarbeiten','Implementare & Collaborare')"></h4>
+            </div>
+            <div class="grid md:grid-cols-3 gap-4 md:pl-9">
+              <ul class="md:col-span-2 space-y-1.5 text-sm text-slate-600 list-disc list-outside pl-4">
+                <li x-text="t('Real-time coordination and issue resolution with all disciplines.','Samordning i realtid och problemlösning med alla discipliner.','Echtzeitkoordination und Problemlösung mit allen Gewerken.','Coordinamento in tempo reale e risoluzione dei problemi con tutte le discipline.')"></li>
+                <li x-text="t('Proactive RFIs and solutions before fabrication/installation.','Proaktiva RFI:er och lösningar före tillverkning/installation.','Proaktive RFIs und Lösungen vor Fertigung/Montage.','RFI e soluzioni proattive prima della fabbricazione/installazione.')"></li>
+              </ul>
+              <div class="flex items-start gap-2 bg-navy-50 rounded-lg p-3">
+                <svg class="w-4 h-4 text-navy-700 flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M2.25 18L9 11.25l4.306 4.306a11.95 11.95 0 015.814-5.518l2.74-1.22m0 0l-5.94-2.281m5.94 2.28l-2.28 5.941"/></svg>
+                <p class="text-xs font-semibold text-navy-800" x-text="t('Fewer delays and site conflicts. Improved productivity.','Färre förseningar och konflikter på plats. Förbättrad produktivitet.','Weniger Verzögerungen und Konflikte auf der Baustelle. Verbesserte Produktivität.','Meno ritardi e conflitti in cantiere. Produttività migliorata.')"></p>
+              </div>
+            </div>
+          </div>
+
+          <div class="py-5">
+            <div class="flex items-center gap-2.5 mb-3">
+              <span class="flex-shrink-0 w-7 h-7 rounded-full bg-navy-800 text-white text-xs font-bold flex items-center justify-center">7</span>
+              <h4 class="font-heading font-bold text-navy-900 text-sm" x-text="t('Monitor & Control','Övervaka & Kontrollera','Überwachen & Steuern','Monitorare & Controllare')"></h4>
+            </div>
+            <div class="grid md:grid-cols-3 gap-4 md:pl-9">
+              <ul class="md:col-span-2 space-y-1.5 text-sm text-slate-600 list-disc list-outside pl-4">
+                <li x-text="t('Track model progress, RFIs, approvals and site installation status.','Följ upp modellens framsteg, RFI:er, godkännanden och installationsstatus på plats.','Modellfortschritt, RFIs, Freigaben und den Montagestatus vor Ort verfolgen.','Monitorare l\'avanzamento del modello, le RFI, le approvazioni e lo stato dell\'installazione in cantiere.')"></li>
+                <li x-text="t('Manage changes with impact analysis.','Hantera ändringar med konsekvensanalys.','Änderungen mit Auswirkungsanalyse verwalten.','Gestire le modifiche con analisi d\'impatto.')"></li>
+              </ul>
+              <div class="flex items-start gap-2 bg-navy-50 rounded-lg p-3">
+                <svg class="w-4 h-4 text-navy-700 flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M2.25 18L9 11.25l4.306 4.306a11.95 11.95 0 015.814-5.518l2.74-1.22m0 0l-5.94-2.281m5.94 2.28l-2.28 5.941"/></svg>
+                <p class="text-xs font-semibold text-navy-800" x-text="t('Better control over cost, schedule and quality.','Bättre kontroll över kostnad, tidsplan och kvalitet.','Bessere Kontrolle über Kosten, Zeitplan und Qualität.','Migliore controllo su costi, programma e qualità.')"></p>
+              </div>
+            </div>
+          </div>
+
+          <div class="py-5">
+            <div class="flex items-center gap-2.5 mb-3">
+              <span class="flex-shrink-0 w-7 h-7 rounded-full bg-navy-800 text-white text-xs font-bold flex items-center justify-center">8</span>
+              <h4 class="font-heading font-bold text-navy-900 text-sm" x-text="t('Review & Improve','Utvärdera & Förbättra','Überprüfen & Verbessern','Rivedere & Migliorare')"></h4>
+            </div>
+            <div class="grid md:grid-cols-3 gap-4 md:pl-9">
+              <ul class="md:col-span-2 space-y-1.5 text-sm text-slate-600 list-disc list-outside pl-4">
+                <li x-text="t('Capture lessons learned and update standards for future projects.','Dokumentera lärdomar och uppdatera standarder för framtida projekt.','Erkenntnisse festhalten und Standards für zukünftige Projekte aktualisieren.','Raccogliere le lezioni apprese e aggiornare gli standard per i progetti futuri.')"></li>
+                <li x-text="t('Continuous improvement of BIM workflows and performance.','Kontinuerlig förbättring av BIM-arbetsflöden och prestanda.','Kontinuierliche Verbesserung von BIM-Workflows und Leistung.','Miglioramento continuo dei flussi di lavoro BIM e delle prestazioni.')"></li>
+              </ul>
+              <div class="flex items-start gap-2 bg-navy-50 rounded-lg p-3">
+                <svg class="w-4 h-4 text-navy-700 flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M2.25 18L9 11.25l4.306 4.306a11.95 11.95 0 015.814-5.518l2.74-1.22m0 0l-5.94-2.281m5.94 2.28l-2.28 5.941"/></svg>
+                <p class="text-xs font-semibold text-navy-800" x-text="t('Stronger capabilities and competitive advantage on future projects.','Starkare kompetens och konkurrensfördel i framtida projekt.','Stärkere Fähigkeiten und Wettbewerbsvorteil bei zukünftigen Projekten.','Competenze più solide e vantaggio competitivo nei progetti futuri.')"></p>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+      <div class="mt-14 reveal d2">
+        <h3 class="font-heading font-bold text-navy-900 text-xl"
+            x-text="t('A Façade Project — How BEP Drives Success','Ett Fasadprojekt — Så Driver BEP Framgång','Ein Fassadenprojekt — Wie der BEP Erfolg Vorantreibt','Un Progetto di Facciata — Come il BEP Guida il Successo')">
+        </h3>
+        <div class="mt-6 grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
+
+          <div class="flex gap-4">
+            <div class="flex-shrink-0 w-11 h-11 bg-navy-50 rounded-xl flex items-center justify-center">
+              <svg class="w-5 h-5 text-navy-700" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="1.5"><path stroke-linecap="round" stroke-linejoin="round" d="M21 7.5l-9-5.25L3 7.5m18 0l-9 5.25m9-5.25v9l-9 5.25M3 7.5l9 5.25M3 7.5v9l9 5.25m0-9v9"/></svg>
+            </div>
+            <div>
+              <h4 class="font-heading font-bold text-navy-900 text-sm" x-text="t('1. Concept & Design','1. Koncept & Design','1. Konzept & Design','1. Concept & Design')"></h4>
+              <p class="mt-1.5 text-slate-600 text-sm leading-relaxed" x-text="t('BIM helps visualize design intent and performance.','BIM hjälper till att visualisera designintention och prestanda.','BIM hilft, Planungsabsicht und Leistung zu visualisieren.','Il BIM aiuta a visualizzare l\'intento progettuale e le prestazioni.')"></p>
+            </div>
+          </div>
+
+          <div class="flex gap-4">
+            <div class="flex-shrink-0 w-11 h-11 bg-navy-50 rounded-xl flex items-center justify-center">
+              <svg class="w-5 h-5 text-navy-700" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="1.5"><path stroke-linecap="round" stroke-linejoin="round" d="M3.75 6A2.25 2.25 0 016 3.75h2.25A2.25 2.25 0 0110.5 6v2.25a2.25 2.25 0 01-2.25 2.25H6a2.25 2.25 0 01-2.25-2.25V6zM3.75 15.75A2.25 2.25 0 016 13.5h2.25a2.25 2.25 0 012.25 2.25V18a2.25 2.25 0 01-2.25 2.25H6A2.25 2.25 0 013.75 18v-2.25zM13.5 6a2.25 2.25 0 012.25-2.25H18A2.25 2.25 0 0120.25 6v2.25A2.25 2.25 0 0118 10.5h-2.25a2.25 2.25 0 01-2.25-2.25V6zM13.5 15.75a2.25 2.25 0 012.25-2.25H18a2.25 2.25 0 012.25 2.25V18A2.25 2.25 0 0118 20.25h-2.25A2.25 2.25 0 0113.5 18v-2.25z"/></svg>
+            </div>
+            <div>
+              <h4 class="font-heading font-bold text-navy-900 text-sm" x-text="t('2. Coordination','2. Samordning','2. Koordination','2. Coordinamento')"></h4>
+              <p class="mt-1.5 text-slate-600 text-sm leading-relaxed" x-text="t('Clash detection and interface coordination reduces rework.','Kollisionskontroll och gränssnittssamordning minskar omarbete.','Kollisionserkennung und Schnittstellenkoordination reduzieren Nacharbeit.','Il rilevamento delle interferenze e il coordinamento delle interfacce riducono le rilavorazioni.')"></p>
+            </div>
+          </div>
+
+          <div class="flex gap-4">
+            <div class="flex-shrink-0 w-11 h-11 bg-navy-50 rounded-xl flex items-center justify-center">
+              <svg class="w-5 h-5 text-navy-700" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="1.5"><path stroke-linecap="round" stroke-linejoin="round" d="M16.862 4.487l1.687-1.688a1.875 1.875 0 112.652 2.652L10.582 16.07a4.5 4.5 0 01-1.897 1.13L6 18l.8-2.685a4.5 4.5 0 011.13-1.897l8.932-8.931zm0 0L19.5 7.125M18 14v4.75A2.25 2.25 0 0115.75 21H5.25A2.25 2.25 0 013 18.75V8.25A2.25 2.25 0 015.25 6H10"/></svg>
+            </div>
+            <div>
+              <h4 class="font-heading font-bold text-navy-900 text-sm" x-text="t('3. Engineering & Shop Drawings','3. Konstruktion & Verkstadsritningar','3. Konstruktion & Werkstattzeichnungen','3. Ingegneria & Disegni di Officina')"></h4>
+              <p class="mt-1.5 text-slate-600 text-sm leading-relaxed" x-text="t('Accurate models enable precise engineering and fabrication.','Exakta modeller möjliggör precis konstruktion och tillverkning.','Präzise Modelle ermöglichen exakte Konstruktion und Fertigung.','Modelli accurati consentono un\'ingegnerizzazione e una fabbricazione precise.')"></p>
+            </div>
+          </div>
+
+          <div class="flex gap-4">
+            <div class="flex-shrink-0 w-11 h-11 bg-navy-50 rounded-xl flex items-center justify-center">
+              <svg class="w-5 h-5 text-navy-700" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="1.5"><path stroke-linecap="round" stroke-linejoin="round" d="M11.42 15.17L17.25 21A2.652 2.652 0 0021 17.25l-5.877-5.877M11.42 15.17l2.496-3.03c.317-.384.74-.626 1.208-.766M11.42 15.17l-4.655 5.653a2.548 2.548 0 11-3.586-3.586l6.837-5.63m5.108-.233c.55-.164 1.163-.188 1.743-.14a4.386 4.386 0 004.895-4.895c-.032-.234-.211-.415-.445-.415l-3.766 3.766-1.591-1.591 3.766-3.766c0-.234-.181-.413-.415-.445a4.386 4.386 0 00-4.895 4.895c.048.58.024 1.193-.14 1.743"/></svg>
+            </div>
+            <div>
+              <h4 class="font-heading font-bold text-navy-900 text-sm" x-text="t('4. Fabrication','4. Tillverkning','4. Fertigung','4. Fabbricazione')"></h4>
+              <p class="mt-1.5 text-slate-600 text-sm leading-relaxed" x-text="t('BIM-to-fabrication workflow improves accuracy and efficiency.','BIM-till-tillverkning-arbetsflödet förbättrar precision och effektivitet.','Der BIM-zu-Fertigung-Workflow verbessert Präzision und Effizienz.','Il flusso di lavoro dal BIM alla fabbricazione migliora precisione ed efficienza.')"></p>
+            </div>
+          </div>
+
+          <div class="flex gap-4">
+            <div class="flex-shrink-0 w-11 h-11 bg-navy-50 rounded-xl flex items-center justify-center">
+              <svg class="w-5 h-5 text-navy-700" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="1.5"><path stroke-linecap="round" stroke-linejoin="round" d="M3.75 21h16.5M4.5 3h15M5.25 3v18m13.5-18v18M9 6.75h1.5m-1.5 3h1.5m-1.5 3h1.5m3-6H15m-1.5 3H15m-1.5 3H15M9 21v-3.375c0-.621.504-1.125 1.125-1.125h3.75c.621 0 1.125.504 1.125 1.125V21"/></svg>
+            </div>
+            <div>
+              <h4 class="font-heading font-bold text-navy-900 text-sm" x-text="t('5. Installation','5. Installation','5. Montage','5. Installazione')"></h4>
+              <p class="mt-1.5 text-slate-600 text-sm leading-relaxed" x-text="t('Well-coordinated installation reduces delays and errors.','Väl samordnad installation minskar förseningar och fel.','Gut koordinierte Montage reduziert Verzögerungen und Fehler.','Un\'installazione ben coordinata riduce ritardi ed errori.')"></p>
+            </div>
+          </div>
+
+          <div class="flex gap-4">
+            <div class="flex-shrink-0 w-11 h-11 bg-navy-50 rounded-xl flex items-center justify-center">
+              <svg class="w-5 h-5 text-navy-700" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="1.5"><path stroke-linecap="round" stroke-linejoin="round" d="M15.75 5.25a3 3 0 013 3m3 0a6 6 0 01-7.029 5.912c-.563-.097-1.159.026-1.563.43L10.5 17.25H8.25v2.25H6v2.25H2.25v-2.818c0-.597.237-1.17.659-1.591l6.499-6.499c.404-.404.527-1 .43-1.563A6 6 0 1121.75 8.25z"/></svg>
+            </div>
+            <div>
+              <h4 class="font-heading font-bold text-navy-900 text-sm" x-text="t('6. Handover & FM','6. Överlämning & FM','6. Übergabe & FM','6. Consegna & FM')"></h4>
+              <p class="mt-1.5 text-slate-600 text-sm leading-relaxed" x-text="t('As-built model supports FM and future maintenance.','As-built-modellen stödjer FM och framtida underhåll.','Das As-Built-Modell unterstützt FM und zukünftige Instandhaltung.','Il modello as-built supporta il FM e la manutenzione futura.')"></p>
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+      <div class="mt-14 p-8 bg-slate-50 rounded-2xl reveal d3">
+        <p class="lbl" x-text="t('The Bottom Line','Slutsatsen','Fazit','In Sintesi')"></p>
+        <h3 class="mt-3 font-heading font-bold text-navy-900 text-xl" x-text="t('A Well-Executed BEP Is the Foundation of Every Successful Façade Project','En Väl Genomförd BEP Är Grunden för Varje Framgångsrikt Fasadprojekt','Ein Gut Umgesetzter BEP Ist das Fundament Jedes Erfolgreichen Fassadenprojekts','Un BEP Ben Eseguito È la Base di Ogni Progetto di Facciata di Successo')"></h3>
+        <p class="mt-3 text-slate-600 leading-relaxed" x-text="t('It ensures precision, coordination, efficiency, and excellence from design to delivery. For façade contractors, it leads to better outcomes, stronger collaboration, and repeatable success on every project. Working on a façade project and want to discuss your BIM strategy? Get in touch — we\'d love to hear from you.','Den säkerställer precision, samordning, effektivitet och excellens från design till leverans. För fasadentreprenörer leder den till bättre resultat, starkare samarbete och upprepningsbar framgång i varje projekt. Arbetar du med ett fasadprojekt och vill diskutera din BIM-strategi? Hör av dig — vi vill gärna höra från dig.','Er sorgt für Präzision, Koordination, Effizienz und Exzellenz von der Planung bis zur Übergabe. Für Fassadenbauer führt er zu besseren Ergebnissen, stärkerer Zusammenarbeit und wiederholbarem Erfolg bei jedem Projekt. Arbeiten Sie an einem Fassadenprojekt und möchten Ihre BIM-Strategie besprechen? Kontaktieren Sie uns — wir freuen uns, von Ihnen zu hören.','Garantisce precisione, coordinamento, efficienza ed eccellenza dalla progettazione alla consegna. Per gli appaltatori di facciate, porta a risultati migliori, una collaborazione più solida e un successo ripetibile in ogni progetto. Stai lavorando a un progetto di facciata e vuoi discutere la tua strategia BIM? Contattaci — ci farebbe piacere sentirti.')"></p>
+        <a href="contact.html" class="mt-6 inline-flex items-center gap-2 px-6 py-3 bg-navy-800 text-white font-semibold rounded-full hover:bg-navy-700 transition-colors cursor-pointer text-sm">
+          <span x-text="t('Get in Touch','Kontakta Oss','Kontakt aufnehmen','Contattaci')"></span>
+          <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M17 8l4 4m0 0l-4 4m4-4H3"/></svg>
+        </a>
+      </div>
+    </article>
+
+    <!-- Briefing No. 01 -->
+    <div class="mt-20 pt-16 border-t border-slate-100">
     <article class="reveal">
       <div class="flex flex-wrap items-center gap-3 mb-6">
         <span class="inline-flex items-center px-3 py-1 rounded-full bg-navy-50 text-navy-700 text-xs font-bold uppercase tracking-wider">
@@ -205,6 +635,7 @@
         </a>
       </div>
     </article>
+    </div>
 
     <!-- Coming soon placeholder -->
     <div class="mt-14 pt-10 border-t border-slate-100 reveal d5">
