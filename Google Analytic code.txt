@@ -1,0 +1,9 @@
+Google Analytic:
+Stream name
+SNAB
+Stream URL
+https://structuranordic.se
+Stream ID
+15208396418
+Measurement ID
+G-4WPGVSPZ3V
